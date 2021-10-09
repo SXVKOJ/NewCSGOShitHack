@@ -11,4 +11,8 @@ static struct HACK
 	void TriggerBotThread();
 
 	void AimBotThread();
+
+	void RecoilControlSystem();
+
+	void RadarHack();
 } Hack;

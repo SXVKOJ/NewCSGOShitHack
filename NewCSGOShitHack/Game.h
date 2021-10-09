@@ -1,7 +1,10 @@
 #pragma once
+#include "Vector.h"
 
 static struct GAME
 {
+	float ViewMatrix[16];
+
 	DWORD GetClient();
 
 	DWORD GetEngine();
@@ -11,6 +14,10 @@ static struct GAME
 	void PlayerJump();
 
 	Vec3 GetPlayerBonePos(DWORD Entity, int index);
+
+	Vec3 GetCurrentWindowSize();
+
+	bool WorldToScreen(Vec3 pos, Vec3& out);
 
 	void PlayerShoot();
 } Game;

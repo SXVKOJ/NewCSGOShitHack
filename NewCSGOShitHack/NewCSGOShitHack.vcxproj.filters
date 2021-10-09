@@ -57,6 +57,12 @@
     <ClCompile Include="AimBot.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
+    <ClCompile Include="RecoilControlSystem.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="RadarHack.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="includes.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,4 +16,19 @@ void HACK::MainThread()
 	{
 		Hack.TriggerBotThread();
 	}
+
+	if (Config.RecoilControlSystem)
+	{
+		Hack.RecoilControlSystem();
+	}
+
+	if (Config.RadarHack)
+	{
+		Hack.RadarHack();
+	}
+
+	if (Config.AimBot && GetAsyncKeyState(Config.AimBotHotKey))
+	{
+		Hack.AimBotThread();
+	}
 }

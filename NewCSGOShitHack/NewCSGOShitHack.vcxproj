@@ -159,6 +159,8 @@
     <ClCompile Include="HackFunc.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
+    <ClCompile Include="RadarHack.cpp" />
+    <ClCompile Include="RecoilControlSystem.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +168,7 @@
     <ClInclude Include="constVars.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HackFunc.h" />
+    <ClInclude Include="includes.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="offsets.hpp" />
     <ClInclude Include="Vector.h" />
