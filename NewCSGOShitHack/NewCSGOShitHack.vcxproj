@@ -165,6 +165,12 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HackFunc.cpp" />
+    <ClCompile Include="kiero\kiero.cpp" />
+    <ClCompile Include="kiero\minhook\src\buffer.c" />
+    <ClCompile Include="kiero\minhook\src\hde\hde32.c" />
+    <ClCompile Include="kiero\minhook\src\hde\hde64.c" />
+    <ClCompile Include="kiero\minhook\src\hook.c" />
+    <ClCompile Include="kiero\minhook\src\trampoline.c" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
     <ClCompile Include="NoFlash.cpp" />

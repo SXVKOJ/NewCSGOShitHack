@@ -1,12 +1,12 @@
 #pragma once
+#include "kiero/kiero.h"
 #include "dear_imgui/imgui.h"
 #include "dear_imgui/imgui_impl_dx9.h"
 #include "dear_imgui/imgui_impl_win32.h"
+#include "kiero/minhook/include/MinHook.h"
 
-#include "min_hook/include/MinHook.h"
-
-#include "d3d9.h"
-#include "d3dx9.h"
+#include <d3d9.h>
+#include <d3dx9.h>
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
@@ -26,3 +26,7 @@
 #include "offsets.hpp"
 #include "Vector.h"
 #include "mem.h"
+
+#define WINDOW_NAME "Dear ImGui DirectX9 Example"
+typedef long(__stdcall* EndScene)(LPDIRECT3DDEVICE9);
+typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);

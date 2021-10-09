@@ -42,5 +42,5 @@ DWORD Mem::SigScan(char* module, char* pattern, char* mask)
 
 void Mem::UpdateOffsets()
 {
-    system("dumper.bat");
+    system("python dumper.py");
 }

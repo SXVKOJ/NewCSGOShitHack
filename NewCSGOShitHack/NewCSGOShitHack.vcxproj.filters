@@ -31,6 +31,9 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{1a1e2405-620c-4319-a198-7835a27927af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\hook">
+      <UniqueIdentifier>{ea43b88b-0074-444d-93bd-6da314abbcd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -86,6 +89,24 @@
     </ClCompile>
     <ClCompile Include="dear_imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\kiero.cpp">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\buffer.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\hook.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\trampoline.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\hde\hde32.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\hde\hde64.c">
+      <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

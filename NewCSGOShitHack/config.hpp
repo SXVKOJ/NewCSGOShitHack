@@ -5,6 +5,8 @@ static struct CONFIG
 	int FOV = 90;
 	
 	bool console = false;
+	bool ImGui_Init = false;
+	bool ImGui_Attached = false;
 
 	bool Bhop = true;
 	bool HealthTreshold = true;
@@ -20,6 +22,7 @@ static struct CONFIG
 	int TriggerBotDelay = 75;
 
 	int AimBotHotKey = 18; // VK_ALT
+	int EndHotKey = 0x23; // VK_END
 
 	float LC_NEONESP[3] = { 0, 1, 1 };
 	float ET_NEONESP[3] = { 1, 0, 1 };
