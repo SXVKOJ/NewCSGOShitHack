@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\mem">
+      <UniqueIdentifier>{ee442400-226e-4021-b5a2-86c8758e1088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Hack">
+      <UniqueIdentifier>{d1debbb6-8350-4e27-86c0-e7ceb098ef81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Main">
+      <UniqueIdentifier>{97330bb8-8f5f-4d41-89df-013b6246777f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\config">
+      <UniqueIdentifier>{c661a298-fa15-44d2-b1c3-0f577ced6cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Vector">
+      <UniqueIdentifier>{5c0d56b1-1253-4ecb-95c4-4499c354b251}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="mem.cpp">
+      <Filter>Исходные файлы\mem</Filter>
+    </ClCompile>
+    <ClCompile Include="HackFunc.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="BHOP.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="NeonGlow.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerBot.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="AimBot.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="offsets.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Исходные файлы\mem</Filter>
+    </ClInclude>
+    <ClInclude Include="HackFunc.h">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>Исходные файлы\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Исходные файлы\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="constVars.hpp">
+      <Filter>Исходные файлы\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dumper.py">
+      <Filter>Файлы заголовков</Filter>
+    </None>
+  </ItemGroup>
+</Project>
