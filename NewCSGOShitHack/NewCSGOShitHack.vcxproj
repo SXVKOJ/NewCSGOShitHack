@@ -75,6 +75,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)Lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -154,6 +156,12 @@
     <ClCompile Include="AimBot.cpp" />
     <ClCompile Include="BHOP.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="dear_imgui\imgui.cpp" />
+    <ClCompile Include="dear_imgui\imgui_demo.cpp" />
+    <ClCompile Include="dear_imgui\imgui_draw.cpp" />
+    <ClCompile Include="dear_imgui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="dear_imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HackFunc.cpp" />

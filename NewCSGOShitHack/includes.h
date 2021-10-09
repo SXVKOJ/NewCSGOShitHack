@@ -1,4 +1,13 @@
 #pragma once
+#include "dear_imgui/imgui.h"
+#include "dear_imgui/imgui_impl_dx9.h"
+#include "dear_imgui/imgui_impl_win32.h"
+
+#include "d3d9.h"
+#include "d3dx9.h"
+
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dx9.lib")
 
 #include <Windows.h>
 #include <iostream>

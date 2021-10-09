@@ -28,6 +28,9 @@
     <Filter Include="Исходные файлы\Vector">
       <UniqueIdentifier>{5c0d56b1-1253-4ecb-95c4-4499c354b251}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{1a1e2405-620c-4319-a198-7835a27927af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -65,6 +68,24 @@
     </ClCompile>
     <ClCompile Include="NoFlash.cpp">
       <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_impl_dx9.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

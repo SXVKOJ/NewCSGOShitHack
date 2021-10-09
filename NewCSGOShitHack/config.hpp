@@ -4,6 +4,8 @@ static struct CONFIG
 {
 	int FOV = 90;
 	
+	bool console = false;
+
 	bool Bhop = true;
 	bool HealthTreshold = true;
 	bool TriggerBot = true;
@@ -15,7 +17,7 @@ static struct CONFIG
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
-	int TriggerBotDelay = 45;
+	int TriggerBotDelay = 75;
 
 	int AimBotHotKey = 18; // VK_ALT
 

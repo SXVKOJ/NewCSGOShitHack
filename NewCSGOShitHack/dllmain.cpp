@@ -4,14 +4,18 @@ DWORD WINAPI MainThread(HMODULE hModule)
 {
     MEM.UpdateOffsets();
 
-    // FILE * pFile = Console.Init();
+    FILE* pFile = nullptr;
+
+    if (Config.console)
+        pFile = Console.Init();
 
     while (!GetAsyncKeyState(VK_END))
     {
         Hack.MainThread();
     }
 
-    // Console.Release(pFile);
+    if (Config.console)
+        Console.Release(pFile);
 
     FreeLibraryAndExitThread(hModule, 0);
 }
