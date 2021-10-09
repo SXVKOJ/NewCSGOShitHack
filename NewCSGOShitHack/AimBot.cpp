@@ -120,5 +120,12 @@ void HACK::AimBotThread()
 		Vec3 newAngles = normalizeAngles(AngleTo.x - ViewAngles.x, AngleTo.y - ViewAngles.y);
 
 		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = ViewAngles + newAngles;
+
+		int EntityHealth = *(int*)(Entity + offsets::m_iHealth);
+
+		if (EntityHealth <= 0)
+		{
+			return;
+		}
 	}
 }

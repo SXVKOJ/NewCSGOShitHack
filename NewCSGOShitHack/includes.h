@@ -3,6 +3,8 @@
 #include "dear_imgui/imgui_impl_dx9.h"
 #include "dear_imgui/imgui_impl_win32.h"
 
+#include "min_hook/include/MinHook.h"
+
 #include "d3d9.h"
 #include "d3dx9.h"
 
