@@ -12,7 +12,9 @@ static struct HACK
 
 	void AimBotThread();
 
-	void RecoilControlSystem();
+	void RecoilControlSystemThread();
 
-	void RadarHack();
+	void RadarHackThread();
+
+	void NoFlashThread();
 } Hack;

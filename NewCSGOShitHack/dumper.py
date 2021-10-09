@@ -32,7 +32,7 @@ def main():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
     global result_file
-    result_file = f"#pragma once\n\nnamespace offsets\n{'{'}\n      // {dt_string}\n"
+    result_file = f"#pragma once\n\nnamespace offsets\n{'{'}\n    // {dt_string}\n"
 
     res = requests.get("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json", headers=headers)
 

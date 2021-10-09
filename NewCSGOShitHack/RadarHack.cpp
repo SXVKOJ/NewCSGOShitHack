@@ -1,6 +1,6 @@
 #include "includes.h"
 
-void HACK::RadarHack()
+void HACK::RadarHackThread()
 {
 	DWORD LocalPlayer = Game.GetLocalPlayer();
 

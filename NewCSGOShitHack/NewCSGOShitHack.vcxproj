@@ -159,6 +159,7 @@
     <ClCompile Include="HackFunc.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
+    <ClCompile Include="NoFlash.cpp" />
     <ClCompile Include="RadarHack.cpp" />
     <ClCompile Include="RecoilControlSystem.cpp" />
     <ClCompile Include="TriggerBot.cpp" />

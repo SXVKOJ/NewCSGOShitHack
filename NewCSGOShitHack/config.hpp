@@ -11,6 +11,7 @@ static struct CONFIG
 	bool AimBot = true;
 	bool RecoilControlSystem = true;
 	bool RadarHack = true;
+	bool NoFlash = true;
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;

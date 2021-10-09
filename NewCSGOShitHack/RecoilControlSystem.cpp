@@ -3,7 +3,7 @@
 float oPunchX = 0;
 float oPunchY = 0;
 
-void HACK::RecoilControlSystem()
+void HACK::RecoilControlSystemThread()
 {
 	DWORD LocalPlayer = Game.GetLocalPlayer();
 	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
