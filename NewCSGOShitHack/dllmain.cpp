@@ -29,19 +29,16 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		Config.ImGui_Init = true;
 	}
 
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+	if (GetAsyncKeyState(Config.MenuHotKey) & 1)
+	{
+		Config.MenuActive = !Config.MenuActive;
+	}
 
-	ImGui::Begin("Settings");
+	if (Config.MenuActive)
+		Hack.MenuThread();
 
-
-
-	ImGui::End();
-
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	if (Config.WallHackESP)
+		Hack.DXESPThread(pDevice);
 
 	return oEndScene(pDevice);
 }
@@ -110,18 +107,19 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
-    switch (ul_reason_for_call)
-    {
-    case DLL_PROCESS_ATTACH:
-        DisableThreadLibraryCalls(hModule);
-        CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL);
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-        kiero::shutdown();
-        break;
-    case DLL_PROCESS_DETACH:
-        break;
-    }
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+		DisableThreadLibraryCalls(hModule);
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL);
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+		kiero::shutdown();
+		break;
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+
     return TRUE;
 }
 

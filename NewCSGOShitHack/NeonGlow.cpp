@@ -23,9 +23,9 @@ void HACK::NeonESPThread()
 
 		if (EntTeam == LocalPlayerTeam)
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = Config.LC_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = Config.LC_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = Config.LC_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = Config.LT_NEONESP[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = Config.LT_NEONESP[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = Config.LT_NEONESP[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 		else

@@ -37,6 +37,8 @@ void HACK::MainThread()
 		if (GetAsyncKeyState(Config.AimBotHotKey))
 		{
 			Hack.AimBotThread();
-		}	
+		}
 	}
+
+	Hack.SetFov(Config.FOV);
 }

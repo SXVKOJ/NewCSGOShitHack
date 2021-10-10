@@ -163,6 +163,9 @@
     <ClCompile Include="dear_imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="DXESP.cpp" />
+    <ClCompile Include="DXFunc.cpp" />
+    <ClCompile Include="FovChanger.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HackFunc.cpp" />
     <ClCompile Include="ImGuiTheme.cpp" />
@@ -173,6 +176,7 @@
     <ClCompile Include="kiero\minhook\src\hook.c" />
     <ClCompile Include="kiero\minhook\src\trampoline.c" />
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
     <ClCompile Include="NoFlash.cpp" />
     <ClCompile Include="RadarHack.cpp" />

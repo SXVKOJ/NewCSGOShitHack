@@ -34,6 +34,9 @@
     <Filter Include="Исходные файлы\hook">
       <UniqueIdentifier>{ea43b88b-0074-444d-93bd-6da314abbcd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\DXShit">
+      <UniqueIdentifier>{fc24c281-7bb6-4f61-96a4-52b489eb3d4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -110,6 +113,18 @@
     </ClCompile>
     <ClCompile Include="ImGuiTheme.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="FovChanger.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DXESP.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="DXFunc.cpp">
+      <Filter>Исходные файлы\DXShit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
