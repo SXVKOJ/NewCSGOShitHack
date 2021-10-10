@@ -97,7 +97,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 		Hack.MainThread();
     }
 
-	if (Config.console)
+	if (Config.console && pFile != nullptr)
 		Console.Release(pFile);
 
     FreeLibraryAndExitThread(hModule, 0);
