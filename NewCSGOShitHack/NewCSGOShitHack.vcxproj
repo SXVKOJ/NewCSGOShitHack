@@ -165,6 +165,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HackFunc.cpp" />
+    <ClCompile Include="ImGuiTheme.cpp" />
     <ClCompile Include="kiero\kiero.cpp" />
     <ClCompile Include="kiero\minhook\src\buffer.c" />
     <ClCompile Include="kiero\minhook\src\hde\hde32.c" />

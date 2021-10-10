@@ -108,6 +108,9 @@
     <ClCompile Include="kiero\minhook\src\hde\hde64.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuiTheme.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">

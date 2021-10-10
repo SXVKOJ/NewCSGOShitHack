@@ -1140,6 +1140,15 @@ enum ImGuiBackendFlags_
 // Enumeration for PushStyleColor() / PopStyleColor()
 enum ImGuiCol_
 {
+    ImGuiCol_ChildWindowBg,     // CUSTOM
+    ImGuiCol_ComboBg,           // CUSTOM
+    ImGuiCol_Column,            // CUSTOM
+    ImGuiCol_ColumnHovered,     // CUSTOM
+    ImGuiCol_ColumnActive,      // CUSTOM
+    ImGuiCol_CloseButton,       // CUSTOM
+    ImGuiCol_CloseButtonHovered,// CUSTOM
+    ImGuiCol_CloseButtonActive, // CUSTOM
+
     ImGuiCol_Text,
     ImGuiCol_TextDisabled,
     ImGuiCol_WindowBg,              // Background of normal windows

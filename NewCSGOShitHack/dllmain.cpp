@@ -24,6 +24,8 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	if (!Config.ImGui_Init)
 	{
 		InitImGui(pDevice);
+		Hack.SetCustomImGuiStyle();
+
 		Config.ImGui_Init = true;
 	}
 

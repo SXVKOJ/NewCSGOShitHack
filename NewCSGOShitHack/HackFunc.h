@@ -17,4 +17,6 @@ static struct HACK
 	void RadarHackThread();
 
 	void NoFlashThread();
+
+	void SetCustomImGuiStyle();
 } Hack;
