@@ -91,7 +91,7 @@ DWORD GetBestTarget()
 
 		NewDiff = ResultDiff;
 
-		if (NewDiff < OldDiff)
+		if (NewDiff <= OldDiff)
 		{
 			OldDiff = NewDiff;
 			Target = Entity;
@@ -107,8 +107,13 @@ void HACK::AimBotThread()
 	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
 
 	if (GetBestTarget() != NULL)
-	{
+	{	
 		DWORD Entity = GetBestTarget();
+
+		if (GetAsyncKeyState(Config.AimBotHotKey) == 0)
+		{
+			return;
+		}
 
 		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
 		Vec3 EntPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);

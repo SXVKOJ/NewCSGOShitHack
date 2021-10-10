@@ -7,6 +7,7 @@ static struct CONFIG
 	bool console = false;
 	bool ImGui_Init = false;
 	bool ImGui_Attached = false;
+	bool AimBotActive = false;
 
 	bool Bhop = true;
 	bool HealthTreshold = true;
@@ -19,7 +20,7 @@ static struct CONFIG
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
-	int TriggerBotDelay = 75;
+	int TriggerBotDelay = 65;
 
 	int AimBotHotKey = 18; // VK_ALT
 	int EndHotKey = 0x23; // VK_END

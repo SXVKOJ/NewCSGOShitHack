@@ -32,8 +32,11 @@ void HACK::MainThread()
 		Hack.NoFlashThread();
 	}
 
-	if (Config.AimBot && GetAsyncKeyState(Config.AimBotHotKey))
+	if (Config.AimBot)
 	{
-		Hack.AimBotThread();
+		if (GetAsyncKeyState(Config.AimBotHotKey))
+		{
+			Hack.AimBotThread();
+		}	
 	}
 }

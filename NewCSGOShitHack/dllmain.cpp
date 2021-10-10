@@ -68,58 +68,42 @@ HWND GetProcessWindow()
 	return window;
 }
 
-DWORD WINAPI MainThread(LPVOID lpReserved)
+DWORD WINAPI MainThread(HMODULE hModule)
 {
-	bool attached = false;
+    MEM.UpdateOffsets();
+
+	FILE* pFile = nullptr;
+	
+	if (Config.console)
+		pFile = Console.Init();
+
 	do
 	{
 		if (kiero::init(kiero::RenderType::D3D9) == kiero::Status::Success)
 		{
 			kiero::bind(42, (void**)&oEndScene, hkEndScene);
-			do
+
+			do {
 				window = GetProcessWindow();
-			while (window == NULL);
+			} while (window == NULL);
+
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWL_WNDPROC, (LONG_PTR)WndProc);
-			attached = true;
+			Config.ImGui_Attached = true;
 		}
-	} while (!attached);
-	return TRUE;
-}
-
-DWORD WINAPI MainThread(HMODULE hModule)
-{
-    MEM.UpdateOffsets();
-
-    FILE* pFile = nullptr;
-
-    if (Config.console)
-        pFile = Console.Init();
+	} while (!Config.ImGui_Attached);
 
     while (!GetAsyncKeyState(Config.EndHotKey))
     {
-        do
-        {
-            if (kiero::init(kiero::RenderType::D3D9) == kiero::Status::Success)
-            {
-                kiero::bind(42, (void**)&oEndScene, hkEndScene);
-                do
-                    window = GetProcessWindow();
-                while (window == NULL);
-                oWndProc = (WNDPROC)SetWindowLongPtr(window, GWL_WNDPROC, (LONG_PTR)WndProc);
-                Config.ImGui_Attached = true;
-            }
-        } while (!Config.ImGui_Attached);
-
-        Hack.MainThread();
+		Hack.MainThread();
     }
 
-    if (Config.console)
-        Console.Release(pFile);
+	if (Config.console)
+		Console.Release(pFile);
 
     FreeLibraryAndExitThread(hModule, 0);
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
     switch (ul_reason_for_call)
     {
