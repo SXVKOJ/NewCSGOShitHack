@@ -79,19 +79,18 @@ DWORD GetBestTarget()
 			return Entity;
 
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
-		Vec3 WorldEntHeadPos;	Game.WorldToScreen(EntHeadPos, WorldEntHeadPos);
 
-		float ScreenMiddleX = Game.GetCurrentWindowSize().x;
-		float ScreenMiddleY = Game.GetCurrentWindowSize().y;
+		int ScreenMiddleX = Game.GetCurrentWindowSize().x / 2;
+		int ScreenMiddleY = Game.GetCurrentWindowSize().y / 2;
 
-		float DiffX = abs(ScreenMiddleX - WorldEntHeadPos.x);
-		float DiffY = abs(ScreenMiddleY - WorldEntHeadPos.y);
+		int DiffX = ScreenMiddleX - abs(EntHeadPos.x);
+		int DiffY = ScreenMiddleY - abs(EntHeadPos.y);
 
-		float ResultDiff = CalcHypotenuse(DiffX, DiffY);
+		int ResultDiff = CalcHypotenuse(DiffX, DiffY);
 
 		NewDiff = ResultDiff;
 
-		if (NewDiff <= OldDiff)
+		if (NewDiff < OldDiff)
 		{
 			OldDiff = NewDiff;
 			Target = Entity;
