@@ -34,6 +34,9 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	ImGui::NewFrame();
 
 	ImGui::Begin("Settings");
+
+
+
 	ImGui::End();
 
 	ImGui::EndFrame();
