@@ -75,7 +75,7 @@ DWORD GetBestTarget()
 			continue;
 
 		// if health is less than a certain threshold, then the aimbot will automatically select this player
-		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal)	
+		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal && !Target)	
 			return Entity;
 
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
@@ -83,8 +83,8 @@ DWORD GetBestTarget()
 		int ScreenMiddleX = Game.GetCurrentWindowSize().x / 2;
 		int ScreenMiddleY = Game.GetCurrentWindowSize().y / 2;
 
-		int DiffX = ScreenMiddleX - abs(EntHeadPos.x);
-		int DiffY = ScreenMiddleY - abs(EntHeadPos.y);
+		int DiffX = abs(ScreenMiddleX - abs(EntHeadPos.x));
+		int DiffY = abs(ScreenMiddleY - abs(EntHeadPos.y));
 
 		int ResultDiff = CalcHypotenuse(DiffX, DiffY);
 
@@ -104,11 +104,10 @@ void HACK::AimBotThread()
 {
 	DWORD LocalPlayer = Game.GetLocalPlayer();
 	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
+	DWORD Entity = GetBestTarget();
 
-	if (GetBestTarget() != NULL)
+	if (Entity != NULL)
 	{	
-		DWORD Entity = GetBestTarget();
-
 		if (GetAsyncKeyState(Config.AimBotHotKey) == 0)
 		{
 			return;

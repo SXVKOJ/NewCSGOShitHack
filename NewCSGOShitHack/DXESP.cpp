@@ -39,7 +39,7 @@ void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
         Game.WorldToScreen(EntityHead, Head2Screen);
 
         float boxHeight = abs(Head2Screen.y - Entity2Screen.y);
-        float boxWidth = boxHeight / 2 + 14;
+        float boxWidth = boxHeight / 2;
 
         int WindowWidth = Game.GetCurrentWindowSize().x;
         int WindowHeight = Game.GetCurrentWindowSize().y;

@@ -13,6 +13,9 @@ void HACK::MenuThread()
 	ImGui::Separator();
 
 	ImGui::Checkbox("AimBot", &Config.AimBot);
+	ImGui::Checkbox("Neon WallHack", &Config.NeonWallHack);
+	ImGui::Checkbox("DX ESP (boxes)", &Config.WallHackESP);
+	ImGui::Checkbox("Bhop", &Config.Bhop);
 	ImGui::Separator();
 
 	ImGui::ColorEdit4("Neon EntTeam WH Color", Config.ET_NEONESP);
@@ -20,7 +23,6 @@ void HACK::MenuThread()
 	ImGui::ColorEdit4("DX ESP Color", Config.DX_ESP);
 
 	ImGui::End();
-
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
