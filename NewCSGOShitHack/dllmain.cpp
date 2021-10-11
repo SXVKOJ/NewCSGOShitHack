@@ -70,15 +70,8 @@ HWND GetProcessWindow()
 	return window;
 }
 
-DWORD WINAPI MainThread(HMODULE hModule)
+DWORD WINAPI KieroInit(HMODULE hModule)
 {
-    MEM.UpdateOffsets();
-
-	FILE* pFile = nullptr;
-	
-	if (Config.console)
-		pFile = Console.Init();
-
 	do
 	{
 		if (kiero::init(kiero::RenderType::D3D9) == kiero::Status::Success)
@@ -93,6 +86,18 @@ DWORD WINAPI MainThread(HMODULE hModule)
 			Config.ImGui_Attached = true;
 		}
 	} while (!Config.ImGui_Attached);
+
+	return TRUE;
+}
+
+DWORD WINAPI MainThread(HMODULE hModule)
+{
+    MEM.UpdateOffsets();
+
+	FILE* pFile = nullptr;
+	
+	if (Config.console)
+		pFile = Console.Init();
 
     while (!GetAsyncKeyState(Config.EndHotKey))
     {
@@ -111,6 +116,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)KieroInit, hModule, NULL, NULL);
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL);
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

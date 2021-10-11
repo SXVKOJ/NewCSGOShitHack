@@ -21,9 +21,11 @@ void HACK::MenuThread()
 	ImGui::ColorEdit4("Neon EntTeam WH Color", Config.ET_NEONESP);
 	ImGui::ColorEdit4("Neon LocTeam WH Color", Config.LT_NEONESP);
 	ImGui::ColorEdit4("DX ESP Color", Config.DX_ESP);
+	ImGui::Separator();
 
 	ImGui::End();
 	ImGui::EndFrame();
 	ImGui::Render();
+	
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
