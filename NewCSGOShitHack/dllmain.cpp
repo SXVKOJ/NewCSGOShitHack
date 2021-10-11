@@ -17,9 +17,11 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
+
+	return;
 }
 
-long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
+long long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
 	if (!Config.ImGui_Init)
 	{
