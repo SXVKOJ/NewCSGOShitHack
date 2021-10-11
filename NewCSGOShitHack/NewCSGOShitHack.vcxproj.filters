@@ -75,24 +75,6 @@
     <ClCompile Include="NoFlash.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="dear_imgui\imgui.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_demo.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_draw.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_impl_dx9.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_impl_win32.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_widgets.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
     <ClCompile Include="kiero\kiero.cpp">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
@@ -125,6 +107,24 @@
     </ClCompile>
     <ClCompile Include="DXFunc.cpp">
       <Filter>Исходные файлы\DXShit</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_impl_dx9.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

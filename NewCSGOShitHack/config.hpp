@@ -10,19 +10,20 @@ static struct CONFIG
 	bool AimBotActive = false;
 	bool MenuActive = false;
 
-	bool Bhop = true;
-	bool HealthTreshold = true;
-	bool TriggerBot = true;
-	bool NeonWallHack = true;
-	bool AimBot = true;
-	bool RecoilControlSystem = true;
-	bool RadarHack = true;
-	bool NoFlash = true;
-	bool WallHackESP = true;
+	bool Bhop = false;
+	bool HealthTreshold = false;
+	bool TriggerBot = false;
+	bool NeonWallHack = false;
+	bool AimBot = false;
+	bool RecoilControlSystem = false;
+	bool RadarHack = false;
+	bool NoFlash = false;
+	bool WallHackESP = false;
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
 	int TriggerBotDelay = 65;
+	int Delay = 1;
 
 	int AimBotHotKey = 18;   // VK_ALT
 	int EndHotKey = 0x23;   // VK_END

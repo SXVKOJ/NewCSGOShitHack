@@ -22,7 +22,7 @@
 #include "Game.h"
 
 #include "constVars.hpp"
-#include "config.hpp"
+#include "Config.hpp"
 #include "offsets.hpp"
 #include "Vector.h"
 #include "mem.h"

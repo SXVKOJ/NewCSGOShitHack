@@ -30,9 +30,7 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	}
 
 	if (GetAsyncKeyState(Config.MenuHotKey) & 1)
-	{
 		Config.MenuActive = !Config.MenuActive;
-	}
 
 	if (Config.MenuActive)
 		Hack.MenuThread();
@@ -102,8 +100,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
     while (!GetAsyncKeyState(Config.EndHotKey))
     {
 		Hack.MainThread();
+
+		Sleep(Config.Delay);
     }
 
+	kiero::shutdown();
+	
 	if (Config.console && pFile != nullptr)
 		Console.Release(pFile);
 
