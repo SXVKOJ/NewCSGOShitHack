@@ -3,6 +3,7 @@
 static struct CONFIG
 {
 	int FOV = 90;
+	int SpinBotSpeed = 0;
 	
 	bool console = false;
 	bool ImGui_Init = false;
@@ -10,15 +11,16 @@ static struct CONFIG
 	bool AimBotActive = false;
 	bool MenuActive = false;
 
-	bool Bhop = false;
-	bool HealthTreshold = false;
-	bool TriggerBot = false;
-	bool NeonWallHack = false;
-	bool AimBot = false;
-	bool RecoilControlSystem = false;
-	bool RadarHack = false;
-	bool NoFlash = false;
-	bool WallHackESP = false;
+	bool Bhop = true;
+	bool HealthTreshold = true;
+	bool TriggerBot = true;
+	bool NeonWallHack = true;
+	bool AimBot = true;
+	bool RecoilControlSystem = true;
+	bool RadarHack = true;
+	bool NoFlash = true;
+	bool WallHackESP = true;
+	bool SpinBot = false;
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;

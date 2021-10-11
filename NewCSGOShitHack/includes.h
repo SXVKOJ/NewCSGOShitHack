@@ -1,3 +1,4 @@
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS 1
 #pragma once
 #include "kiero/kiero.h"
 #include "dear_imgui/imgui.h"

@@ -126,6 +126,9 @@
     <ClCompile Include="dear_imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="SpinBot.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
