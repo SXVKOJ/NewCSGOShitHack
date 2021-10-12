@@ -21,7 +21,7 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	return;
 }
 
-long long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
+long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
 	if (!Config.ImGui_Init)
 	{
