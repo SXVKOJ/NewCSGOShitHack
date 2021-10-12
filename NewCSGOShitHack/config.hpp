@@ -1,5 +1,41 @@
 #pragma once
 
+extern int FOV;
+extern int SpinBotSpeed;
+
+extern bool console;
+extern bool ImGui_Init;
+extern bool ImGui_Attached;
+extern bool AimBotActive;
+extern bool MenuActive;
+
+extern bool Bhop;
+extern bool HealthTreshold;
+extern bool TriggerBot;
+extern bool NeonWallHack;
+extern bool AimBot;
+extern bool RecoilControlSystem;
+extern bool RadarHack;
+extern bool NoFlash;
+extern bool WallHackESP;
+extern bool SpinBot;
+extern bool SilentAim;
+
+extern int HealthTresholdVal;
+extern int BhopDelay;
+extern int TriggerBotDelay;
+extern int Delay;
+extern int SilentAimSmooth;
+
+extern int AimBotHotKey;   // VK_ALT
+extern int EndHotKey;     // VK_END
+extern int MenuHotKey;   // VK_HOME
+
+extern float LT_NEONESP[3];
+extern float ET_NEONESP[3];
+
+extern float DX_ESP[3];
+
 static struct CONFIG
 {
 	int FOV = 90;

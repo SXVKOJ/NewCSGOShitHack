@@ -18,6 +18,8 @@ static struct HACK
 
 	void NoFlashThread();
 
+	void SilentAimThread();
+
 	void SpinBotThread(int speed);
 
 	void SetCustomImGuiStyle();

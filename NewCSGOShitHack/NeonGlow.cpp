@@ -23,16 +23,16 @@ void HACK::NeonESPThread()
 
 		if (EntTeam == LocalPlayerTeam)
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = Config.LT_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = Config.LT_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = Config.LT_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = LT_NEONESP[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = LT_NEONESP[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = LT_NEONESP[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 		else
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = Config.ET_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = Config.ET_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = Config.ET_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = ET_NEONESP[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = ET_NEONESP[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = ET_NEONESP[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 

@@ -44,7 +44,7 @@ void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
         int WindowWidth = Game.GetCurrentWindowSize().x;
         int WindowHeight = Game.GetCurrentWindowSize().y;
 
-        DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, 3, D3DCOLOR_COLORVALUE(Config.DX_ESP[0], Config.DX_ESP[1], Config.DX_ESP[2], 1), pDevice);
-        DrawLine(WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, 1, true, D3DCOLOR_COLORVALUE(Config.DX_ESP[0], Config.DX_ESP[1], Config.DX_ESP[2], 1), pDevice);
+        DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, 3, D3DCOLOR_COLORVALUE(DX_ESP[0], DX_ESP[1], DX_ESP[2], 1), pDevice);
+        DrawLine(WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, 1, true, D3DCOLOR_COLORVALUE(DX_ESP[0], DX_ESP[1], DX_ESP[2], 1), pDevice);
     }
 }

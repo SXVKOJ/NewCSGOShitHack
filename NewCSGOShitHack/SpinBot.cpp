@@ -4,8 +4,6 @@ static bool SpinInit = false;
 
 void HACK::SpinBotThread(int speed)
 {
-	bool F_Entity = false;
-
 	DWORD LocalPlayer = Game.GetLocalPlayer();
 	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
 
@@ -19,11 +17,8 @@ void HACK::SpinBotThread(int speed)
 	float x = *(float*)(ClientState + offsets::dwClientState_ViewAngles);
 	float y = *(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4);
 
-	if (!F_Entity)
-	{
-		*(float*)(ClientState + offsets::dwClientState_ViewAngles) = 89;
-		*(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4) = y - speed;
-	}
+	*(float*)(ClientState + offsets::dwClientState_ViewAngles) = 89;
+	*(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4) = y - speed;
 
 	if (y == -179.f)
 		*(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4) = 180;

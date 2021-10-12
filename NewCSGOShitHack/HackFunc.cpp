@@ -2,34 +2,34 @@
 
 void HACK::MainThread()
 {
-	if (Config.Bhop && GetAsyncKeyState(VK_SPACE))
+	if (Bhop && GetAsyncKeyState(VK_SPACE))
 		Hack.BhopThread();
 
-	if (Config.NeonWallHack)
+	if (NeonWallHack)
 		Hack.NeonESPThread();
 
-	if (Config.TriggerBot)
+	if (TriggerBot)
 		Hack.TriggerBotThread();
 
-	if (Config.RecoilControlSystem)
+	if (RecoilControlSystem)
 		Hack.RecoilControlSystemThread();
 
-	if (Config.SpinBot)
+	if (SpinBot)
 		Hack.SpinBotThread(Config.SpinBotSpeed);
 
-	if (Config.RadarHack)
+	if (RadarHack)
 		Hack.RadarHackThread();
 
-	if (Config.NoFlash)
+	if (NoFlash)
 		Hack.NoFlashThread();
 
-	if (Config.AimBot)
+	if (AimBot)
 	{
-		if (GetAsyncKeyState(Config.AimBotHotKey))
+		if (GetAsyncKeyState(AimBotHotKey))
 		{
 			Hack.AimBotThread();
 		}
 	}
 
-	Hack.SetFov(Config.FOV);
+	Hack.SetFov(FOV);
 }

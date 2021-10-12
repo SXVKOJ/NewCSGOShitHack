@@ -129,6 +129,9 @@
     <ClCompile Include="SpinBot.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
+    <ClCompile Include="SilentAim.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
