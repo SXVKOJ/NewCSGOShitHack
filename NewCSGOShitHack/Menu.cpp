@@ -141,7 +141,7 @@ void HACK::MenuThread()
 		ImGui::Separator();
 		ImGui::Checkbox("Smooth Mode", &SmoothAimBot);
 		if (SmoothAimBot)
-			ImGui::SliderInt("Smooth step", &SmoothStep, 1, 10);
+			ImGui::SliderInt("Smooth", &SmoothStep, 1, 10);
 
 		ImGui::Separator();
 		ImGui::Checkbox("Legit Mode", &AimLegitMode);

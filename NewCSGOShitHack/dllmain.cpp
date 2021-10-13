@@ -53,7 +53,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	if (Config.MenuActive)
 		Hack.MenuThread();
 
-	if (Config.WallHackESP)
+	if (WallHackESP)
 		Hack.DXESPThread(pDevice);
 
 	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
@@ -64,51 +64,6 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	ImGuiIO& io = ImGui::GetIO();
-
-	switch (uMsg)
-	{
-	case WM_LBUTTONDOWN:
-		io.MouseDown[0] = true;
-		break;
-	case WM_LBUTTONUP:
-		io.MouseDown[0] = false;
-		break;
-	case WM_RBUTTONDOWN:
-		io.MouseDown[1] = true;
-		break;
-	case WM_RBUTTONUP:
-		io.MouseDown[1] = false;
-		break;
-	case WM_MBUTTONDOWN:
-		io.MouseDown[2] = true;
-		break;
-	case WM_MBUTTONUP:
-		io.MouseDown[2] = false;
-		break;
-	case WM_MOUSEWHEEL:
-		io.MouseWheel += GET_WHEEL_DELTA_WPARAM(wParam) > 0 ? 1.0f : -1.0f;
-		break;
-	case WM_MOUSEMOVE:
-		io.MousePos.x = (signed short)(lParam);
-		io.MousePos.y = (signed short)(lParam >> 16);
-		break;
-	case WM_KEYDOWN:
-		if (wParam == 52)
-			break;
-		if (wParam < 256)
-			io.KeysDown[wParam] = 1;
-		break;
-	case WM_KEYUP:
-		if (wParam == 52)
-			break;
-		if (wParam < 256)
-			io.KeysDown[wParam] = 0;
-		break;
-	case WM_CHAR:
-		if (wParam > 0 && wParam < 0x10000)
-			io.AddInputCharacter((unsigned short)wParam);
-		return true;
-	}
 
 	if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
 		return true;

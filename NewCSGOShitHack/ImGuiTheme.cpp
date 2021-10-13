@@ -4,6 +4,7 @@ void HACK::SetCustomImGuiStyle()
 {
 	ImGuiStyle* style = &ImGui::GetStyle();
 
+	style->WindowBorderSize = 0.0f;
 	style->WindowPadding = ImVec2(15, 15);
 	style->WindowRounding = 5.0f;
 	style->FramePadding = ImVec2(5, 5);
