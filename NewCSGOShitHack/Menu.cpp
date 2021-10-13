@@ -61,7 +61,7 @@ void HACK::MenuThread()
 	ImGui::Separator();
 	ImGui::SliderInt("FOV Slider", &FOV, 90, 160);
 	ImGui::SliderInt("SpinBot Speed", &SpinBotSpeed, 0, 200);
-	ImGui::SliderInt("Trigger Bot Delay", &TriggerBotDelay, 20, 200);
+	ImGui::SliderInt("Trigger Bot Delay", &TriggerBotDelay, 20, 5000);
 	ImGui::SliderInt("Bhop Delay", &BhopDelay, 10, 30);
 	ImGui::SliderInt("Default Delay", &Delay, 1, 5);
 	ImGui::SliderInt("Health Treshold value (Aimbot)", &HealthTresholdVal, 1, 99);

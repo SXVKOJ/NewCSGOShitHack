@@ -1,4 +1,11 @@
 #pragma once
+#include "Vector.h"
+
+DWORD GetBestTarget();
+
+Vec3 calcAngle(Vec3 lp, Vec3 ep);
+
+Vec3 normalizeAngles(float x, float y);
 
 static struct HACK
 {

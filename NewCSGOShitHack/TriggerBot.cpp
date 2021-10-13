@@ -16,6 +16,8 @@ void HACK::TriggerBotThread()
 		if (LocalPlayerTeam != EntityTeam)
 		{
 			Game.PlayerShoot();
+
+			Sleep(TriggerBotDelay);
 		}
 	}
 }

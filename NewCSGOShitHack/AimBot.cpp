@@ -14,15 +14,15 @@ Vec3 calcAngle(Vec3 lp, Vec3 ep)
 
 	float hyp = sqrt(d_x * d_x + d_y * d_y + d_z * d_z);
 
-	float x = atan(d_z / hyp) * 180 / M_PI;
-	float y = atan(d_y / d_x) * 180 / M_PI;
+	double x = atan(d_z / hyp) * 180 / M_PI;
+	double y = atan(d_y / d_x) * 180 / M_PI;
 
 	if (d_x > 0.0)
 	{
 		y += 180;
 	}
 
-	return Vec3{ x, y, 0 };
+	return Vec3{ (float)x,(float)y, 0 };
 }
 
 Vec3 normalizeAngles(float x, float y)
