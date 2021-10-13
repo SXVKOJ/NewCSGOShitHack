@@ -1,9 +1,13 @@
 #include "includes.h"
 # define M_PI           3.14159265358979323846
 
-int CalcHypotenuse(int f_cathetus, int s_cathetus)
+Vec3 Subtract(Vec3 src, Vec3 dst)
 {
-	return sqrt((f_cathetus * f_cathetus) + (s_cathetus * s_cathetus));
+	Vec3 diff;
+	diff.x = src.x - dst.x;
+	diff.y = src.y - dst.y;
+	diff.z = src.z - dst.z;
+	return diff;
 }
 
 Vec3 calcAngle(Vec3 lp, Vec3 ep)
@@ -47,6 +51,17 @@ Vec3 normalizeAngles(float x, float y)
 	return Vec3{ x, y, 0 };
 }
 
+float Magnitude(Vec3 vec)
+{
+	return sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+}
+
+float Distance(Vec3 src, Vec3 dst)
+{
+	Vec3 diff = Subtract(src, dst);
+	return Magnitude(diff);
+}
+
 DWORD GetBestTarget()
 {
 	DWORD Target = NULL;
@@ -55,6 +70,7 @@ DWORD GetBestTarget()
 	float NewDiff = 0;
 
 	DWORD LocalPlayer = *(DWORD*)(Game.GetClient() + offsets::dwLocalPlayer);
+	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
 
 	for (int i = 1; i < 64; i++)
 	{
@@ -75,21 +91,15 @@ DWORD GetBestTarget()
 			continue;
 
 		// if health is less than a certain threshold, then the aimbot will automatically select this player
-		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal && !Target)	
+		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal && !Target)
 			return Entity;
 
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
+		Vec3 LocalPos = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
-		int ScreenMiddleX = Game.GetCurrentWindowSize().x / 2;
-		int ScreenMiddleY = Game.GetCurrentWindowSize().y / 2;
+		Vec3 AngleTo = calcAngle(LocalPos, EntHeadPos);
 
-		int DiffX = abs(ScreenMiddleX - abs(EntHeadPos.x));
-		int DiffY = abs(ScreenMiddleY - abs(EntHeadPos.y));
-
-		int ResultDiff = CalcHypotenuse(DiffX, DiffY);
-
-		NewDiff = ResultDiff;
-
+		NewDiff = AngleTo.x;
 		if (NewDiff < OldDiff)
 		{
 			OldDiff = NewDiff;

@@ -7,6 +7,8 @@ Vec3 calcAngle(Vec3 lp, Vec3 ep);
 
 Vec3 normalizeAngles(float x, float y);
 
+int CalcHypotenuse(int f_cathetus, int s_cathetus);
+
 static struct HACK
 {
 	void MainThread();
