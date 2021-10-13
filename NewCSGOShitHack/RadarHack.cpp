@@ -22,6 +22,6 @@ void HACK::RadarHackThread()
 		if (EntityHealth <= 0)
 			continue;
 
-		*(int*)(Entity + offsets::m_bSpotted) = constVars.Active;
+		*(bool*)(Entity + offsets::m_bSpotted) = true;
 	}
 }

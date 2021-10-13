@@ -29,6 +29,22 @@ Vec3 calcAngle(Vec3 lp, Vec3 ep)
 	return Vec3{ (float)x,(float)y, 0 };
 }
 
+Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst)
+{
+	double delta[3] = { (src.x - dst.x), (src.y - dst.y), (src.z - dst.z) };
+	double hyp = sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
+
+	Vec3 aimBotAngle;
+	aimBotAngle.x = (float)(atanf(delta[2] / hyp) * 57.295779513082f);
+	aimBotAngle.y = (float)(atanf(delta[1] / delta[0]) * 57.295779513082f);
+	aimBotAngle.z = 0.0f;
+
+	if (delta[0] >= 0.0)
+		aimBotAngle.y += 180.0f;
+
+	return aimBotAngle;
+}
+
 Vec3 normalizeAngles(float x, float y)
 {
 	if (x > 89)
@@ -124,10 +140,15 @@ void HACK::AimBotThread()
 		}
 
 		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
-		Vec3 EntPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
+		Vec3 EntPos = Game.GetPlayerBonePos(Entity, TargetBonePos);
 		LocalPos.z += *(float*)(LocalPlayer + offsets::m_vecViewOffset + 0x8);
 
+		
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
+		
+		if (SmoothAimBot)
+			AngleTo = CalcSmoothAngle(LocalPos, EntPos);
+		
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x - ViewAngles.x, AngleTo.y - ViewAngles.y);

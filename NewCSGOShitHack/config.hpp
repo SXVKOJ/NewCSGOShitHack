@@ -2,6 +2,7 @@
 
 extern int FOV;
 extern int SpinBotSpeed;
+extern int TargetBonePos;
 
 extern bool console;
 extern bool ImGui_Init;
@@ -20,6 +21,9 @@ extern bool NoFlash;
 extern bool WallHackESP;
 extern bool SpinBot;
 extern bool SilentAim;
+extern bool SmoothAimBot;
+extern bool ThirdPersonView;
+extern bool TPSActive;
 
 extern int HealthTresholdVal;
 extern int BhopDelay;

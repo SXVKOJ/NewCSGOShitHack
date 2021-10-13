@@ -15,7 +15,7 @@ void HACK::MainThread()
 		Hack.RecoilControlSystemThread();
 
 	if (SpinBot)
-		Hack.SpinBotThread(Config.SpinBotSpeed);
+		Hack.SpinBotThread(SpinBotSpeed);
 
 	if (RadarHack)
 		Hack.RadarHackThread();
@@ -23,6 +23,20 @@ void HACK::MainThread()
 	if (NoFlash)
 		Hack.NoFlashThread();
 
+	if (ThirdPersonView && !TPSActive)
+	{
+		Hack.PlayerSetTPS(true);
+
+		TPSActive = true;
+	}
+
+	if (!ThirdPersonView && TPSActive)
+	{
+		Hack.PlayerSetTPS(false);
+
+		TPSActive = false;
+	}
+	
 	if (AimBot)
 	{
 		if (GetAsyncKeyState(AimBotHotKey))
