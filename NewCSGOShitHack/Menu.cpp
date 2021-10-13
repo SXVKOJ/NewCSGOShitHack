@@ -19,6 +19,9 @@ bool SilentAimBot = false;
 bool ThirdPersonView = false;
 bool TPSActive = false;
 
+bool ImGui_Init = false;
+bool ImGui_Attached = false;
+
 int HealthTresholdVal = 33;
 int BhopDelay = 17;
 int TriggerBotDelay = 65;

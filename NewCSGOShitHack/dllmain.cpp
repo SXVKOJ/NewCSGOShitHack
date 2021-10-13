@@ -13,8 +13,10 @@ static HWND window = NULL;
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 {
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = 1.0f / 60.0f;
+	D3DDEVICE_CREATION_PARAMETERS d3dcp{ 0 };
+	pDevice->GetCreationParameters(&d3dcp);
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
 
@@ -23,12 +25,12 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 
 HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
-	if (!Config.ImGui_Init)
+	if (!ImGui_Init)
 	{
 		InitImGui(pDevice);
 		Hack.SetCustomImGuiStyle();
 
-		Config.ImGui_Init = true;
+		ImGui_Init = true;
 	}
 
 	if (GetAsyncKeyState(Config.MenuHotKey) & 1)
@@ -83,9 +85,9 @@ DWORD WINAPI KieroInit(HMODULE hModule)
 			} while (window == NULL);
 
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWL_WNDPROC, (LONG_PTR)WndProc);
-			Config.ImGui_Attached = true;
+			ImGui_Attached = true;
 		}
-	} while (!Config.ImGui_Attached);
+	} while (!ImGui_Attached);
 
 	return TRUE;
 }
