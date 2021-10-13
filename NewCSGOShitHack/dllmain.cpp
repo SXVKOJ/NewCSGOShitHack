@@ -20,6 +20,7 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	io.Fonts->AddFontDefault();
+	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
 
 	D3DVIEWPORT9 viewport;
 	viewport.Width = io.DisplaySize.x;
@@ -54,6 +55,8 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 
 	if (Config.WallHackESP)
 		Hack.DXESPThread(pDevice);
+
+	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
 
 	return oEndScene(pDevice);
 }
