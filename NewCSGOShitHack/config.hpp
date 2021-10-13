@@ -1,6 +1,7 @@
 #pragma once
 
 extern int FOV;
+extern int SmoothStep;
 extern int SpinBotSpeed;
 extern int TargetBonePos;
 
@@ -20,16 +21,22 @@ extern bool RadarHack;
 extern bool NoFlash;
 extern bool WallHackESP;
 extern bool SpinBot;
-extern bool SilentAim;
+extern bool AimingAssistance;
 extern bool SmoothAimBot;
 extern bool ThirdPersonView;
 extern bool TPSActive;
+extern bool AimLegitMode;
+extern bool TriggerBotInAimBot;
 
 extern int HealthTresholdVal;
 extern int BhopDelay;
-extern int TriggerBotDelay;
+extern int TriggerBotCooldown;
 extern int Delay;
 extern int SilentAimSmooth;
+extern int LegitAimBotDiff;
+
+extern int BoxWidth;
+extern int LineWidth;
 
 extern int AimBotHotKey;   // VK_ALT
 extern int EndHotKey;     // VK_END
@@ -64,7 +71,7 @@ static struct CONFIG
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
-	int TriggerBotDelay = 65;
+	int TriggerBotCooldown = 65;
 	int Delay = 1;
 
 	int AimBotHotKey = 18;   // VK_ALT

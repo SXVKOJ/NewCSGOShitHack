@@ -10,7 +10,7 @@ void HACK::RecoilControlSystemThread()
 
 	int ShotsFired = *(int*)(LocalPlayer + offsets::m_iShotsFired);
 
-	if (ShotsFired >= 3)
+	if (ShotsFired >= 2)
 	{
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 

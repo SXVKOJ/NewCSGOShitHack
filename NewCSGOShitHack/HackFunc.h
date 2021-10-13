@@ -7,6 +7,8 @@ Vec3 calcAngle(Vec3 lp, Vec3 ep);
 
 Vec3 normalizeAngles(float x, float y);
 
+Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst);
+
 static struct HACK
 {
 	void MainThread();
@@ -25,7 +27,7 @@ static struct HACK
 
 	void NoFlashThread();
 
-	void SilentAimThread();
+	void AimingAssistanceThread();
 
 	void SpinBotThread(int speed);
 

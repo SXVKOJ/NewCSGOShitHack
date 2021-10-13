@@ -13,6 +13,15 @@ static struct Vec3
         return *this;
     }
 
+    Vec3& operator-(Vec3 arg)
+    {
+        x -= arg.x;
+        y -= arg.y;
+        z -= arg.z;
+
+        return *this;
+    }
+
     Vec3& operator*(float arg)
     {
         x *= arg;

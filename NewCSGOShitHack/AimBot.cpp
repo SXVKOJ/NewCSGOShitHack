@@ -106,6 +106,12 @@ DWORD GetBestTarget()
 		if (EntityHealth <= 0)
 			continue;
 
+		int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
+		int SpottedByMask = *(int*)(Entity + offsets::m_bSpottedByMask);
+
+		if (!(SpottedByMask & (1 << CrosshairID)) && AimLegitMode)
+			continue;
+
 		// if health is less than a certain threshold, then the aimbot will automatically select this player
 		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal && !Target)
 			return Entity;
@@ -145,15 +151,13 @@ void HACK::AimBotThread()
 		
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
-		Vec3 newAngles = normalizeAngles(AngleTo.x - ViewAngles.x, AngleTo.y - ViewAngles.y);
+		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = ViewAngles + newAngles;
+		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
 
-		int EntityHealth = *(int*)(Entity + offsets::m_iHealth);
-
-		if (EntityHealth <= 0)
+		if (TriggerBotInAimBot)
 		{
-			return;
+			TriggerBotThread();
 		}
 	}
 }

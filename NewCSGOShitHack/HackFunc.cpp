@@ -8,7 +8,7 @@ void HACK::MainThread()
 	if (NeonWallHack)
 		Hack.NeonESPThread();
 
-	if (TriggerBot)
+	if (TriggerBot && !TriggerBotInAimBot)
 		Hack.TriggerBotThread();
 
 	if (RecoilControlSystem)
@@ -22,6 +22,9 @@ void HACK::MainThread()
 
 	if (NoFlash)
 		Hack.NoFlashThread();
+
+	if (AimingAssistance)
+		Hack.AimingAssistanceThread();
 
 	if (ThirdPersonView && !TPSActive)
 	{
@@ -46,4 +49,7 @@ void HACK::MainThread()
 	}
 
 	Hack.SetFov(FOV);
+
+	if (AimBot && AimingAssistance)
+		AimBot = !AimBot;
 }

@@ -21,7 +21,7 @@ void GAME::PlayerShoot()
 	DWORD client = this->GetClient();
 
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsActive;
-	Sleep(Config.TriggerBotDelay);
+	Sleep(Config.TriggerBotCooldown);
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsOFF;
 }
 

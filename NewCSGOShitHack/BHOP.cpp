@@ -10,7 +10,7 @@ void HACK::BhopThread()
 
 	if (PlayerFlags == constVars.FlagsOnGround)
 	{
-		if (PlayerVel.x - 1e-6 != 0 && PlayerVel.y - 1e-6 != 0)
+		if (PlayerVel.x != 0 && PlayerVel.y != 0)
 		{
 			Game.PlayerJump();
 		}

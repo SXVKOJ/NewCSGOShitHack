@@ -1,8 +1,10 @@
 #include "includes.h"
 
 int FOV = 90;
+int SmoothStep = 1;
 int SpinBotSpeed = 0;
 int TargetBonePos = constVars.HeadBone;
+int LegitAimBotDiff = 300;
 
 bool Bhop = false;
 bool HealthTreshold = false;
@@ -18,13 +20,19 @@ bool SmoothAimBot = false;
 bool SilentAimBot = false;
 bool ThirdPersonView = false;
 bool TPSActive = false;
+bool AimLegitMode = false;
+bool AimingAssistance = false;
+bool TriggerBotInAimBot = false;
 
 bool ImGui_Init = false;
 bool ImGui_Attached = false;
 
+int BoxWidth = 3;
+int LineWidth = 1;
+
 int HealthTresholdVal = 33;
 int BhopDelay = 17;
-int TriggerBotDelay = 65;
+int TriggerBotCooldown = 65;
 int Delay = 1;
 
 int AimBotHotKey = 18;   // VK_ALT
@@ -86,16 +94,14 @@ void HACK::MenuThread()
 	{
 		// MAIN THREAD
 		ImGui::Separator();
-		ImGui::SliderInt("Bhop Delay", &BhopDelay, 10, 30);
-		ImGui::SliderInt("Default Delay", &Delay, 1, 5);
+		ImGui::SliderInt("Bhop Cooldown", &BhopDelay, 10, 30);
+		ImGui::SliderInt("Default Cooldown (for FPS)", &Delay, 1, 10);
 		ImGui::Separator();
 		ImGui::Checkbox("AimBot", &AimBot);
 		ImGui::Separator();
-		ImGui::Checkbox("Smooth AimBot", &SmoothAimBot);
-		ImGui::Separator();
 		ImGui::Checkbox("SpinBot", &SpinBot);
 		ImGui::Separator();
-		ImGui::Checkbox("Neon WallHack", &NeonWallHack);
+		ImGui::Checkbox("Glow ESP (Neon)", &NeonWallHack);
 		ImGui::Separator();
 		ImGui::Checkbox("DX ESP (boxes)", &WallHackESP);
 		ImGui::Separator();
@@ -104,6 +110,9 @@ void HACK::MenuThread()
 		ImGui::Checkbox("Radar Hack", &RadarHack);
 		ImGui::Separator();
 		ImGui::Checkbox("TriggerBot", &TriggerBot);
+		if (TriggerBot)
+			ImGui::Checkbox("Inside AimBot?", &TriggerBotInAimBot);
+
 		ImGui::Separator();
 		ImGui::Checkbox("No Flash", &NoFlash);
 		ImGui::Separator();
@@ -125,11 +134,23 @@ void HACK::MenuThread()
 		// AIMBOT
 		ImGui::Separator();
 		ImGui::SliderInt("SpinBot Speed", &SpinBotSpeed, 0, 200);
-		ImGui::SliderInt("Trigger Bot Delay", &TriggerBotDelay, 20, 5000);
-		ImGui::SliderInt("Health Treshold value (Aimbot)", &HealthTresholdVal, 1, 99);
+		ImGui::SliderInt("Trigger Bot Cooldown", &TriggerBotCooldown, 20, 5000);
+		ImGui::SliderInt("Health Treshold value", &HealthTresholdVal, 1, 99);
 		ImGui::Separator();
-		ImGui::Checkbox("Health Treshold (AimBot)", &HealthTreshold);
-		ImGui::Checkbox("Smooth Mode (+Legit)", &SmoothAimBot);
+		ImGui::Checkbox("Health Treshold", &HealthTreshold);
+		ImGui::Separator();
+		ImGui::Checkbox("Smooth Mode", &SmoothAimBot);
+		if (SmoothAimBot)
+			ImGui::SliderInt("Smooth step", &SmoothStep, 1, 10);
+
+		ImGui::Separator();
+		ImGui::Checkbox("Legit Mode", &AimLegitMode);
+		ImGui::Separator();
+		ImGui::Checkbox("Aiming assistance", &AimingAssistance);
+
+		if (AimingAssistance)
+			ImGui::SliderInt("Min Distanse", &LegitAimBotDiff, 1, 3000);
+		
 		ImGui::Separator();
 		ImGui::InputInt("Target Bone", &TargetBonePos, 1, 100, 0);
 	}	
@@ -138,10 +159,12 @@ void HACK::MenuThread()
 	{
 		// WALLHACK
 		ImGui::Separator();
-		ImGui::ColorEdit4("Neon EntTeam WH Color", ET_NEONESP);
-		ImGui::ColorEdit4("Neon LocTeam WH Color", LT_NEONESP);
-		ImGui::ColorEdit4("DX ESP Color", DX_ESP);
+		ImGui::ColorEdit4("EntTeam Color", ET_NEONESP);
+		ImGui::ColorEdit4("LocTeam Color", LT_NEONESP);
+		ImGui::ColorEdit4("ESP Color", DX_ESP);
 		ImGui::Separator();
+		ImGui::InputInt("Box Width", &BoxWidth, 1, 50, 0);
+		ImGui::InputInt("Line Width", &LineWidth, 1, 50, 0);
 	}
 
 	ImGui::End();

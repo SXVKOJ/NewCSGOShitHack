@@ -17,7 +17,8 @@ void HACK::TriggerBotThread()
 		{
 			Game.PlayerShoot();
 
-			Sleep(TriggerBotDelay);
+			if (TriggerBotCooldown >= 25)
+				Sleep(TriggerBotCooldown);
 		}
 	}
 }
