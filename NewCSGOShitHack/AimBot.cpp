@@ -134,16 +134,10 @@ void HACK::AimBotThread()
 
 	if (Entity != NULL)
 	{	
-		if (GetAsyncKeyState(Config.AimBotHotKey) == 0)
-		{
-			return;
-		}
-
 		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
 		Vec3 EntPos = Game.GetPlayerBonePos(Entity, TargetBonePos);
 		LocalPos.z += *(float*)(LocalPlayer + offsets::m_vecViewOffset + 0x8);
 
-		
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
 		
 		if (SmoothAimBot)
