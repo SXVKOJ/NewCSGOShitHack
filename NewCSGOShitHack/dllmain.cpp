@@ -13,10 +13,23 @@ static HWND window = NULL;
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 {
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.DeltaTime = 1.0f / 60.0f;
-	D3DDEVICE_CREATION_PARAMETERS d3dcp{ 0 };
-	pDevice->GetCreationParameters(&d3dcp);
+
+	D3DDEVICE_CREATION_PARAMETERS CP;
+	pDevice->GetCreationParameters(&CP);
+	window = CP.hFocusWindow;
+
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.Fonts->AddFontDefault();
+
+	D3DVIEWPORT9 viewport;
+	viewport.Width = io.DisplaySize.x;
+	viewport.Height = io.DisplaySize.y;
+	viewport.MinZ = 0.0f;
+	viewport.MaxZ = 1.0f;
+	viewport.X = 0.0f;
+	viewport.Y = 0.0f;
+	pDevice->SetViewport(&viewport);
+
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
 
