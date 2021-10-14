@@ -48,10 +48,10 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		config::ImGui_Init = true;
 	}
 
-	if (GetAsyncKeyState(Config.MenuHotKey) & 1)
-		Config.MenuActive = !Config.MenuActive;
+	if (GetAsyncKeyState(MenuHotKey) & 1)
+		MenuActive = !MenuActive;
 
-	if (Config.MenuActive)
+	if (MenuActive)
 		Hack.MenuThread();
 
 	if (config::WallHackESP)
@@ -117,10 +117,10 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 	FILE* pFile = nullptr;
 	
-	if (Config.console)
+	if (config::console)
 		pFile = Console.Init();
 
-    while (!GetAsyncKeyState(Config.EndHotKey))
+    while (!GetAsyncKeyState(EndHotKey))
     {
 		Hack.MainThread();
 
@@ -130,7 +130,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
 	kiero::shutdown();
 	
-	if (Config.console && pFile != nullptr)
+	if (config::console && pFile != nullptr)
 		Console.Release(pFile);
 
     FreeLibraryAndExitThread(hModule, 0);

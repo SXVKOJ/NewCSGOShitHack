@@ -6,6 +6,7 @@ int config::SpinBotSpeed = 0;
 int config::TargetBonePos = constVars.HeadBone;
 int config::LegitAimBotDiff = 300;
 
+bool config::console = false;
 bool config::Bhop = false;
 bool config::HealthTreshold = false;
 bool config::TriggerBot = false;
@@ -37,6 +38,7 @@ int config::MainThreadDelay = 1;
 int AimBotHotKey = 18;   // VK_ALT
 int EndHotKey = 0x23;   // VK_END
 int MenuHotKey = 0x24; // VK_HOME
+bool MenuActive = false;
 
 float config::LT_NEONESP[3] = { 0, 1, 1 };
 float config::ET_NEONESP[3] = { 1, 0, 1 };

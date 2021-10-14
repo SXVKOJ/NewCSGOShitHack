@@ -123,7 +123,7 @@ DWORD GetBestTarget()
 			continue;
 
 		// if health is less than a certain threshold, then the aimbot will automatically select this player
-		if (Config.config::HealthTreshold && EntityHealth <= Config.config::HealthTresholdVal && !Target)
+		if (config::HealthTreshold && EntityHealth <= config::HealthTresholdVal && !Target)
 			return Entity;
 
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
