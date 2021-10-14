@@ -23,6 +23,7 @@ bool config::TPSActive = false;
 bool config::AimLegitMode = false;
 bool config::AimingAssistance = false;
 bool config::TriggerBotInAimBot = false;
+bool config::ESPBones = false;
 
 bool config::ImGui_Init = false;
 bool config::ImGui_Attached = false;
@@ -35,10 +36,10 @@ int config::BhopDelay = 17;
 int config::TriggerBotCooldown = 65;
 int config::MainThreadDelay = 1;
 
-int AimBotHotKey = 18;   // VK_ALT
-int EndHotKey = 0x23;   // VK_END
-int MenuHotKey = 0x24; // VK_HOME
-bool MenuActive = false;
+int config::AimBotHotKey = 18;   // VK_ALT
+int config::EndHotKey = 0x23;   // VK_END
+int config::MenuHotKey = 0x24; // VK_HOME
+bool config::MenuActive = false;
 
 float config::LT_NEONESP[3] = { 0, 1, 1 };
 float config::ET_NEONESP[3] = { 1, 0, 1 };
@@ -185,6 +186,8 @@ void HACK::MenuThread()
 		ImGui::ColorEdit4("EntTeam Color", config::ET_NEONESP);
 		ImGui::ColorEdit4("LocTeam Color", config::LT_NEONESP);
 		ImGui::ColorEdit4("ESP Color", config::DX_ESP);
+		ImGui::Separator();
+		ImGui::Checkbox("Draw Bones", &config::ESPBones);
 		ImGui::Separator();
 		ImGui::InputInt("Box Width", &config::BoxWidth, 1, 10, 0);
 		ImGui::InputInt("Line Width", &config::LineWidth, 1, 10, 0);

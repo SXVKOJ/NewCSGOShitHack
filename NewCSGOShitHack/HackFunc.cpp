@@ -42,7 +42,7 @@ void HACK::MainThread()
 	
 	if (config::AimBot)
 	{
-		if (GetAsyncKeyState(AimBotHotKey))
+		if (GetAsyncKeyState(config::AimBotHotKey))
 		{
 			Hack.AimBotThread();
 		}

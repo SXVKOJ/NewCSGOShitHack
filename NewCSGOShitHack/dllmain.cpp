@@ -6,6 +6,15 @@
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+ID3DXLine* p_Line = nullptr;
+ID3DXLine* Line = nullptr;
+
+ID3DXLine* BodyLine = nullptr;
+ID3DXLine* rLegLine = nullptr;
+ID3DXLine* lLegLine = nullptr;
+ID3DXLine* rArmLine = nullptr;
+ID3DXLine* lArmLine = nullptr;
+
 EndScene oEndScene = NULL;
 WNDPROC oWndProc;
 static HWND window = NULL;
@@ -45,19 +54,29 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		Hack.SetCustomImGuiStyle();
 		Hack.LoadImageToDll(NameArry, pDevice);
 
+		D3DXCreateLine(pDevice, &Line);
+		D3DXCreateLine(pDevice, &p_Line);
+
+		D3DXCreateLine(pDevice, &BodyLine);
+		D3DXCreateLine(pDevice, &rLegLine);
+		D3DXCreateLine(pDevice, &lLegLine);
+		D3DXCreateLine(pDevice, &rArmLine);
+		D3DXCreateLine(pDevice, &lArmLine);
+
 		config::ImGui_Init = true;
 	}
 
-	if (GetAsyncKeyState(MenuHotKey) & 1)
-		MenuActive = !MenuActive;
+	if (GetAsyncKeyState(config::MenuHotKey) & 1)
+		config::MenuActive = !config::MenuActive;
 
-	if (MenuActive)
+	if (config::MenuActive)
 		Hack.MenuThread();
 
 	if (config::WallHackESP)
 		Hack.DXESPThread(pDevice);
-	
-	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
+
+	if (config::ESPBones)
+		Hack.ESPDrawBonesThread(pDevice);
 
 	return oEndScene(pDevice);
 }
@@ -120,7 +139,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	if (config::console)
 		pFile = Console.Init();
 
-    while (!GetAsyncKeyState(EndHotKey))
+    while (!GetAsyncKeyState(config::EndHotKey))
     {
 		Hack.MainThread();
 

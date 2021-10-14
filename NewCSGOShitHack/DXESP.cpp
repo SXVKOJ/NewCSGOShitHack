@@ -34,7 +34,6 @@ void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
         Vec3 Head2Screen;
 
         memcpy(&Game.ViewMatrix, (PBYTE*)(Game.GetClient() + offsets::dwViewMatrix), sizeof(Game.ViewMatrix));
-
         Game.WorldToScreen(EntityPos, Entity2Screen);
         Game.WorldToScreen(EntityHead, Head2Screen);
 
@@ -45,6 +44,6 @@ void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
         int WindowHeight = Game.GetCurrentWindowSize().y;
 
         DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, config::BoxWidth, D3DCOLOR_COLORVALUE(config::DX_ESP[0], config::DX_ESP[1], config::DX_ESP[2], 1), pDevice);
-        DrawLine(WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, config::LineWidth, true, D3DCOLOR_COLORVALUE(config::DX_ESP[0], config::DX_ESP[1], config::DX_ESP[2], 1), pDevice);
+        DrawLine(Line, WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, config::LineWidth, true, D3DCOLOR_COLORVALUE(config::DX_ESP[0], config::DX_ESP[1], config::DX_ESP[2], 1), pDevice);
     }
 }

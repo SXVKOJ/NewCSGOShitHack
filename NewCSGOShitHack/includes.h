@@ -19,6 +19,7 @@
 #include <psapi.h>
 #include <winternl.h>
 #include <cmath>
+#include <vector>
 
 #include "HackFunc.h"
 #include "Game.h"

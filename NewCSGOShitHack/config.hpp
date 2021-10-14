@@ -11,7 +11,6 @@ namespace config
 	extern bool ImGui_Init;
 	extern bool ImGui_Attached;
 	extern bool AimBotActive;
-	extern bool MenuActive;
 
 	extern bool Bhop;
 	extern bool HealthTreshold;
@@ -29,6 +28,7 @@ namespace config
 	extern bool TPSActive;
 	extern bool AimLegitMode;
 	extern bool TriggerBotInAimBot;
+	extern bool ESPBones;
 
 	extern int HealthTresholdVal;
 	extern int BhopDelay;
@@ -44,9 +44,9 @@ namespace config
 	extern float ET_NEONESP[3];
 
 	extern float DX_ESP[3];
-}
 
-extern int AimBotHotKey;   // VK_ALT
-extern int EndHotKey;     // VK_END
-extern int MenuHotKey;   // VK_HOME
-extern bool MenuActive;
+	extern int AimBotHotKey;   // VK_ALT
+	extern int EndHotKey;     // VK_END
+	extern int MenuHotKey;   // VK_HOME
+	extern bool MenuActive;
+}

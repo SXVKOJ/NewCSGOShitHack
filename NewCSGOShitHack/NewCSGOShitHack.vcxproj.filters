@@ -132,6 +132,9 @@
     <ClCompile Include="SilentAim.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
+    <ClCompile Include="ESPBones.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
