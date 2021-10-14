@@ -9,6 +9,8 @@ Vec3 normalizeAngles(float x, float y);
 
 Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst);
 
+Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig);
+
 static struct HACK
 {
 	void MainThread();

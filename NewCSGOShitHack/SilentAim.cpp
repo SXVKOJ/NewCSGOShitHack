@@ -1,8 +1,8 @@
 #include "includes.h"
 
-int GetAngleDifference(Vec3& first, Vec3& second)
+int Hypotenuse(int FCathetus, int SCathetus)
 {
-	return sqrt(pow(first.x - second.x, 2) + pow(first.y - second.y, 2));
+	return sqrt(pow(FCathetus, 2) + pow(SCathetus, 2));
 }
 
 DWORD GetNearestPlayer()
@@ -41,12 +41,21 @@ DWORD GetNearestPlayer()
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
 		Vec3 LocalPos = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
-		int Diff = GetAngleDifference(LocalPos, EntHeadPos);
-		NewDiff = Diff;
-		if ((Diff <= config::LegitAimBotDiff) && NewDiff < OldDiff)
+		memcpy(&Game.ViewMatrix, (PBYTE*)(Game.GetClient() + offsets::dwViewMatrix), sizeof(Game.ViewMatrix));
+
+		Vec3 EntHeadW2S;
+		Game.WorldToScreen(EntHeadPos, EntHeadW2S);
+
+		int ScreenMidX = Game.GetCurrentWindowSize().x / 2;
+		int ScreenMidY = Game.GetCurrentWindowSize().y / 2;
+
+		int DiffX = abs(ScreenMidX - EntHeadW2S.x);
+		int DiffY = abs(ScreenMidY - EntHeadW2S.y);
+
+		if (Hypotenuse(DiffX, DiffY) <= config::LegitAimBotDiff)
 		{
-			OldDiff = NewDiff;
 			Target = Entity;
+			return Entity;
 		}
 	}
 
@@ -74,6 +83,6 @@ void HACK::AimingAssistanceThread()
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
+		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
 	}
 }

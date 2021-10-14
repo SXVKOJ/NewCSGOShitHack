@@ -31,7 +31,7 @@ void GAME::PlayerJump()
 	DWORD client = GetClient();
 
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsActive;
-	if (config::BhopDelay >= 20)
+	if (config::BhopDelay >= 15)
 		Sleep(config::BhopDelay);
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsOFF;
 }
