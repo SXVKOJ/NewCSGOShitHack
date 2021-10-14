@@ -13,12 +13,12 @@ DWORD GAME::GetEngine()
 
 DWORD GAME::GetLocalPlayer()
 {
-	return *(DWORD*)(this->GetClient() + offsets::dwLocalPlayer);
+	return *(DWORD*)(GetClient() + offsets::dwLocalPlayer);
 }
 
 void GAME::PlayerShoot()
 {
-	DWORD client = this->GetClient();
+	DWORD client = GetClient();
 
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsActive;
 	if (config::TriggerBotCooldown > 20)
@@ -28,10 +28,10 @@ void GAME::PlayerShoot()
 
 void GAME::PlayerJump()
 {
-	DWORD client = this->GetClient();
+	DWORD client = GetClient();
 
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsActive;
-	if (config::BhopDelay >= 15)
+	if (config::BhopDelay >= 20)
 		Sleep(config::BhopDelay);
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsOFF;
 }
