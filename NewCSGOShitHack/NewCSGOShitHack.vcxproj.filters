@@ -185,6 +185,9 @@
     <ClInclude Include="kiero\kiero.h">
       <Filter>Исходные файлы\hook</Filter>
     </ClInclude>
+    <ClInclude Include="image.hpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="dumper.py">

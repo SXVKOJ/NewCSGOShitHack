@@ -164,7 +164,9 @@ void HACK::MenuThread()
 			ImGui::SliderInt("Min Distanse", &LegitAimBotDiff, 1, 3000);
 		
 		ImGui::Separator();
-		ImGui::InputInt("Target Bone", &TargetBonePos, 1, 100, 0);
+		ImGui::InputInt("Target Bone", &TargetBonePos, 1, 79, 0);
+		//ImGui::Image(tImage, ImVec2(495, 659)); 
+
 	}	
 
 	else if (CurrTab == 3)
@@ -175,8 +177,8 @@ void HACK::MenuThread()
 		ImGui::ColorEdit4("LocTeam Color", LT_NEONESP);
 		ImGui::ColorEdit4("ESP Color", DX_ESP);
 		ImGui::Separator();
-		ImGui::InputInt("Box Width", &BoxWidth, 1, 50, 0);
-		ImGui::InputInt("Line Width", &LineWidth, 1, 50, 0);
+		ImGui::InputInt("Box Width", &BoxWidth, 1, 10, 0);
+		ImGui::InputInt("Line Width", &LineWidth, 1, 10, 0);
 	}
 
 	ImGui::End();

@@ -43,6 +43,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	{
 		InitImGui(pDevice);
 		Hack.SetCustomImGuiStyle();
+		Hack.LoadImageToDll(NameArry, pDevice);
 
 		ImGui_Init = true;
 	}

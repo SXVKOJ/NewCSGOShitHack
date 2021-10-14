@@ -41,6 +41,8 @@ static struct HACK
 
 	void DXESPThread(LPDIRECT3DDEVICE9& pDevice);
 
+	void LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice);
+
 	void DrawRect(int x, int y, int w, int h, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice);
 
 	void DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice);

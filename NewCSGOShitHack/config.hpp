@@ -1,5 +1,7 @@
 #pragma once
 
+extern IDirect3DTexture9* tImage;
+
 extern int FOV;
 extern int SmoothStep;
 extern int SpinBotSpeed;

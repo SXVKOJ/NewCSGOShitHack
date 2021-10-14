@@ -193,6 +193,7 @@
     <ClInclude Include="constVars.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HackFunc.h" />
+    <ClInclude Include="image.hpp" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="kiero\kiero.h" />
     <ClInclude Include="kiero\minhook\include\MinHook.h" />

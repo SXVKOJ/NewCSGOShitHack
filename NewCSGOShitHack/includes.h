@@ -24,6 +24,7 @@
 #include "Game.h"
 
 #include "constVars.hpp"
+#include "image.hpp"
 #include "Config.hpp"
 #include "offsets.hpp"
 #include "Vector.h"
