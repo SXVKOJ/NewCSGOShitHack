@@ -123,7 +123,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     {
 		Hack.MainThread();
 
-		Sleep(Config.Delay);
+		Sleep(MainThreadDelay);
     }
 
 	kiero::shutdown();
@@ -142,8 +142,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 		DisableThreadLibraryCalls(hModule);
 		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)KieroInit, hModule, NULL, NULL));
 		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL));
-	case DLL_THREAD_ATTACH:
-	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
 		kiero::shutdown();
 		break;

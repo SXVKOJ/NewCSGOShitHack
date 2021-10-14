@@ -31,7 +31,7 @@ extern bool TriggerBotInAimBot;
 extern int HealthTresholdVal;
 extern int BhopDelay;
 extern int TriggerBotCooldown;
-extern int Delay;
+extern int MainThreadDelay;
 extern int SilentAimSmooth;
 extern int LegitAimBotDiff;
 
@@ -62,7 +62,7 @@ static struct CONFIG
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
 	int TriggerBotCooldown = 65;
-	int Delay = 1;
+	int MainThreadDelay = 1;
 
 	int AimBotHotKey = 18;   // VK_ALT
 	int EndHotKey = 0x23;   // VK_END

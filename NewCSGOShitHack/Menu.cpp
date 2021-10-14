@@ -33,7 +33,7 @@ int LineWidth = 1;
 int HealthTresholdVal = 33;
 int BhopDelay = 17;
 int TriggerBotCooldown = 65;
-int Delay = 1;
+int MainThreadDelay = 1;
 
 int AimBotHotKey = 18;   // VK_ALT
 int EndHotKey = 0x23;   // VK_END
@@ -107,7 +107,7 @@ void HACK::MenuThread()
 		// MAIN THREAD
 		ImGui::Separator();
 		ImGui::SliderInt("Bhop Cooldown", &BhopDelay, 10, 30);
-		ImGui::SliderInt("Default Cooldown (for FPS)", &Delay, 1, 10);
+		ImGui::SliderInt("Default Cooldown (for FPS)", &MainThreadDelay, 1, 10);
 		ImGui::Separator();
 		ImGui::Checkbox("AimBot", &AimBot);
 		ImGui::Separator();
