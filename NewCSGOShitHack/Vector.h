@@ -30,6 +30,15 @@ static struct Vec3
 
         return *this;
     }
+
+    Vec3& operator/(int arg)
+    {
+        x /= arg;
+        y /= arg;
+        z /= arg;
+
+        return *this;
+    }
 };
 
 static struct Vec4

@@ -77,6 +77,13 @@ void ToggleButton(const char* str_id, bool* v)
 }
 
 static int CurrTab = 0;
+static bool BonesIds = false;
+IDirect3DTexture9* tImage = nullptr;
+
+void HACK::LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice)
+{
+	D3DXCreateTextureFromFileInMemoryEx(pDevice, &NameArry, sizeof(NameArry), 495, 659, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &tImage);
+}
 
 void HACK::MenuThread()
 {
@@ -107,7 +114,7 @@ void HACK::MenuThread()
 		// MAIN THREAD
 		ImGui::Separator();
 		ImGui::SliderInt("Bhop Cooldown", &BhopDelay, 10, 30);
-		ImGui::SliderInt("Default Cooldown (for FPS)", &MainThreadDelay, 1, 10);
+		ImGui::SliderInt("Default Cooldown (for FPS)", &MainThreadDelay, 1, 100);
 		ImGui::Separator();
 		ImGui::Checkbox("AimBot", &AimBot);
 		ImGui::Separator();
@@ -136,7 +143,7 @@ void HACK::MenuThread()
 	{
 		// VIEW
 		ImGui::Separator();
-		ImGui::SliderInt("FOV Slider", &FOV, 90, 200);
+		ImGui::SliderInt("FOV Slider", &FOV, 90, 170);
 		ImGui::Separator();
 		ImGui::Checkbox("Third Person Mode", &ThirdPersonView);
 	}	
@@ -165,8 +172,9 @@ void HACK::MenuThread()
 		
 		ImGui::Separator();
 		ImGui::InputInt("Target Bone", &TargetBonePos, 1, 79, 0);
-		//ImGui::Image(tImage, ImVec2(495, 659)); 
-
+		ImGui::Checkbox("Bones id's", &BonesIds);
+		if ((tImage != nullptr) && BonesIds)
+			ImGui::Image(tImage, ImVec2(495, 659));
 	}	
 
 	else if (CurrTab == 3)

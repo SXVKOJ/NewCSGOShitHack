@@ -1,7 +1,5 @@
 #pragma once
 
-extern IDirect3DTexture9* tImage;
-
 extern int FOV;
 extern int SmoothStep;
 extern int SpinBotSpeed;
@@ -51,9 +49,6 @@ extern float DX_ESP[3];
 
 static struct CONFIG
 {
-	int FOV = 90;
-	int SpinBotSpeed = 0;
-	
 	bool console = false;
 	bool ImGui_Init = false;
 	bool ImGui_Attached = false;

@@ -1,13 +1,5 @@
 #include "includes.h"
 
-IDirect3DTexture9* tImage = nullptr;
-
-void HACK::LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice)
-{
-	if (tImage == nullptr)
-		D3DXCreateTextureFromFileInMemoryEx(pDevice, &NameArry, sizeof(NameArry), 495, 659, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &tImage);
-}
-
 void HACK::MainThread()
 {
 	if (Bhop && GetAsyncKeyState(VK_SPACE))

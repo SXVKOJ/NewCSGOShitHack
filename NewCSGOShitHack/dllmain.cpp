@@ -56,7 +56,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 
 	if (WallHackESP)
 		Hack.DXESPThread(pDevice);
-
+	
 	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
 
 	return oEndScene(pDevice);

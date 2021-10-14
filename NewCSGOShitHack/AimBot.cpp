@@ -18,21 +18,19 @@ Vec3 calcAngle(Vec3 lp, Vec3 ep)
 
 	float hyp = sqrt(d_x * d_x + d_y * d_y + d_z * d_z);
 
-	double x = atan(d_z / hyp) * 180 / M_PI;
-	double y = atan(d_y / d_x) * 180 / M_PI;
+	float x = atan(d_z / hyp) * 180 / M_PI;
+	float y = atan(d_y / d_x) * 180 / M_PI;
 
 	if (d_x > 0.0)
-	{
 		y += 180;
-	}
 
 	return Vec3{ (float)x,(float)y, 0 };
 }
 
 Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst)
 {
-	double delta[3] = { (src.x - dst.x), (src.y - dst.y), (src.z - dst.z) };
-	double hyp = sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
+	float delta[3] = { (src.x - dst.x), (src.y - dst.y), (src.z - dst.z) };
+	float hyp = sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
 
 	Vec3 aimBotAngle;
 	aimBotAngle.x = (float)(atanf(delta[2] / hyp) * 57.295779513082f);
