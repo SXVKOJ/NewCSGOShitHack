@@ -43,7 +43,7 @@ DWORD GetNearestPlayer()
 
 		int Diff = GetAngleDifference(LocalPos, EntHeadPos);
 		NewDiff = Diff;
-		if ((Diff <= LegitAimBotDiff) && NewDiff < OldDiff)
+		if ((Diff <= config::LegitAimBotDiff) && NewDiff < OldDiff)
 		{
 			OldDiff = NewDiff;
 			Target = Entity;
@@ -62,12 +62,12 @@ void HACK::AimingAssistanceThread()
 	if (Entity != NULL)
 	{
 		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
-		Vec3 EntPos = Game.GetPlayerBonePos(Entity, TargetBonePos);
+		Vec3 EntPos = Game.GetPlayerBonePos(Entity, config::TargetBonePos);
 		LocalPos.z += *(float*)(LocalPlayer + offsets::m_vecViewOffset + 0x8);
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
 
-		if (SmoothAimBot)
+		if (config::SmoothAimBot)
 			AngleTo = CalcSmoothAngle(LocalPos, EntPos);
 
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);

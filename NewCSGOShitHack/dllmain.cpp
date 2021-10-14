@@ -39,13 +39,13 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 
 HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
-	if (!ImGui_Init)
+	if (!config::ImGui_Init)
 	{
 		InitImGui(pDevice);
 		Hack.SetCustomImGuiStyle();
 		Hack.LoadImageToDll(NameArry, pDevice);
 
-		ImGui_Init = true;
+		config::ImGui_Init = true;
 	}
 
 	if (GetAsyncKeyState(Config.MenuHotKey) & 1)
@@ -54,7 +54,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	if (Config.MenuActive)
 		Hack.MenuThread();
 
-	if (WallHackESP)
+	if (config::WallHackESP)
 		Hack.DXESPThread(pDevice);
 	
 	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
@@ -104,9 +104,9 @@ DWORD WINAPI KieroInit(HMODULE hModule)
 			} while (window == NULL);
 
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWL_WNDPROC, (LONG_PTR)WndProc);
-			ImGui_Attached = true;
+			config::ImGui_Attached = true;
 		}
-	} while (!ImGui_Attached);
+	} while (!config::ImGui_Attached);
 
 	return TRUE;
 }
@@ -124,8 +124,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     {
 		Hack.MainThread();
 
-		if (MainThreadDelay > 1)
-			Sleep(MainThreadDelay);
+		if (config::MainThreadDelay > 1)
+			Sleep(config::MainThreadDelay);
     }
 
 	kiero::shutdown();

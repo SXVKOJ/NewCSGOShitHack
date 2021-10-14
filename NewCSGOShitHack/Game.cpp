@@ -21,8 +21,8 @@ void GAME::PlayerShoot()
 	DWORD client = this->GetClient();
 
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsActive;
-	if (TriggerBotCooldown >= Config.TriggerBotCooldown)
-		Sleep(TriggerBotCooldown);
+	if (config::TriggerBotCooldown >= Config.config::TriggerBotCooldown)
+		Sleep(config::TriggerBotCooldown);
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsOFF;
 }
 
@@ -31,8 +31,8 @@ void GAME::PlayerJump()
 	DWORD client = this->GetClient();
 
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsActive;
-	if (BhopDelay >= Config.BhopDelay)
-		Sleep(BhopDelay);
+	if (config::BhopDelay >= Config.config::BhopDelay)
+		Sleep(config::BhopDelay);
 	*(int*)(client + offsets::dwForceJump) = constVars.FlagsOFF;
 }
 

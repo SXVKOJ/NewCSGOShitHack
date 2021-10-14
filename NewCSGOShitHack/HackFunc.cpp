@@ -2,45 +2,45 @@
 
 void HACK::MainThread()
 {
-	if (Bhop && GetAsyncKeyState(VK_SPACE))
+	if (config::Bhop && GetAsyncKeyState(VK_SPACE))
 		Hack.BhopThread();
 
-	if (NeonWallHack)
+	if (config::NeonWallHack)
 		Hack.NeonESPThread();
 
-	if (TriggerBot && !TriggerBotInAimBot)
+	if (config::TriggerBot && !config::TriggerBotInAimBot)
 		Hack.TriggerBotThread();
 
-	if (RecoilControlSystem)
+	if (config::RecoilControlSystem)
 		Hack.RecoilControlSystemThread();
 
-	if (SpinBot)
-		Hack.SpinBotThread(SpinBotSpeed);
+	if (config::SpinBot)
+		Hack.SpinBotThread(config::SpinBotSpeed);
 
-	if (RadarHack)
+	if (config::RadarHack)
 		Hack.RadarHackThread();
 
-	if (NoFlash)
+	if (config::NoFlash)
 		Hack.NoFlashThread();
 
-	if (AimingAssistance)
+	if (config::AimingAssistance)
 		Hack.AimingAssistanceThread();
 
-	if (ThirdPersonView && !TPSActive)
+	if (config::ThirdPersonView && !config::TPSActive)
 	{
 		Hack.PlayerSetTPS(true);
 
-		TPSActive = true;
+		config::TPSActive = true;
 	}
 
-	if (!ThirdPersonView && TPSActive)
+	if (!config::ThirdPersonView && config::TPSActive)
 	{
 		Hack.PlayerSetTPS(false);
 
-		TPSActive = false;
+		config::TPSActive = false;
 	}
 	
-	if (AimBot)
+	if (config::AimBot)
 	{
 		if (GetAsyncKeyState(AimBotHotKey))
 		{
@@ -48,8 +48,8 @@ void HACK::MainThread()
 		}
 	}
 
-	Hack.SetFov(FOV);
+	Hack.SetFov(config::FOV);
 
-	if (AimBot && AimingAssistance)
-		AimBot = !AimBot;
+	if (config::AimBot && config::AimingAssistance)
+		config::AimBot = !config::AimBot;
 }

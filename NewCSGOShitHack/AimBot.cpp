@@ -49,8 +49,8 @@ Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig)
 	delta.x = orig.x - dest.x;
 	delta.y = orig.y - dest.y;
 
-	dest.x = orig.x - delta.x / (5.f * SmoothStep);
-	dest.y = orig.y - delta.y / (5.f * SmoothStep);
+	dest.x = orig.x - delta.x / (5.f * config::SmoothStep);
+	dest.y = orig.y - delta.y / (5.f * config::SmoothStep);
 
 	return dest;
 }
@@ -119,11 +119,11 @@ DWORD GetBestTarget()
 		int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
 		int SpottedByMask = *(int*)(Entity + offsets::m_bSpottedByMask);
 
-		if (!(SpottedByMask & (1 << CrosshairID)) && AimLegitMode)
+		if (!(SpottedByMask & (1 << CrosshairID)) && config::AimLegitMode)
 			continue;
 
 		// if health is less than a certain threshold, then the aimbot will automatically select this player
-		if (Config.HealthTreshold && EntityHealth <= Config.HealthTresholdVal && !Target)
+		if (Config.config::HealthTreshold && EntityHealth <= Config.config::HealthTresholdVal && !Target)
 			return Entity;
 
 		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
@@ -151,24 +151,24 @@ void HACK::AimBotThread()
 	if (Entity != NULL)
 	{	
 		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
-		Vec3 EntPos = Game.GetPlayerBonePos(Entity, TargetBonePos);
+		Vec3 EntPos = Game.GetPlayerBonePos(Entity, config::TargetBonePos);
 		LocalPos.z += *(float*)(LocalPlayer + offsets::m_vecViewOffset + 0x8);
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
 		
-		if (SmoothAimBot)
+		if (config::SmoothAimBot)
 			AngleTo = CalcSmoothAngle(LocalPos, EntPos);
 		
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		if (!SmoothAimBot)
+		if (!config::SmoothAimBot)
 			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
 		else
 			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
 
-		if (TriggerBotInAimBot)
+		if (config::TriggerBotInAimBot)
 		{
 			TriggerBotThread();
 		}

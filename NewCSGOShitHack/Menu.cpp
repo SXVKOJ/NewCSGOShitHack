@@ -1,47 +1,46 @@
 #include "includes.h"
 
-int FOV = 90;
-int SmoothStep = 1;
-int SpinBotSpeed = 0;
-int TargetBonePos = constVars.HeadBone;
-int LegitAimBotDiff = 300;
+int config::FOV = 90;
+int config::SmoothStep = 1;
+int config::SpinBotSpeed = 0;
+int config::TargetBonePos = constVars.HeadBone;
+int config::LegitAimBotDiff = 300;
 
-bool Bhop = false;
-bool HealthTreshold = false;
-bool TriggerBot = false;
-bool NeonWallHack = false;
-bool AimBot = false;
-bool RecoilControlSystem = false;
-bool RadarHack = false;
-bool NoFlash = false;
-bool WallHackESP = false;
-bool SpinBot = false;
-bool SmoothAimBot = false;
-bool SilentAimBot = false;
-bool ThirdPersonView = false;
-bool TPSActive = false;
-bool AimLegitMode = false;
-bool AimingAssistance = false;
-bool TriggerBotInAimBot = false;
+bool config::Bhop = false;
+bool config::HealthTreshold = false;
+bool config::TriggerBot = false;
+bool config::NeonWallHack = false;
+bool config::AimBot = false;
+bool config::RecoilControlSystem = false;
+bool config::RadarHack = false;
+bool config::NoFlash = false;
+bool config::WallHackESP = false;
+bool config::SpinBot = false;
+bool config::SmoothAimBot = false;
+bool config::ThirdPersonView = false;
+bool config::TPSActive = false;
+bool config::AimLegitMode = false;
+bool config::AimingAssistance = false;
+bool config::TriggerBotInAimBot = false;
 
-bool ImGui_Init = false;
-bool ImGui_Attached = false;
+bool config::ImGui_Init = false;
+bool config::ImGui_Attached = false;
 
-int BoxWidth = 3;
-int LineWidth = 1;
+int config::BoxWidth = 3;
+int config::LineWidth = 1;
 
-int HealthTresholdVal = 33;
-int BhopDelay = 17;
-int TriggerBotCooldown = 65;
-int MainThreadDelay = 1;
+int config::HealthTresholdVal = 33;
+int config::BhopDelay = 17;
+int config::TriggerBotCooldown = 65;
+int config::MainThreadDelay = 1;
 
 int AimBotHotKey = 18;   // VK_ALT
 int EndHotKey = 0x23;   // VK_END
 int MenuHotKey = 0x24; // VK_HOME
 
-float LT_NEONESP[3] = { 0, 1, 1 };
-float ET_NEONESP[3] = { 1, 0, 1 };
-float DX_ESP[3] = { 1, 0, 1 };
+float config::LT_NEONESP[3] = { 0, 1, 1 };
+float config::ET_NEONESP[3] = { 1, 0, 1 };
+float config::DX_ESP[3] = { 1, 0, 1 };
 
 void ToggleButton(const char* str_id, bool* v)
 {
@@ -113,29 +112,29 @@ void HACK::MenuThread()
 	{
 		// MAIN THREAD
 		ImGui::Separator();
-		ImGui::SliderInt("Bhop Cooldown", &BhopDelay, 10, 30);
-		ImGui::SliderInt("Default Cooldown (for FPS)", &MainThreadDelay, 1, 100);
+		ImGui::SliderInt("Bhop Cooldown", &config::BhopDelay, 10, 30);
+		ImGui::SliderInt("Default Cooldown (for FPS)", &config::MainThreadDelay, 1, 100);
 		ImGui::Separator();
-		ImGui::Checkbox("AimBot", &AimBot);
+		ImGui::Checkbox("AimBot", &config::AimBot);
 		ImGui::Separator();
-		ImGui::Checkbox("SpinBot", &SpinBot);
+		ImGui::Checkbox("SpinBot", &config::SpinBot);
 		ImGui::Separator();
-		ImGui::Checkbox("Glow ESP (Neon)", &NeonWallHack);
+		ImGui::Checkbox("Glow ESP (Neon)", &config::NeonWallHack);
 		ImGui::Separator();
-		ImGui::Checkbox("DX ESP (boxes)", &WallHackESP);
+		ImGui::Checkbox("DX ESP (boxes)", &config::WallHackESP);
 		ImGui::Separator();
-		ImGui::Checkbox("Recoil Control System", &RecoilControlSystem);
+		ImGui::Checkbox("Recoil Control System", &config::RecoilControlSystem);
 		ImGui::Separator();
-		ImGui::Checkbox("Radar Hack", &RadarHack);
+		ImGui::Checkbox("Radar Hack", &config::RadarHack);
 		ImGui::Separator();
-		ImGui::Checkbox("TriggerBot", &TriggerBot);
-		if (TriggerBot)
-			ImGui::Checkbox("Inside AimBot?", &TriggerBotInAimBot);
+		ImGui::Checkbox("TriggerBot", &config::TriggerBot);
+		if (config::TriggerBot)
+			ImGui::Checkbox("Inside AimBot?", &config::TriggerBotInAimBot);
 
 		ImGui::Separator();
-		ImGui::Checkbox("No Flash", &NoFlash);
+		ImGui::Checkbox("No Flash", &config::NoFlash);
 		ImGui::Separator();
-		ImGui::Checkbox("Bhop", &Bhop);
+		ImGui::Checkbox("Bhop", &config::Bhop);
 		ImGui::Separator();
 	}
 	
@@ -143,35 +142,35 @@ void HACK::MenuThread()
 	{
 		// VIEW
 		ImGui::Separator();
-		ImGui::SliderInt("FOV Slider", &FOV, 90, 170);
+		ImGui::SliderInt("FOV Slider", &config::FOV, 90, 170);
 		ImGui::Separator();
-		ImGui::Checkbox("Third Person Mode", &ThirdPersonView);
+		ImGui::Checkbox("Third Person Mode", &config::ThirdPersonView);
 	}	
 
 	else if (CurrTab == 2)
 	{
 		// AIMBOT
 		ImGui::Separator();
-		ImGui::SliderInt("SpinBot Speed", &SpinBotSpeed, 0, 200);
-		ImGui::SliderInt("Trigger Bot Cooldown", &TriggerBotCooldown, 20, 5000);
-		ImGui::SliderInt("Health Treshold value", &HealthTresholdVal, 1, 99);
+		ImGui::SliderInt("SpinBot Speed", &config::SpinBotSpeed, 0, 200);
+		ImGui::SliderInt("Trigger Bot Cooldown", &config::TriggerBotCooldown, 20, 5000);
+		ImGui::SliderInt("Health Treshold value", &config::HealthTresholdVal, 1, 99);
 		ImGui::Separator();
-		ImGui::Checkbox("Health Treshold", &HealthTreshold);
+		ImGui::Checkbox("Health Treshold", &config::HealthTreshold);
 		ImGui::Separator();
-		ImGui::Checkbox("Smooth Mode", &SmoothAimBot);
-		if (SmoothAimBot)
-			ImGui::SliderInt("Smooth", &SmoothStep, 1, 10);
+		ImGui::Checkbox("Smooth Mode", &config::SmoothAimBot);
+		if (config::SmoothAimBot)
+			ImGui::SliderInt("Smooth", &config::SmoothStep, 1, 10);
 
 		ImGui::Separator();
-		ImGui::Checkbox("Legit Mode", &AimLegitMode);
+		ImGui::Checkbox("Legit Mode", &config::AimLegitMode);
 		ImGui::Separator();
-		ImGui::Checkbox("Aiming assistance", &AimingAssistance);
+		ImGui::Checkbox("Aiming assistance", &config::AimingAssistance);
 
-		if (AimingAssistance)
-			ImGui::SliderInt("Min Distanse", &LegitAimBotDiff, 1, 3000);
+		if (config::AimingAssistance)
+			ImGui::SliderInt("Min Distanse", &config::LegitAimBotDiff, 1, 3000);
 		
 		ImGui::Separator();
-		ImGui::InputInt("Target Bone", &TargetBonePos, 1, 79, 0);
+		ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
 		ImGui::Checkbox("Bones id's", &BonesIds);
 		if ((tImage != nullptr) && BonesIds)
 			ImGui::Image(tImage, ImVec2(495, 659));
@@ -181,12 +180,12 @@ void HACK::MenuThread()
 	{
 		// WALLHACK
 		ImGui::Separator();
-		ImGui::ColorEdit4("EntTeam Color", ET_NEONESP);
-		ImGui::ColorEdit4("LocTeam Color", LT_NEONESP);
-		ImGui::ColorEdit4("ESP Color", DX_ESP);
+		ImGui::ColorEdit4("EntTeam Color", config::ET_NEONESP);
+		ImGui::ColorEdit4("LocTeam Color", config::LT_NEONESP);
+		ImGui::ColorEdit4("ESP Color", config::DX_ESP);
 		ImGui::Separator();
-		ImGui::InputInt("Box Width", &BoxWidth, 1, 10, 0);
-		ImGui::InputInt("Line Width", &LineWidth, 1, 10, 0);
+		ImGui::InputInt("Box Width", &config::BoxWidth, 1, 10, 0);
+		ImGui::InputInt("Line Width", &config::LineWidth, 1, 10, 0);
 	}
 
 	ImGui::End();
