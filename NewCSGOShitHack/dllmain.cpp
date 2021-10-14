@@ -124,7 +124,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
     {
 		Hack.MainThread();
 
-		Sleep(MainThreadDelay);
+		if (MainThreadDelay > 1)
+			Sleep(MainThreadDelay);
     }
 
 	kiero::shutdown();

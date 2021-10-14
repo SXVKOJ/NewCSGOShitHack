@@ -43,6 +43,18 @@ Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst)
 	return aimBotAngle;
 }
 
+Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig)
+{
+	Vec3 delta;
+	delta.x = orig.x - dest.x;
+	delta.y = orig.y - dest.y;
+
+	dest.x = orig.x - delta.x / (5.f * SmoothStep);
+	dest.y = orig.y - delta.y / (5.f * SmoothStep);
+
+	return dest;
+}
+
 Vec3 normalizeAngles(float x, float y)
 {
 	if (x > 89)
@@ -151,7 +163,10 @@ void HACK::AimBotThread()
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
+		if (!SmoothAimBot)
+			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
+		else
+			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
 
 		if (TriggerBotInAimBot)
 		{

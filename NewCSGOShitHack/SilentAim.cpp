@@ -74,6 +74,6 @@ void HACK::AimingAssistanceThread()
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles / SmoothStep;
+		*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
 	}
 }
