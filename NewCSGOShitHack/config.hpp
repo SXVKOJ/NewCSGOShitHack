@@ -57,17 +57,7 @@ static struct CONFIG
 	bool ImGui_Attached = false;
 	bool AimBotActive = false;
 	bool MenuActive = false;
-
-	bool Bhop = true;
-	bool HealthTreshold = true;
-	bool TriggerBot = true;
-	bool NeonWallHack = true;
-	bool AimBot = true;
-	bool RecoilControlSystem = true;
-	bool RadarHack = true;
-	bool NoFlash = true;
-	bool WallHackESP = true;
-	bool SpinBot = false;
+	bool HealthTreshold = false;
 
 	int HealthTresholdVal = 33;
 	int BhopDelay = 17;
