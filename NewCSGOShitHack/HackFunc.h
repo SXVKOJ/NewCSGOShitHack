@@ -11,14 +11,20 @@ Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst);
 
 Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig);
 
-extern ID3DXLine* Line;
-extern ID3DXLine* p_Line;
+extern LPD3DXFONT m_font;
+extern IDirect3DTexture9* tImage;
 
-extern ID3DXLine* BodyLine;
-extern ID3DXLine* rLegLine;
-extern ID3DXLine* lLegLine;
-extern ID3DXLine* rArmLine;
-extern ID3DXLine* lArmLine;
+namespace DXLines
+{
+	extern ID3DXLine* Line;
+	extern ID3DXLine* p_Line;
+
+	extern ID3DXLine* BodyLine;
+	extern ID3DXLine* rLegLine;
+	extern ID3DXLine* lLegLine;
+	extern ID3DXLine* rArmLine;
+	extern ID3DXLine* lArmLine;
+}
 
 static struct HACK
 {
@@ -42,7 +48,7 @@ static struct HACK
 
 	void SpinBotThread(int speed);
 
-	void ESPDrawBonesThread(LPDIRECT3DDEVICE9& pDevice);
+	void ESPDrawBonesThread();
 
 	void SetCustomImGuiStyle();
 
@@ -50,17 +56,21 @@ static struct HACK
 
 	void MenuThread();
 
+	void InitLines(LPDIRECT3DDEVICE9& pDevice);
+
 	void PlayerSetTPS(bool arg);
 
-	void DXESPThread(LPDIRECT3DDEVICE9& pDevice);
+	void DXESPThread();
+
+	void DrawMessage(LPD3DXFONT& font, unsigned int x, unsigned int y, D3DCOLOR color, LPCSTR Message);
 
 	void LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice);
 
-	void DrawBones(ID3DXLine* Line, DWORD Entity, std::vector<int> Bones, float thickness, LPDIRECT3DDEVICE9& pDevice);
+	void DrawBones(ID3DXLine* Line, DWORD Entity, std::vector<int> Bones, float thickness);
 
 	void DrawRect(int x, int y, int w, int h, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice);
 
-	void DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice);
+	void DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color);
 
-	void DrawLine(ID3DXLine* Line, float x1, float y1, float x2, float y2, float width, bool antialias, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice);
+	void DrawLine(ID3DXLine* Line, float x1, float y1, float x2, float y2, float width, bool antialias, D3DCOLOR color);
 } Hack;

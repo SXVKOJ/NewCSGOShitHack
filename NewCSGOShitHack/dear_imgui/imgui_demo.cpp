@@ -2885,7 +2885,7 @@ static void ShowDemoWindowLayout()
             }
             const ImVec2 p0 = ImGui::GetItemRectMin();
             const ImVec2 p1 = ImGui::GetItemRectMax();
-            const char* text_str = "Line 1 hello\nLine 2 clip me!";
+            const char* text_str = "DXLines::Line 1 hello\nLine 2 clip me!";
             const ImVec2 text_pos = ImVec2(p0.x + offset.x, p0.y + offset.y);
             ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
@@ -3354,7 +3354,7 @@ static void ShowDemoWindowColumns()
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
                 for (int j = 0; j < 10; j++)
                 {
-                    ImGui::Text("Line %d Column %d...", i, j);
+                    ImGui::Text("DXLines::Line %d Column %d...", i, j);
                     ImGui::NextColumn();
                 }
         }

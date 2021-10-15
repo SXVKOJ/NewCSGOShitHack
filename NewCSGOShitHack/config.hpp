@@ -28,7 +28,6 @@ namespace config
 	extern bool TPSActive;
 	extern bool AimLegitMode;
 	extern bool TriggerBotInAimBot;
-	extern bool ESPBones;
 
 	extern int HealthTresholdVal;
 	extern int BhopDelay;
@@ -37,16 +36,23 @@ namespace config
 	extern int SilentAimSmooth;
 	extern int LegitAimBotDiff;
 
-	extern int BoxWidth;
-	extern int LineWidth;
-
-	extern float LT_NEONESP[3];
-	extern float ET_NEONESP[3];
-
-	extern float DX_ESP[3];
-
 	extern int AimBotHotKey;   // VK_ALT
 	extern int EndHotKey;     // VK_END
 	extern int MenuHotKey;   // VK_HOME
 	extern bool MenuActive;
+
+	namespace esp
+	{
+		extern int BoxWidth;
+		extern int LineWidth;
+
+		extern float LT_NEONESP[3];
+		extern float ET_NEONESP[3];
+
+		extern float DX_ESP[3];
+
+		extern bool HP;
+		extern bool ESPBones;
+		extern bool Lines;
+	}
 }

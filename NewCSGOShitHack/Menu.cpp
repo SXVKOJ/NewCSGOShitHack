@@ -23,13 +23,12 @@ bool config::TPSActive = false;
 bool config::AimLegitMode = false;
 bool config::AimingAssistance = false;
 bool config::TriggerBotInAimBot = false;
-bool config::ESPBones = false;
 
 bool config::ImGui_Init = false;
 bool config::ImGui_Attached = false;
 
-int config::BoxWidth = 3;
-int config::LineWidth = 1;
+int config::esp::BoxWidth = 3;
+int config::esp::LineWidth = 1;
 
 int config::HealthTresholdVal = 33;
 int config::BhopDelay = 17;
@@ -41,9 +40,13 @@ int config::EndHotKey = 0x23;   // VK_END
 int config::MenuHotKey = 0x24; // VK_HOME
 bool config::MenuActive = false;
 
-float config::LT_NEONESP[3] = { 0, 1, 1 };
-float config::ET_NEONESP[3] = { 1, 0, 1 };
-float config::DX_ESP[3] = { 1, 0, 1 };
+float config::esp::LT_NEONESP[3] = { 0, 1, 1 };
+float config::esp::ET_NEONESP[3] = { 1, 0, 1 };
+float config::esp::DX_ESP[3] = { 1, 0, 1 };
+
+bool config::esp::HP = false;	
+bool config::esp::ESPBones = false;
+bool config::esp::Lines = true;
 
 void ToggleButton(const char* str_id, bool* v)
 {
@@ -80,7 +83,6 @@ void ToggleButton(const char* str_id, bool* v)
 
 static int CurrTab = 0;
 static bool BonesIds = false;
-IDirect3DTexture9* tImage = nullptr;
 
 void HACK::LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice)
 {
@@ -170,7 +172,7 @@ void HACK::MenuThread()
 		ImGui::Checkbox("Aiming assistance", &config::AimingAssistance);
 
 		if (config::AimingAssistance)
-			ImGui::SliderInt("Min Distanse", &config::LegitAimBotDiff, 1, 3000);
+			ImGui::SliderInt("Min Distanse", &config::LegitAimBotDiff, 1, 1920);
 		
 		ImGui::Separator();
 		ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
@@ -183,14 +185,15 @@ void HACK::MenuThread()
 	{
 		// WALLHACK
 		ImGui::Separator();
-		ImGui::ColorEdit4("EntTeam Color", config::ET_NEONESP);
-		ImGui::ColorEdit4("LocTeam Color", config::LT_NEONESP);
-		ImGui::ColorEdit4("ESP Color", config::DX_ESP);
+		ImGui::ColorEdit4("EntTeam Color", config::esp::ET_NEONESP);
+		ImGui::ColorEdit4("LocTeam Color", config::esp::LT_NEONESP);
+		ImGui::ColorEdit4("ESP Color", config::esp::DX_ESP);
 		ImGui::Separator();
-		ImGui::Checkbox("Draw Bones", &config::ESPBones);
+		ImGui::Checkbox("Draw Bones", &config::esp::ESPBones);
+		ImGui::Checkbox("Draw Health", &config::esp::HP);
 		ImGui::Separator();
-		ImGui::InputInt("Box Width", &config::BoxWidth, 1, 10, 0);
-		ImGui::InputInt("Line Width", &config::LineWidth, 1, 10, 0);
+		ImGui::InputInt("Box Width", &config::esp::BoxWidth, 1, 10, 0);
+		ImGui::InputInt("Line Width", &config::esp::LineWidth, 1, 10, 0);
 	}
 
 	ImGui::End();

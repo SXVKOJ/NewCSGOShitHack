@@ -1,6 +1,6 @@
 #include "includes.h"
 
-void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
+void HACK::DXESPThread()
 {
     DWORD LocalPlayer = *(DWORD*)(Game.GetClient() + offsets::dwLocalPlayer);
     int LocalPlayerTeam = *(int*)(LocalPlayer + offsets::m_iTeamNum);
@@ -43,7 +43,11 @@ void HACK::DXESPThread(LPDIRECT3DDEVICE9& pDevice)
         int WindowWidth = Game.GetCurrentWindowSize().x;
         int WindowHeight = Game.GetCurrentWindowSize().y;
 
-        DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, config::BoxWidth, D3DCOLOR_COLORVALUE(config::DX_ESP[0], config::DX_ESP[1], config::DX_ESP[2], 1), pDevice);
-        DrawLine(Line, WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, config::LineWidth, true, D3DCOLOR_COLORVALUE(config::DX_ESP[0], config::DX_ESP[1], config::DX_ESP[2], 1), pDevice);
+        DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, config::esp::BoxWidth, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1));
+        if (config::esp::Lines)
+            DrawLine(DXLines::Line, WindowWidth / 2, WindowHeight / 2, Entity2Screen.x, Entity2Screen.y, config::esp::LineWidth, true, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1));
+
+        if (config::esp::HP)
+            DrawMessage(m_font, Entity2Screen.x, Entity2Screen.y - boxHeight - 35, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1), std::to_string(EntHealth).c_str());
     }
 }

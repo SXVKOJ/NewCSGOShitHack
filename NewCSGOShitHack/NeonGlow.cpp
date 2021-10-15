@@ -23,16 +23,16 @@ void HACK::NeonESPThread()
 
 		if (EntTeam == LocalPlayerTeam)
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::LT_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::LT_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::LT_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::LT_NEONESP[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::LT_NEONESP[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::LT_NEONESP[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 		else
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::ET_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::ET_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::ET_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::ET_NEONESP[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::ET_NEONESP[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::ET_NEONESP[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 

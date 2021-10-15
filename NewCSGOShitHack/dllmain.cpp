@@ -6,15 +6,17 @@
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-ID3DXLine* p_Line = nullptr;
-ID3DXLine* Line = nullptr;
+ID3DXLine* DXLines::p_Line = nullptr;
+ID3DXLine* DXLines::Line = nullptr;
 
-ID3DXLine* BodyLine = nullptr;
-ID3DXLine* rLegLine = nullptr;
-ID3DXLine* lLegLine = nullptr;
-ID3DXLine* rArmLine = nullptr;
-ID3DXLine* lArmLine = nullptr;
+ID3DXLine* DXLines::BodyLine = nullptr;
+ID3DXLine* DXLines::rLegLine = nullptr;
+ID3DXLine* DXLines::lLegLine = nullptr;
+ID3DXLine* DXLines::rArmLine = nullptr;
+ID3DXLine* DXLines::lArmLine = nullptr;
 
+IDirect3DTexture9* tImage = nullptr;
+LPD3DXFONT m_font = NULL;
 EndScene oEndScene = NULL;
 WNDPROC oWndProc;
 static HWND window = NULL;
@@ -30,7 +32,7 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	io.Fonts->AddFontDefault();
 	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
-
+	
 	D3DVIEWPORT9 viewport;
 	viewport.Width = io.DisplaySize.x;
 	viewport.Height = io.DisplaySize.y;
@@ -39,6 +41,8 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	viewport.X = 0.0f;
 	viewport.Y = 0.0f;
 	pDevice->SetViewport(&viewport);
+
+	D3DXCreateFont(pDevice, 16, 6, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &m_font);
 
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
@@ -53,15 +57,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		InitImGui(pDevice);
 		Hack.SetCustomImGuiStyle();
 		Hack.LoadImageToDll(NameArry, pDevice);
-
-		D3DXCreateLine(pDevice, &Line);
-		D3DXCreateLine(pDevice, &p_Line);
-
-		D3DXCreateLine(pDevice, &BodyLine);
-		D3DXCreateLine(pDevice, &rLegLine);
-		D3DXCreateLine(pDevice, &lLegLine);
-		D3DXCreateLine(pDevice, &rArmLine);
-		D3DXCreateLine(pDevice, &lArmLine);
+		Hack.InitLines(pDevice);
 
 		config::ImGui_Init = true;
 	}
@@ -73,10 +69,10 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		Hack.MenuThread();
 
 	if (config::WallHackESP)
-		Hack.DXESPThread(pDevice);
+		Hack.DXESPThread();
 
-	if (config::ESPBones)
-		Hack.ESPDrawBonesThread(pDevice);
+	if (config::esp::ESPBones)
+		Hack.ESPDrawBonesThread();
 
 	return oEndScene(pDevice);
 }
