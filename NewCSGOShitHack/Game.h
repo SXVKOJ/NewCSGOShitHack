@@ -20,6 +20,8 @@ static struct GAME
 	bool WorldToScreen(Vec3 pos, Vec3& out);
 
 	void PlayerShoot();
+
+	int GetCurrentWeapon();
 } Game;
 
 static struct CONSOLE

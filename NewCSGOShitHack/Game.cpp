@@ -92,3 +92,14 @@ bool GAME::WorldToScreen(Vec3 pos, Vec3& out)
 
 	return true;
 }
+
+int GAME::GetCurrentWeapon()
+{
+	DWORD LocalPlayer = GetLocalPlayer();
+
+	int weapon = *(int*)(LocalPlayer + offsets::m_hActiveWeapon);
+	int weaponEnt = *(int*)(GetClient() + offsets::dwEntityList + ((weapon & 0xFFF) - 1) * 0x10);
+	int weaponID = *(int*)(weaponEnt + offsets::m_iItemDefinitionIndex);
+
+	return weaponID;
+}

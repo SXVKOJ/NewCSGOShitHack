@@ -35,7 +35,8 @@ namespace config
 	extern int MainThreadDelay;
 	extern int SilentAimSmooth;
 	extern int LegitAimBotDiff;
-
+	
+	extern int CurrentSkinID;
 	extern int AimBotHotKey;   // VK_ALT
 	extern int EndHotKey;     // VK_END
 	extern int MenuHotKey;   // VK_HOME

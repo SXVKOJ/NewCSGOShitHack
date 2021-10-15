@@ -30,6 +30,7 @@ bool config::ImGui_Attached = false;
 int config::esp::BoxWidth = 3;
 int config::esp::LineWidth = 1;
 
+int config::CurrentSkinID = 0;
 int config::HealthTresholdVal = 33;
 int config::BhopDelay = 17;
 int config::TriggerBotCooldown = 65;
@@ -150,6 +151,14 @@ void HACK::MenuThread()
 		ImGui::SliderInt("FOV Slider", &config::FOV, 90, 170);
 		ImGui::Separator();
 		ImGui::Checkbox("Third Person Mode", &config::ThirdPersonView);
+		ImGui::Separator();
+		ImGui::InputInt("Skin id", &config::CurrentSkinID);
+		ImGui::SameLine();
+		
+		if (ImGui::Button("Accept", ImVec2(100, 25)))
+		{
+			ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+		}	
 	}	
 
 	else if (CurrTab == 2)

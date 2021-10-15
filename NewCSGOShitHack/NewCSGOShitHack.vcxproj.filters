@@ -135,6 +135,9 @@
     <ClCompile Include="ESPBones.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
+    <ClCompile Include="SkinChanger.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">

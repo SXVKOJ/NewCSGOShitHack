@@ -186,6 +186,7 @@
     <ClCompile Include="RadarHack.cpp" />
     <ClCompile Include="RecoilControlSystem.cpp" />
     <ClCompile Include="SilentAim.cpp" />
+    <ClCompile Include="SkinChanger.cpp" />
     <ClCompile Include="SpinBot.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
   </ItemGroup>

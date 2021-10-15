@@ -46,6 +46,8 @@ static struct HACK
 
 	void AimingAssistanceThread();
 
+	void ChangeSkin(int weapon, int paint);
+
 	void SpinBotThread(int speed);
 
 	void ESPDrawBonesThread();
