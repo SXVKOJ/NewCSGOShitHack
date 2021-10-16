@@ -152,12 +152,13 @@ void HACK::MenuThread()
 		ImGui::Separator();
 		ImGui::Checkbox("Third Person Mode", &config::ThirdPersonView);
 		ImGui::Separator();
-		ImGui::InputInt("Skin id", &config::CurrentSkinID);
+		ImGui::InputInt("SkinID", &config::CurrentSkinID);
 		ImGui::SameLine();
 		
 		if (ImGui::Button("Accept", ImVec2(100, 25)))
 		{
-			Hack.FullForceUpdate();
+			if (config::CurrentSkinID != 0 && Game.GetCurrentWeapon() != -1)
+				ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
 		}	
 	}	
 

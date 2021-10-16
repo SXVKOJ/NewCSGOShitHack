@@ -99,7 +99,13 @@ int GAME::GetCurrentWeapon()
 
 	int weapon = *(int*)(LocalPlayer + offsets::m_hActiveWeapon);
 	int weaponEnt = *(int*)(GetClient() + offsets::dwEntityList + ((weapon & 0xFFF) - 1) * 0x10);
-	int weaponID = *(int*)(weaponEnt + offsets::m_iItemDefinitionIndex);
 
-	return weaponID;
+	if (weaponEnt != NULL)
+	{
+		short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
+
+		return weaponID;
+	}
+		
+	return -1;
 }
