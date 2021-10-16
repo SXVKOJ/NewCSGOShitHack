@@ -44,6 +44,8 @@ static struct HACK
 
 	void NoFlashThread();
 
+	void FullForceUpdate();
+
 	void AimingAssistanceThread();
 
 	void ChangeSkin(int weapon, int paint);

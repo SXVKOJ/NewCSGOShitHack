@@ -1,12 +1,18 @@
 #include "includes.h"
 
+void HACK::FullForceUpdate()
+{
+    DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
+    *(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
+}
+
 void HACK::ChangeSkin(int weapon, int paint)
 {
     DWORD LocalPlayer = Game.GetLocalPlayer();
 
     int tWeapon = weapon;
     int tPainKit = paint;
-    float wear = 0.000001f;
+    float wear = 0.001f;
 
     for (int i = 0; i < 8; i++)
     {
@@ -18,13 +24,17 @@ void HACK::ChangeSkin(int weapon, int paint)
 
         if (cWep != 0)
         {
-            int cWepID = *(int*)(cWep + offsets::m_iItemDefinitionIndex);
+            short cWepID = *(short*)(cWep + offsets::m_iItemDefinitionIndex);
 
             if (cWepID == weapon)
             {
                 *(int*)(cWep + offsets::m_iItemIDHigh) = -1;
                 *(int*)(cWep + offsets::m_nFallbackPaintKit) = tPainKit;
                 *(float*)(cWep + offsets::m_flFallbackWear) = wear;
+                *(int*)(cWep + offsets::m_OriginalOwnerXuidLow) = 0;
+                *(int*)(cWep + offsets::m_OriginalOwnerXuidHigh) = 0;
+                *(int*)(cWep + offsets::m_nFallbackStatTrak) = 1337;
+                *(int*)(cWep + offsets::m_iEntityQuality) = 3;
             }
         }
     }

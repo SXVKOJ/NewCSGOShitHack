@@ -157,9 +157,7 @@ void HACK::MenuThread()
 		
 		if (ImGui::Button("Accept", ImVec2(100, 25)))
 		{
-			// force update skin
-			DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
-			*(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
+			Hack.FullForceUpdate();
 		}	
 	}	
 
