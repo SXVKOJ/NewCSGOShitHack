@@ -93,7 +93,7 @@ bool GAME::WorldToScreen(Vec3 pos, Vec3& out)
 	return true;
 }
 
-int GAME::GetCurrentWeapon()
+short GAME::GetCurrentWeapon()
 {
 	DWORD LocalPlayer = GetLocalPlayer();
 

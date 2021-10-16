@@ -19,6 +19,8 @@ IDirect3DTexture9* tImage = nullptr;
 LPD3DXFONT m_font = NULL;
 EndScene oEndScene = NULL;
 WNDPROC oWndProc;
+
+static FrameStageNotify fnFrameStageNotify;
 static HWND window = NULL;
 
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
@@ -77,6 +79,17 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	return oEndScene(pDevice);
 }
 
+void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
+{
+	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+	{
+		if (config::CurrentSkinID != 0 && Game.GetCurrentWeapon() != -1)
+			Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+	}
+
+	fnFrameStageNotify(ecx, Stage);
+}
+
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	ImGuiIO& io = ImGui::GetIO();
@@ -104,6 +117,20 @@ HWND GetProcessWindow()
 	window = NULL;
 	EnumWindows(EnumWindowsCallback, NULL);
 	return window;
+}
+
+DWORD WINAPI InitVMTHook(HMODULE hModule)
+{
+	VMTHook* Client_Table = nullptr;
+
+	void* client = (void*)GetInterface("client.dll", "VClient018");
+	Client_Table = new VMTHook(client);
+
+	Client_Table->SwapPointer(36, &FrameStageNotifyThink);
+
+	Client_Table->ApplyNewTable();
+
+	return TRUE;
 }
 
 DWORD WINAPI KieroInit(HMODULE hModule)
@@ -157,6 +184,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
+		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)InitVMTHook, hModule, NULL, NULL));
 		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)KieroInit, hModule, NULL, NULL));
 		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL));
 	case DLL_PROCESS_DETACH:

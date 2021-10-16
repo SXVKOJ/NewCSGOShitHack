@@ -21,7 +21,7 @@ static struct GAME
 
 	void PlayerShoot();
 
-	int GetCurrentWeapon();
+	short GetCurrentWeapon();
 } Game;
 
 static struct CONSOLE

@@ -28,6 +28,8 @@ namespace DXLines
 
 static struct HACK
 {
+	bool IsKnifeWeapon();
+
 	void MainThread();
 
 	void BhopThread();
@@ -48,7 +50,7 @@ static struct HACK
 
 	void AimingAssistanceThread();
 
-	void ChangeSkin(int weapon, int paint);
+	void ChangeSkin(short weapon, int paint);
 
 	void SpinBotThread(int speed);
 

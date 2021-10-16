@@ -32,6 +32,7 @@
 #include "weapons.h"
 #include "Vector.h"
 #include "mem.h"
+#include "VMT.h"
 
 #define WINDOW_NAME "Dear ImGui DirectX9 Example"
 typedef long(__stdcall* EndScene)(LPDIRECT3DDEVICE9);

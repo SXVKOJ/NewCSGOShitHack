@@ -39,7 +39,7 @@ void HACK::MainThread()
 
 		config::TPSActive = false;
 	}
-	
+
 	if (config::AimBot)
 	{
 		if (GetAsyncKeyState(config::AimBotHotKey))

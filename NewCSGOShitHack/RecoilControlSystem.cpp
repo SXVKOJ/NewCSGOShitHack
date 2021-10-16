@@ -14,8 +14,8 @@ void HACK::RecoilControlSystemThread()
 	{
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 
-		float PunchX = *(float*)(LocalPlayer + offsets::m_aimPunchAngle) * 2;
-		float PunchY = *(float*)(LocalPlayer + offsets::m_aimPunchAngle + 0x4) * 2;
+		float PunchX = *(float*)(LocalPlayer + offsets::m_aimPunchAngle) * 2 * 0.4499999f;
+		float PunchY = *(float*)(LocalPlayer + offsets::m_aimPunchAngle + 0x4) * 2 * 0.4499999f;
 
 		float n_x = (ViewAngles.x + oPunchX) - PunchX;
 		float n_y = (ViewAngles.y + oPunchY) - PunchY;

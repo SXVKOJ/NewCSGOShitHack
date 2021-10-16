@@ -157,8 +157,7 @@ void HACK::MenuThread()
 		
 		if (ImGui::Button("Accept", ImVec2(100, 25)))
 		{
-			if (config::CurrentSkinID != 0 && Game.GetCurrentWeapon() != -1)
-				ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+			FullForceUpdate();
 		}	
 	}	
 
