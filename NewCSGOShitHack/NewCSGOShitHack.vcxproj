@@ -209,6 +209,7 @@
     <ClInclude Include="mem.h" />
     <ClInclude Include="offsets.hpp" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="weapons.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dumper.py" />

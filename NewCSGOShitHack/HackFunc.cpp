@@ -52,4 +52,7 @@ void HACK::MainThread()
 
 	if (config::AimBot && config::AimingAssistance)
 		config::AimBot = !config::AimBot;
+
+	if (config::CurrentSkinID != 0)
+		ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
 }

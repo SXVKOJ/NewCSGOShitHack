@@ -29,6 +29,7 @@
 #include "image.hpp"
 #include "Config.hpp"
 #include "offsets.hpp"
+#include "weapons.h"
 #include "Vector.h"
 #include "mem.h"
 

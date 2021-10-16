@@ -194,6 +194,9 @@
     <ClInclude Include="image.hpp">
       <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
+    <ClInclude Include="weapons.h">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="dumper.py">

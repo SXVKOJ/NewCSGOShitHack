@@ -87,7 +87,7 @@ static bool BonesIds = false;
 
 void HACK::LoadImageToDll(BYTE* Image, LPDIRECT3DDEVICE9& pDevice)
 {
-	D3DXCreateTextureFromFileInMemoryEx(pDevice, &NameArry, sizeof(NameArry), 495, 659, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &tImage);
+	D3DXCreateTextureFromFileInMemoryEx(pDevice, Image, sizeof(Image), 495, 659, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &tImage);
 }
 
 void HACK::MenuThread()
@@ -157,7 +157,9 @@ void HACK::MenuThread()
 		
 		if (ImGui::Button("Accept", ImVec2(100, 25)))
 		{
-			ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+			// force update skin
+			DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
+			*(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
 		}	
 	}	
 
@@ -185,7 +187,7 @@ void HACK::MenuThread()
 		
 		ImGui::Separator();
 		ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
-		ImGui::Checkbox("Bones id's", &BonesIds);
+		ImGui::Checkbox("Show Bones id's", &BonesIds);
 		if ((tImage != nullptr) && BonesIds)
 			ImGui::Image(tImage, ImVec2(495, 659));
 	}	
