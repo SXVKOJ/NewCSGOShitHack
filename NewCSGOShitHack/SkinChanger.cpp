@@ -31,18 +31,12 @@ void HACK::ChangeSkin(short weapon, int paint)
         {           
             short CurrentWeaponID = Game.GetCurrentWeapon();
 
-            if (CurrentWeaponID != weapon)
+            if (CurrentWeaponID == weapon)
             {
-                if (*(int*)(WeaponBase + offsets::m_iItemIDHigh) != -1)
-                    *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
-
-                *(int*)(WeaponBase + offsets::m_OriginalOwnerXuidLow) = 0;
-                *(int*)(WeaponBase + offsets::m_OriginalOwnerXuidHigh) = 0;
+                *(int*)(WeaponBase + offsets::m_iItemIDHigh) = 1;
                 *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
-                *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
-                *(int*)(WeaponBase + offsets::m_nFallbackStatTrak) = 1337;
                 *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
-                *(int*)(WeaponBase + offsets::m_iEntityQuality) = 9;
+                *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
             }
         }
     }

@@ -20,7 +20,7 @@ LPD3DXFONT m_font = NULL;
 EndScene oEndScene = NULL;
 WNDPROC oWndProc;
 
-static FrameStageNotify fnFrameStageNotify;
+FrameStageNotify fnFrameStageNotify;
 static HWND window = NULL;
 
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
@@ -80,14 +80,13 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 }
 
 void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
-{
-	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+{	
+	while (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
 	{
-		if (config::CurrentSkinID != 0 && Game.GetCurrentWeapon() != -1)
-			Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+		Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
 	}
 
-	fnFrameStageNotify(ecx, Stage);
+	fnFrameStageNotify(edx, Stage);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -126,7 +125,7 @@ DWORD WINAPI InitVMTHook(HMODULE hModule)
 	void* client = (void*)GetInterface("client.dll", "VClient018");
 	Client_Table = new VMTHook(client);
 
-	Client_Table->SwapPointer(36, &FrameStageNotifyThink);
+	Client_Table->SwapPointer(37, reinterpret_cast<void*>(FrameStageNotifyThink));
 
 	Client_Table->ApplyNewTable();
 
