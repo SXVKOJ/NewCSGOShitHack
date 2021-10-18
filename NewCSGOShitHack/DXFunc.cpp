@@ -10,6 +10,9 @@ void HACK::InitLines(LPDIRECT3DDEVICE9& pDevice)
     D3DXCreateLine(pDevice, &DXLines::lLegLine);
     D3DXCreateLine(pDevice, &DXLines::rArmLine);
     D3DXCreateLine(pDevice, &DXLines::lArmLine);
+
+    D3DXCreateLine(pDevice, &DXLines::HealthBarLine);
+    D3DXCreateLine(pDevice, &DXLines::ArmorBarLine);
 }
 
 void HACK::DrawRect(int x, int y, int w, int h, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice)

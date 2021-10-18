@@ -33,7 +33,7 @@ void HACK::ChangeSkin(short weapon, int paint)
 
             if (CurrentWeaponID == weapon)
             {
-                *(int*)(WeaponBase + offsets::m_iItemIDHigh) = 1;
+                *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
                 *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
                 *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
                 *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;

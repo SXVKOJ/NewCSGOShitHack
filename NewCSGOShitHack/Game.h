@@ -3,6 +3,8 @@
 
 static struct GAME
 {
+	std::string GetWeaponName(int Weapon);
+
 	float ViewMatrix[16];
 
 	DWORD GetClient();
@@ -10,6 +12,8 @@ static struct GAME
 	DWORD GetEngine();
 
 	DWORD GetLocalPlayer();
+
+	short GetEntityWeapon(DWORD Entity);
 
 	void PlayerJump();
 

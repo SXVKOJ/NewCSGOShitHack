@@ -55,5 +55,30 @@ namespace config
 		extern bool HP;
 		extern bool ESPBones;
 		extern bool Lines;
+
+		namespace health
+		{
+			extern int offset_x;
+			extern int offset_y;
+
+			extern bool custom_color;
+			extern float color[3];
+
+			extern bool HealthBar;
+			extern bool ArmorBar;
+
+			extern int HealthBarWidth;
+			extern int ArmorBarWidth;
+		}
+
+		namespace weapon
+		{
+			extern bool ShowWeapon;
+			extern int offset_x;
+			extern int offset_y;
+
+			extern bool custom_color;
+			extern float color[3];
+		}
 	}
 }

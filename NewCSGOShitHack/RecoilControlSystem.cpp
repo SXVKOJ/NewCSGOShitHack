@@ -10,7 +10,7 @@ void HACK::RecoilControlSystemThread()
 
 	int ShotsFired = *(int*)(LocalPlayer + offsets::m_iShotsFired);
 
-	if (ShotsFired >= 2)
+	if (ShotsFired >= 1 && GetAsyncKeyState(VK_LBUTTON))
 	{
 		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
 

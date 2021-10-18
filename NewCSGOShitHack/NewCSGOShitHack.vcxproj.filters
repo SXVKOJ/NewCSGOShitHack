@@ -138,9 +138,6 @@
     <ClCompile Include="SkinChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="VMT.cpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
@@ -201,7 +198,7 @@
       <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
     <ClInclude Include="VMT.h">
-      <Filter>Исходные файлы\Main</Filter>
+      <Filter>Исходные файлы\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

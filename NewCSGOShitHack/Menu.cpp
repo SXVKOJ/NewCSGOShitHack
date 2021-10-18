@@ -44,10 +44,25 @@ bool config::MenuActive = false;
 float config::esp::LT_NEONESP[3] = { 0, 1, 1 };
 float config::esp::ET_NEONESP[3] = { 1, 0, 1 };
 float config::esp::DX_ESP[3] = { 1, 0, 1 };
+float config::esp::health::color[3] = { 1, 0, 1 };
+float config::esp::weapon::color[3] = { 0, 1, 1 };
 
-bool config::esp::HP = false;	
+int config::esp::health::offset_x = -20;
+int config::esp::health::offset_y = 0;
+int config::esp::weapon::offset_x = 20;
+int config::esp::weapon::offset_y = 0;
+
+int config::esp::health::HealthBarWidth = 25;
+int config::esp::health::ArmorBarWidth = 25;
+
+bool config::esp::health::HealthBar = false;
+bool config::esp::health::ArmorBar = false;
+bool config::esp::weapon::ShowWeapon = false;
+bool config::esp::HP = false;
 bool config::esp::ESPBones = false;
 bool config::esp::Lines = true;
+bool config::esp::health::custom_color = false;
+bool config::esp::weapon::custom_color = false;
 
 void ToggleButton(const char* str_id, bool* v)
 {
@@ -143,7 +158,7 @@ void HACK::MenuThread()
 		ImGui::Checkbox("Bhop", &config::Bhop);
 		ImGui::Separator();
 	}
-	
+
 	else if (CurrTab == 1)
 	{
 		// VIEW
@@ -154,12 +169,12 @@ void HACK::MenuThread()
 		ImGui::Separator();
 		ImGui::InputInt("SkinID", &config::CurrentSkinID);
 		ImGui::SameLine();
-		
+
 		if (ImGui::Button("Accept", ImVec2(100, 25)))
 		{
 			FullForceUpdate();
-		}	
-	}	
+		}
+	}
 
 	else if (CurrTab == 2)
 	{
@@ -182,13 +197,13 @@ void HACK::MenuThread()
 
 		if (config::AimingAssistance)
 			ImGui::SliderInt("Min Distanse", &config::LegitAimBotDiff, 1, 1920);
-		
+
 		ImGui::Separator();
 		ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
 		ImGui::Checkbox("Show Bones id's", &BonesIds);
 		if ((tImage != nullptr) && BonesIds)
 			ImGui::Image(tImage, ImVec2(495, 659));
-	}	
+	}
 
 	else if (CurrTab == 3)
 	{
@@ -198,8 +213,39 @@ void HACK::MenuThread()
 		ImGui::ColorEdit4("LocTeam Color", config::esp::LT_NEONESP);
 		ImGui::ColorEdit4("ESP Color", config::esp::DX_ESP);
 		ImGui::Separator();
-		ImGui::Checkbox("Draw Bones", &config::esp::ESPBones);
-		ImGui::Checkbox("Draw Health", &config::esp::HP);
+		ImGui::Checkbox("Show Bones", &config::esp::ESPBones);
+		ImGui::Checkbox("Show Health", &config::esp::HP);
+		ImGui::Separator();
+		ImGui::Checkbox("Show HealthBar", &config::esp::health::HealthBar);
+		ImGui::Checkbox("Show ArmorBar", &config::esp::health::HealthBar);
+
+		if (config::esp::HP)
+		{
+			ImGui::Separator();
+
+			ImGui::Checkbox("Custom color", &config::esp::health::custom_color);
+			if (config::esp::health::custom_color)
+				ImGui::ColorEdit4("color", config::esp::health::color);
+
+			ImGui::SliderInt("offset X", &config::esp::health::offset_x, -20, 150);
+			ImGui::SliderInt("offset Y", &config::esp::health::offset_y, 0, 150);
+
+			ImGui::Separator();
+		}
+		ImGui::Checkbox("Show Weapon", &config::esp::weapon::ShowWeapon);
+		if (config::esp::weapon::ShowWeapon)
+		{
+			ImGui::Separator();
+
+			ImGui::Checkbox("Custom Color", &config::esp::weapon::custom_color);
+			if (config::esp::weapon::custom_color)
+				ImGui::ColorEdit4("Color", config::esp::weapon::color);
+
+			ImGui::SliderInt("offset x", &config::esp::weapon::offset_x, 0, 150);
+			ImGui::SliderInt("offset y", &config::esp::weapon::offset_y, 0, 150);
+
+			ImGui::Separator();
+		}
 		ImGui::Separator();
 		ImGui::InputInt("Box Width", &config::esp::BoxWidth, 1, 10, 0);
 		ImGui::InputInt("Line Width", &config::esp::LineWidth, 1, 10, 0);

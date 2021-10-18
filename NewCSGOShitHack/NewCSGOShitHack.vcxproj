@@ -189,7 +189,6 @@
     <ClCompile Include="SkinChanger.cpp" />
     <ClCompile Include="SpinBot.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
-    <ClCompile Include="VMT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.hpp" />

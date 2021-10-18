@@ -109,3 +109,126 @@ short GAME::GetCurrentWeapon()
 		
 	return -1;
 }
+
+short GAME::GetEntityWeapon(DWORD Entity)
+{
+	int weapon = *(int*)(Entity + offsets::m_hActiveWeapon);
+	int weaponEnt = *(int*)(GetClient() + offsets::dwEntityList + ((weapon & 0xFFF) - 1) * 0x10);
+
+	if (weaponEnt != NULL)
+	{
+		short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
+
+		return weaponID;
+	}
+
+	return -1;
+}
+
+std::string GAME::GetWeaponName(int Weapon)
+{
+	if (Weapon == WEAPON_AWP)
+		return "AMP";
+
+	else if (Weapon == WEAPON_G3SG1)
+		return "G3SG1";
+
+	else if (Weapon == WEAPON_SCAR20)
+		return "SCAR20";
+
+	else if (Weapon == WEAPON_SSG)
+		return "SSG";
+
+	else if (Weapon == WEAPON_AK47)
+		return "AK-47";
+
+	else if (Weapon == WEAPON_AUG)
+		return "AUG";
+
+	else if (Weapon == WEAPON_FAMAS)
+		return "FAMAS";
+
+	else if (Weapon == WEAPON_GALILAR)
+		return "GALIL";
+
+	else if (Weapon == WEAPON_M4A1)
+		return "M4A1";
+
+	else if (Weapon == WEAPON_M4A4)
+		return "M4A4";
+
+	else if (Weapon == WEAPON_SG553)
+		return "SG553";
+
+	else if (Weapon == WEAPON_USP)
+		return "USP";
+
+	else if (Weapon == WEAPON_REVOLVER)
+		return "REVOLVER";
+
+	else if (Weapon == WEAPON_CZ75)
+		return "CZ75";
+
+	else if (Weapon == WEAPON_DEAGLE)
+		return "DEAGLE";
+
+	else if (Weapon == WEAPON_BERETTAS)
+		return "BERETTAS";
+
+	else if (Weapon == WEAPON_FIVESEVEN)
+		return "FIVESEVEN";
+
+	else if (Weapon == WEAPON_GLOCK)
+		return "GLOCK";
+
+	else if (Weapon == WEAPON_P2000)
+		return "P2000";
+
+	else if (Weapon == WEAPON_P250)
+		return "P250";
+
+	else if (Weapon == WEAPON_TEC9)
+		return "TEC9";
+
+	else if (Weapon == WEAPON_MAC10)
+		return "MAC10";
+
+	else if (Weapon == WEAPON_MP7)
+		return "MP7";
+
+	else if (Weapon == WEAPON_MP9)
+		return "MP9";
+
+	else if (Weapon == WEAPON_MP5)
+		return "MP5";
+
+	else if (Weapon == WEAPON_PPBIZON)
+		return "BIZON";
+
+	else if (Weapon == WEAPON_P90)
+		return "P90";
+
+	else if (Weapon == WEAPON_UMP45)
+		return "UMP45";
+
+	else if (Weapon == WEAPON_MAG7)
+		return "MAG7";
+
+	else if (Weapon == WEAPON_NOVA)
+		return "NOVA";
+
+	else if (Weapon == WEAPON_SAWEDOFF)
+		return "SAWEDOFF";
+
+	else if (Weapon == WEAPON_XM1014)
+		return "XM1014";
+
+	else if (Weapon == WEAPON_M249)
+		return "M249";
+
+	else if (Weapon == WEAPON_NEGEV)
+		return "NEGEV";
+		
+	else
+		return "KNIFE";
+}

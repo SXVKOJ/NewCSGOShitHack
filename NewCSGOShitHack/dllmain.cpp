@@ -15,13 +15,33 @@ ID3DXLine* DXLines::lLegLine = nullptr;
 ID3DXLine* DXLines::rArmLine = nullptr;
 ID3DXLine* DXLines::lArmLine = nullptr;
 
+ID3DXLine* DXLines::HealthBarLine = nullptr;
+ID3DXLine* DXLines::ArmorBarLine = nullptr;
+
 IDirect3DTexture9* tImage = nullptr;
+
 LPD3DXFONT m_font = NULL;
+LPD3DXFONT weapon_font = NULL;
+
 EndScene oEndScene = NULL;
 WNDPROC oWndProc;
 
-FrameStageNotify fnFrameStageNotify;
 static HWND window = NULL;
+
+typedef void(__thiscall* FrameStageNotify)(void*, ClientFrameStage_t);
+typedef void* (__cdecl* tCreateInterface)(const char* name, int* returnCode);
+FrameStageNotify fnFrameStageNotify = NULL;
+
+void* GetInterface(const char* dllname, const char* interfacename)
+{
+	tCreateInterface CreateInterface = (tCreateInterface)GetProcAddress(GetModuleHandle(dllname), "CreateInterface");
+
+	int returnCode = 0;
+	void* xinterface = CreateInterface(interfacename, &returnCode);
+
+	return xinterface;
+}
+
 
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 {
@@ -45,6 +65,7 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	pDevice->SetViewport(&viewport);
 
 	D3DXCreateFont(pDevice, 16, 6, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &m_font);
+	D3DXCreateFont(pDevice, 16, 6, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &weapon_font);
 
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
@@ -81,15 +102,40 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 
 void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
 {	
-	while (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
 	{
-		Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+		DWORD LocalPlayer = Game.GetLocalPlayer();
+
+		int tWeapon = Game.GetCurrentWeapon();
+		int tPainKit = config::CurrentSkinID; 
+		float wear = 0.000001f;
+
+		for (int i = 0; i < 8; i++)
+		{
+			int WeaponBase = *(int*)(LocalPlayer + offsets::m_hActiveWeapon + i * 0x4) & 0xFFF;
+
+			WeaponBase = *(int*)(Game.GetClient() + offsets::dwEntityList + (WeaponBase - 1) * 0x10);
+
+			if (WeaponBase != NULL)
+			{
+				short CurrentWeaponID = *(short*)(WeaponBase + offsets::m_iItemDefinitionIndex);
+
+				if (CurrentWeaponID == tWeapon)
+				{
+					*(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
+					*(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
+					*(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
+					*(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
+				}
+			}
+		}
 	}
 
-	fnFrameStageNotify(edx, Stage);
+	fnFrameStageNotify(ecx, Stage);
 }
 
-LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
 
 	ImGuiIO& io = ImGui::GetIO();
 
@@ -122,10 +168,10 @@ DWORD WINAPI InitVMTHook(HMODULE hModule)
 {
 	VMTHook* Client_Table = nullptr;
 
-	void* client = (void*)GetInterface("client.dll", "VClient018");
-	Client_Table = new VMTHook(client);
+	fnFrameStageNotify = (FrameStageNotify)GetInterface("client.dll", "VClient018");
+	Client_Table = new VMTHook(fnFrameStageNotify);
 
-	Client_Table->SwapPointer(37, reinterpret_cast<void*>(FrameStageNotifyThink));
+	Client_Table->SwapPointer(36, reinterpret_cast<void*>(FrameStageNotifyThink));
 
 	Client_Table->ApplyNewTable();
 
@@ -193,4 +239,3 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
     return TRUE;
 }
-
