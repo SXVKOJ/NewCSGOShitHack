@@ -47,13 +47,10 @@ float config::esp::DX_ESP[3] = { 1, 0, 1 };
 float config::esp::health::color[3] = { 1, 0, 1 };
 float config::esp::weapon::color[3] = { 0, 1, 1 };
 
-int config::esp::health::offset_x = -20;
+int config::esp::health::offset_x = 0;
 int config::esp::health::offset_y = 0;
 int config::esp::weapon::offset_x = 20;
 int config::esp::weapon::offset_y = 0;
-
-int config::esp::health::HealthBarWidth = 25;
-int config::esp::health::ArmorBarWidth = 25;
 
 bool config::esp::health::HealthBar = false;
 bool config::esp::health::ArmorBar = false;
@@ -217,7 +214,7 @@ void HACK::MenuThread()
 		ImGui::Checkbox("Show Health", &config::esp::HP);
 		ImGui::Separator();
 		ImGui::Checkbox("Show HealthBar", &config::esp::health::HealthBar);
-		ImGui::Checkbox("Show ArmorBar", &config::esp::health::HealthBar);
+		ImGui::Checkbox("Show ArmorBar", &config::esp::health::ArmorBar);
 
 		if (config::esp::HP)
 		{

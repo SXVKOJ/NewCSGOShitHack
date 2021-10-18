@@ -66,9 +66,6 @@ namespace config
 
 			extern bool HealthBar;
 			extern bool ArmorBar;
-
-			extern int HealthBarWidth;
-			extern int ArmorBarWidth;
 		}
 
 		namespace weapon
