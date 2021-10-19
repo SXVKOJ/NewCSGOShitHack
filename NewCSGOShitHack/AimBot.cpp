@@ -1,6 +1,8 @@
 #include "includes.h"
 # define M_PI           3.14159265358979323846
 
+float USER_COMP_CFG[100];
+
 Vec3 Subtract(Vec3 src, Vec3 dst)
 {
 	Vec3 diff;
@@ -167,6 +169,9 @@ void HACK::AimBotThread()
 			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
 		else
 			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
+
+		if (config::Aim::Compensation)
+			*(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4) = ViewAngles.y + config::Aim::CompensationVal;
 
 		if (config::TriggerBotInAimBot)
 		{

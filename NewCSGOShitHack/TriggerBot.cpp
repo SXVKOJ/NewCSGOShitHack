@@ -16,9 +16,6 @@ void HACK::TriggerBotThread()
 		if (LocalPlayerTeam != EntityTeam)
 		{
 			Game.PlayerShoot();
-
-			if (config::TriggerBotCooldown >= 25)
-				Sleep(config::TriggerBotCooldown);
 		}
 	}
 }

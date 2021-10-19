@@ -85,7 +85,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 		config::ImGui_Init = true;
 	}
 
-	if (GetAsyncKeyState(config::MenuHotKey) & 1)
+	if (GetAsyncKeyState(config::HotKeys::Menu) & 1)
 		config::MenuActive = !config::MenuActive;
 
 	if (config::MenuActive)
@@ -103,7 +103,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
 {	
 	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
-		Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
+		Hack.SkinChangerThread();
 
 	fnFrameStageNotify(ecx, Stage);
 }
@@ -181,11 +181,11 @@ DWORD WINAPI MainThread(HMODULE hModule)
 	if (config::console)
 		pFile = Console.Init();
 
-    while (!GetAsyncKeyState(config::EndHotKey))
+    while (!GetAsyncKeyState(config::HotKeys::End))
     {
 		Hack.MainThread();
 
-		if (config::MainThreadDelay > 1)
+		if (config::MainThreadDelay > 1 && config::FPSMode)
 			Sleep(config::MainThreadDelay);
     }
 

@@ -1,5 +1,7 @@
 #include "includes.h"
 
+int UserCFG[526];
+
 bool HACK::IsKnifeWeapon()
 {
     short wepID = Game.GetCurrentWeapon();
@@ -13,30 +15,37 @@ void HACK::FullForceUpdate()
     *(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
 }
 
-void HACK::ChangeSkin(short weapon, int paint)
+void HACK::SkinChangerThread()
 {
     DWORD LocalPlayer = Game.GetLocalPlayer();
 
-    int tWeapon = weapon;
-    int tPainKit = paint;
     float wear = 0.000001f;
 
-    for (int i = 0; i < 8; i++)
+    for (int j = 0; j < 526; j++)
     {
-        int WeaponBase = *(int*)(LocalPlayer + offsets::m_hActiveWeapon + i * 0x4) & 0xFFF;
+        if (UserCFG[j] == 0)
+            continue;
 
-        WeaponBase = *(int*)(Game.GetClient() + offsets::dwEntityList + (WeaponBase - 1) * 0x10);
+        int tWeapon = j;
+        int tPainKit = UserCFG[j];
 
-        if (WeaponBase != NULL)
-        {           
-            short CurrentWeaponID = Game.GetCurrentWeapon();
+        for (int i = 0; i < 8; i++)
+        {
+            int WeaponBase = *(int*)(LocalPlayer + offsets::m_hActiveWeapon + i * 0x4) & 0xFFF;
 
-            if (CurrentWeaponID == weapon)
+            WeaponBase = *(int*)(Game.GetClient() + offsets::dwEntityList + (WeaponBase - 1) * 0x10);
+
+            if (WeaponBase != NULL)
             {
-                *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
-                *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
-                *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
-                *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
+                short CurrentWeaponID = *(short*)(WeaponBase + offsets::m_iItemDefinitionIndex);
+
+                if (CurrentWeaponID == tWeapon)
+                {
+                    *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
+                    *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
+                    *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
+                    *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
+                }
             }
         }
     }

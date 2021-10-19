@@ -40,9 +40,14 @@ void HACK::MainThread()
 		config::TPSActive = false;
 	}
 
+	if (config::View::custom)
+	{
+		Hack.SetCustomViewOffset(Vec3{ config::View::offset_x, config::View::offset_y, config::View::offset_z });
+	}
+
 	if (config::AimBot)
 	{
-		if (GetAsyncKeyState(config::AimBotHotKey))
+		if (GetAsyncKeyState(config::HotKeys::AimBot))
 		{
 			Hack.AimBotThread();
 		}

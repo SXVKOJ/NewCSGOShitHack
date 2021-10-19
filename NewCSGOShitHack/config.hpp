@@ -35,12 +35,39 @@ namespace config
 	extern int MainThreadDelay;
 	extern int SilentAimSmooth;
 	extern int LegitAimBotDiff;
-	
-	extern int CurrentSkinID;
-	extern int AimBotHotKey;   // VK_ALT
-	extern int EndHotKey;     // VK_END
-	extern int MenuHotKey;   // VK_HOME
+
+	extern bool FPSMode;
+
+	namespace Aim
+	{
+		extern bool Compensation;
+		extern int CompensationVal;
+		extern int CurrentWeaponID;
+	}
+
 	extern bool MenuActive;
+
+	namespace View
+	{
+		extern float offset_x;
+		extern float offset_y;
+		extern float offset_z;
+
+		extern bool custom;
+	}
+	
+	namespace SkinChanger
+	{
+		extern int CurrentSkinID;
+		extern int CurrentWeaponID;
+	}
+	
+	namespace HotKeys
+	{
+		extern int AimBot;   // VK_ALT
+		extern int End;     // VK_END
+		extern int Menu;   // VK_HOME	
+	}
 
 	namespace esp
 	{

@@ -15,6 +15,9 @@ extern LPD3DXFONT m_font;
 extern LPD3DXFONT weapon_font;
 extern IDirect3DTexture9* tImage;
 
+extern int UserCFG[526];
+extern float USER_COMP_CFG[100];
+
 namespace DXLines
 {
 	extern ID3DXLine* Line;
@@ -54,7 +57,7 @@ static struct HACK
 
 	void AimingAssistanceThread();
 
-	void ChangeSkin(short weapon, int paint);
+	void SkinChangerThread();
 
 	void SpinBotThread(int speed);
 
@@ -65,6 +68,8 @@ static struct HACK
 	void SetFov(const int nFov);
 
 	void MenuThread();
+
+	void SetCustomViewOffset(Vec3 nView);
 
 	void InitLines(LPDIRECT3DDEVICE9& pDevice);
 

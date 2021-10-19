@@ -13,3 +13,10 @@ void HACK::PlayerSetTPS(bool arg)
 
 	*(bool*)(LocalPlayer + offsets::m_iObserverMode) = arg;
 }
+
+void HACK::SetCustomViewOffset(Vec3 nView)
+{
+	DWORD LocalPlayer = Game.GetLocalPlayer();
+
+	*(Vec3*)(LocalPlayer + offsets::m_vecViewOffset) = nView;
+}
