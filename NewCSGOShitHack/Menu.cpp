@@ -116,26 +116,25 @@ void HACK::MenuThread()
 	}
 	ImGui::SetWindowSize(ImVec2(700, 650));
 
-	{   /*                 Tabs                  */
-		if (ImGui::Button("Main", ImVec2(150, 30)))
-			CurrTab = 0;
+    /*                 Tabs                  */
+	if (ImGui::Button("Main", ImVec2(150, 30)))
+		CurrTab = 0;
 
-		ImGui::SameLine();
-		if (ImGui::Button("Visuals", ImVec2(150, 30)))
-			CurrTab = 1;
+	ImGui::SameLine();
+	if (ImGui::Button("Visuals", ImVec2(150, 30)))
+		CurrTab = 1;
 
-		ImGui::SameLine();
-		if (ImGui::Button("Aimbot", ImVec2(150, 30)))
-			CurrTab = 2;
+	ImGui::SameLine();
+	if (ImGui::Button("Aimbot", ImVec2(150, 30)))
+		CurrTab = 2;
 
-		ImGui::SameLine();
-		if (ImGui::Button("SkinChanger", ImVec2(150, 30)))
-			CurrTab = 3;
-	}
+	ImGui::SameLine();
+	if (ImGui::Button("SkinChanger", ImVec2(150, 30)))
+		CurrTab = 3;
 
-	switch (CurrTab)
+	if (true)
 	{
-		case 0: /* Main */
+		if (CurrTab == 0) /* Main */
 		{
 			using namespace config;
 
@@ -159,7 +158,7 @@ void HACK::MenuThread()
 			if (ImGui::RadioButton("Trigger Bot", config::TriggerBot))
 				TriggerBot = !TriggerBot;
 		}
-		case 1: /* Visuals */
+		else if (CurrTab == 1) /* Visuals */
 		{
 			using namespace config::esp;
 
@@ -218,7 +217,7 @@ void HACK::MenuThread()
 			ImGui::SliderInt("Weapon x", &config::esp::weapon::offset_x, -150, 150);
 			ImGui::SliderInt("Weapon y", &config::esp::weapon::offset_y, -150, 150);
 		}
-		case 2: /* AimBot */
+		else if (CurrTab == 2) /* AimBot */
 		{
 			using namespace config;
 
@@ -277,10 +276,8 @@ void HACK::MenuThread()
 				ImGui::SameLine();
 				ImGui::SliderInt("Treshold", &config::LegitAimBotDiff, 1, 900);
 			}
-
-
 		}
-		case 3: /* SkinChanger */
+		else if (CurrTab == 3) /* SkinChanger */
 		{
 
 		}
