@@ -51,6 +51,7 @@ int config::esp::health::offset_x = 0;
 int config::esp::health::offset_y = 0;
 int config::esp::weapon::offset_x = 20;
 int config::esp::weapon::offset_y = 0;
+int config::esp::health::BarsPos = 0; // 0 - top, 1 - left, 2 - bottom, 3 - right
 
 bool config::esp::health::HealthBar = false;
 bool config::esp::health::ArmorBar = false;
@@ -215,20 +216,28 @@ void HACK::MenuThread()
 		ImGui::Separator();
 		ImGui::Checkbox("Show HealthBar", &config::esp::health::HealthBar);
 		ImGui::Checkbox("Show ArmorBar", &config::esp::health::ArmorBar);
+		if (config::esp::health::HealthBar || config::esp::health::ArmorBar)
+		{
+			ImGui::Text("0 - top; 1 - left; 2 - bottom; 3 - right");
+			ImGui::SliderInt("Pos", &config::esp::health::BarsPos, 0, 3);
+		}
 
 		if (config::esp::HP)
 		{
 			ImGui::Separator();
 
+
 			ImGui::Checkbox("Custom color", &config::esp::health::custom_color);
 			if (config::esp::health::custom_color)
 				ImGui::ColorEdit4("color", config::esp::health::color);
 
-			ImGui::SliderInt("offset X", &config::esp::health::offset_x, -20, 150);
-			ImGui::SliderInt("offset Y", &config::esp::health::offset_y, 0, 150);
+			ImGui::Separator();
+			ImGui::SliderInt("X", &config::esp::health::offset_x, -150, 150);
+			ImGui::SliderInt("Y", &config::esp::health::offset_y, -150, 150);
 
 			ImGui::Separator();
 		}
+		ImGui::Separator();
 		ImGui::Checkbox("Show Weapon", &config::esp::weapon::ShowWeapon);
 		if (config::esp::weapon::ShowWeapon)
 		{
@@ -238,8 +247,9 @@ void HACK::MenuThread()
 			if (config::esp::weapon::custom_color)
 				ImGui::ColorEdit4("Color", config::esp::weapon::color);
 
-			ImGui::SliderInt("offset x", &config::esp::weapon::offset_x, 0, 150);
-			ImGui::SliderInt("offset y", &config::esp::weapon::offset_y, 0, 150);
+			ImGui::Separator();
+			ImGui::SliderInt("x", &config::esp::weapon::offset_x, -150, 150);
+			ImGui::SliderInt("y", &config::esp::weapon::offset_y, -150, 150);
 
 			ImGui::Separator();
 		}

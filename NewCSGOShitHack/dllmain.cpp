@@ -64,8 +64,8 @@ void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 	viewport.Y = 0.0f;
 	pDevice->SetViewport(&viewport);
 
-	D3DXCreateFont(pDevice, 16, 6, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &m_font);
-	D3DXCreateFont(pDevice, 16, 6, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &weapon_font);
+	D3DXCreateFont(pDevice, 18, 7, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &m_font);
+	D3DXCreateFont(pDevice, 17, 7, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &weapon_font);
 
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(pDevice);
@@ -103,33 +103,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
 {	
 	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
-	{
-		DWORD LocalPlayer = Game.GetLocalPlayer();
-
-		int tWeapon = Game.GetCurrentWeapon();
-		int tPainKit = config::CurrentSkinID; 
-		float wear = 0.000001f;
-
-		for (int i = 0; i < 8; i++)
-		{
-			int WeaponBase = *(int*)(LocalPlayer + offsets::m_hActiveWeapon + i * 0x4) & 0xFFF;
-
-			WeaponBase = *(int*)(Game.GetClient() + offsets::dwEntityList + (WeaponBase - 1) * 0x10);
-
-			if (WeaponBase != NULL)
-			{
-				short CurrentWeaponID = *(short*)(WeaponBase + offsets::m_iItemDefinitionIndex);
-
-				if (CurrentWeaponID == tWeapon)
-				{
-					*(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
-					*(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = tPainKit;
-					*(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
-					*(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
-				}
-			}
-		}
-	}
+		Hack.ChangeSkin(Game.GetCurrentWeapon(), config::CurrentSkinID);
 
 	fnFrameStageNotify(ecx, Stage);
 }

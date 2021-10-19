@@ -11,4 +11,12 @@ static struct CONSTVARS
 
 	const int PlayerStructSize = 0x10;
 	const int HeadBone = 8;
+
+	const float GreenColor[3] = { 0, 1, 0 };
+
+	// 0 - top; 1 - left; 2 - bottom; 3 - right
+	const int PosTop = 0;
+	const int PosLeft = 1;
+	const int PosBottom = 2;
+	const int PosRight = 3;
 } constVars;
