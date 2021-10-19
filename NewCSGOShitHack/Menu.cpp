@@ -308,7 +308,7 @@ void HACK::MenuThread()
 				ImGui::SameLine();
 				if (ImGui::Button("_Curr_", ImVec2(100, 25)))
 				{
-					config::SkinChanger::CurrentWeaponID = Game.GetCurrentWeapon();
+					config::Aim::CurrentWeaponID = Game.GetCurrentWeapon();
 				}
 				ImGui::InputInt("CompVal   ", &config::Aim::CompensationVal, 1, 30);
 				ImGui::SameLine();
