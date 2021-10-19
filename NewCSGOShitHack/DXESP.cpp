@@ -61,9 +61,6 @@ void HACK::DXESPThread()
         if (config::esp::weapon::ShowWeapon)
         {
             using namespace config::esp::weapon;
-            
-            if (!custom_color)
-                *color = *config::esp::DX_ESP;
 
             DrawMessage(weapon_font,
                 Entity2Screen.x + offset_x,

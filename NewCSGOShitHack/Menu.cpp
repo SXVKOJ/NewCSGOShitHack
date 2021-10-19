@@ -14,7 +14,7 @@ bool config::NeonWallHack = false;
 bool config::AimBot = false;
 bool config::RecoilControlSystem = false;
 bool config::RadarHack = false;
-bool config::NoFlash = false;
+bool config::NoFlash = true;
 bool config::WallHackESP = false;
 bool config::SpinBot = false;
 bool config::SmoothAimBot = false;
@@ -109,158 +109,187 @@ void HACK::MenuThread()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin("Settings");
-	ImGui::SetWindowSize(ImVec2(666, 680), 0);
-
-	if (ImGui::Button("Main", ImVec2(150, 30)))
-		CurrTab = 0;
-
-	ImGui::SameLine();
-	if (ImGui::Button("View", ImVec2(150, 30)))
-		CurrTab = 1;
-
-	ImGui::SameLine();
-	if (ImGui::Button("Aimbot", ImVec2(150, 30)))
-		CurrTab = 2;
-
-	ImGui::SameLine();
-	if (ImGui::Button("WallHack", ImVec2(150, 30)))
-		CurrTab = 3;
-
-	if (CurrTab == 0)
+	if (!ImGui::Begin("Settings"))
 	{
-		// MAIN THREAD
-		ImGui::Separator();
-		ImGui::SliderInt("Bhop Cooldown", &config::BhopDelay, 10, 30);
-		ImGui::SliderInt("Default Cooldown (for FPS)", &config::MainThreadDelay, 1, 100);
-		ImGui::Separator();
-		ImGui::Checkbox("AimBot", &config::AimBot);
-		ImGui::Separator();
-		ImGui::Checkbox("SpinBot", &config::SpinBot);
-		ImGui::Separator();
-		ImGui::Checkbox("Glow ESP (Neon)", &config::NeonWallHack);
-		ImGui::Separator();
-		ImGui::Checkbox("DX ESP (boxes)", &config::WallHackESP);
-		ImGui::Separator();
-		ImGui::Checkbox("Recoil Control System", &config::RecoilControlSystem);
-		ImGui::Separator();
-		ImGui::Checkbox("Radar Hack", &config::RadarHack);
-		ImGui::Separator();
-		ImGui::Checkbox("TriggerBot", &config::TriggerBot);
-		if (config::TriggerBot)
-			ImGui::Checkbox("Inside AimBot?", &config::TriggerBotInAimBot);
-
-		ImGui::Separator();
-		ImGui::Checkbox("No Flash", &config::NoFlash);
-		ImGui::Separator();
-		ImGui::Checkbox("Bhop", &config::Bhop);
-		ImGui::Separator();
+		ImGui::End();
+		return;
 	}
+	ImGui::SetWindowSize(ImVec2(700, 650));
 
-	else if (CurrTab == 1)
-	{
-		// VIEW
-		ImGui::Separator();
-		ImGui::SliderInt("FOV Slider", &config::FOV, 90, 170);
-		ImGui::Separator();
-		ImGui::Checkbox("Third Person Mode", &config::ThirdPersonView);
-		ImGui::Separator();
-		ImGui::InputInt("SkinID", &config::CurrentSkinID);
+	{   /*                 Tabs                  */
+		if (ImGui::Button("Main", ImVec2(150, 30)))
+			CurrTab = 0;
+
 		ImGui::SameLine();
+		if (ImGui::Button("Visuals", ImVec2(150, 30)))
+			CurrTab = 1;
 
-		if (ImGui::Button("Accept", ImVec2(100, 25)))
-		{
-			FullForceUpdate();
-		}
+		ImGui::SameLine();
+		if (ImGui::Button("Aimbot", ImVec2(150, 30)))
+			CurrTab = 2;
+
+		ImGui::SameLine();
+		if (ImGui::Button("SkinChanger", ImVec2(150, 30)))
+			CurrTab = 3;
 	}
 
-	else if (CurrTab == 2)
+	switch (CurrTab)
 	{
-		// AIMBOT
-		ImGui::Separator();
-		ImGui::SliderInt("SpinBot Speed", &config::SpinBotSpeed, 0, 200);
-		ImGui::SliderInt("Trigger Bot Cooldown", &config::TriggerBotCooldown, 20, 5000);
-		ImGui::SliderInt("Health Treshold value", &config::HealthTresholdVal, 1, 99);
-		ImGui::Separator();
-		ImGui::Checkbox("Health Treshold", &config::HealthTreshold);
-		ImGui::Separator();
-		ImGui::Checkbox("Smooth Mode", &config::SmoothAimBot);
-		if (config::SmoothAimBot)
-			ImGui::SliderInt("Smooth", &config::SmoothStep, 1, 10);
-
-		ImGui::Separator();
-		ImGui::Checkbox("Legit Mode", &config::AimLegitMode);
-		ImGui::Separator();
-		ImGui::Checkbox("Aiming assistance", &config::AimingAssistance);
-
-		if (config::AimingAssistance)
-			ImGui::SliderInt("Min Distanse", &config::LegitAimBotDiff, 1, 1920);
-
-		ImGui::Separator();
-		ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
-		ImGui::Checkbox("Show Bones id's", &BonesIds);
-		if ((tImage != nullptr) && BonesIds)
-			ImGui::Image(tImage, ImVec2(495, 659));
-	}
-
-	else if (CurrTab == 3)
-	{
-		// WALLHACK
-		ImGui::Separator();
-		ImGui::ColorEdit4("EntTeam Color", config::esp::ET_NEONESP);
-		ImGui::ColorEdit4("LocTeam Color", config::esp::LT_NEONESP);
-		ImGui::ColorEdit4("ESP Color", config::esp::DX_ESP);
-		ImGui::Separator();
-		ImGui::Checkbox("Show Bones", &config::esp::ESPBones);
-		ImGui::Checkbox("Show Health", &config::esp::HP);
-		ImGui::Separator();
-		ImGui::Checkbox("Show HealthBar", &config::esp::health::HealthBar);
-		ImGui::Checkbox("Show ArmorBar", &config::esp::health::ArmorBar);
-		if (config::esp::health::HealthBar || config::esp::health::ArmorBar)
+		case 0: /* Main */
 		{
-			ImGui::Text("0 - top; 1 - left; 2 - bottom; 3 - right");
-			ImGui::SliderInt("Pos", &config::esp::health::BarsPos, 0, 3);
-		}
+			using namespace config;
 
-		if (config::esp::HP)
+			ImGui::Separator();
+
+			ImGui::Text("Main Functions");
+			ImGui::Separator();
+
+			if (ImGui::RadioButton("Bhop", Bhop))
+				Bhop = !Bhop;
+			if (ImGui::RadioButton("AimBot", AimBot))
+				AimBot = !AimBot;
+			if (ImGui::RadioButton("Glow ESP", NeonWallHack))
+				NeonWallHack = !NeonWallHack;
+			if (ImGui::RadioButton("Default ESP", WallHackESP))
+				WallHackESP = !WallHackESP;
+			if (ImGui::RadioButton("Recoil Control System", RecoilControlSystem))
+				RecoilControlSystem = RecoilControlSystem;
+			if (ImGui::RadioButton("Radar Hack", RadarHack))
+				RadarHack = !RadarHack;
+			if (ImGui::RadioButton("Trigger Bot", config::TriggerBot))
+				TriggerBot = !TriggerBot;
+		}
+		case 1: /* Visuals */
 		{
+			using namespace config::esp;
+
+			ImGui::Text("View");
+			ImGui::Separator();
+			ImGui::SliderInt("FOV Slider", &config::FOV, 90, 170);
+			ImGui::SameLine();
+			if (ImGui::Button("Reset", ImVec2(100, 25)))
+			{
+				config::FOV = 90;
+			}
+
+			if (ImGui::RadioButton("Third Person Mode", config::ThirdPersonView))
+				config::ThirdPersonView = !config::ThirdPersonView;
+			
+			// TODO: the ability to shift the position of the weapon
+
+			ImGui::Text("ESP");
 			ImGui::Separator();
 
+			if (ImGui::RadioButton("Show Boxes", config::WallHackESP))
+				config::WallHackESP = !config::WallHackESP;
+			if (ImGui::RadioButton("Show Lines", Lines))
+				Lines = !Lines;
+			if (ImGui::RadioButton("Show Health", HP))
+				HP = !HP;
+			if (ImGui::RadioButton("Show Bones", ESPBones))
+				ESPBones = !ESPBones;
+			if (ImGui::RadioButton("Show Weapon", weapon::ShowWeapon))
+				weapon::ShowWeapon = !weapon::ShowWeapon;
+			if (ImGui::RadioButton("Show HealthBar", health::HealthBar))
+				health::HealthBar = !health::HealthBar;
+			if (ImGui::RadioButton("Show ArmorBar", health::ArmorBar))
+				health::ArmorBar = !health::ArmorBar;
 
-			ImGui::Checkbox("Custom color", &config::esp::health::custom_color);
-			if (config::esp::health::custom_color)
-				ImGui::ColorEdit4("color", config::esp::health::color);
+			if (health::HealthBar || health::ArmorBar)
+			{
+				ImGui::SameLine();
+				ImGui::InputInt("HB Pos", &health::BarsPos, 1, 1);
+			}
 
+			ImGui::Text("Colors");
 			ImGui::Separator();
-			ImGui::SliderInt("X", &config::esp::health::offset_x, -150, 150);
-			ImGui::SliderInt("Y", &config::esp::health::offset_y, -150, 150);
 
+			ImGui::ColorEdit4("Boxes", config::esp::DX_ESP);
+			ImGui::ColorEdit4("Weapon", config::esp::weapon::color);
+			ImGui::ColorEdit4("Health", config::esp::health::color);
+			ImGui::ColorEdit4("Glow (ET)", config::esp::ET_NEONESP);
+			ImGui::ColorEdit4("Glow (LT)", config::esp::LT_NEONESP);
+
+			ImGui::Text("Offsets");
 			ImGui::Separator();
+
+			ImGui::SliderInt("Health x", &config::esp::health::offset_x, -150, 150);
+			ImGui::SliderInt("Health y", &config::esp::health::offset_y, -150, 150);
+			ImGui::SliderInt("Weapon x", &config::esp::weapon::offset_x, -150, 150);
+			ImGui::SliderInt("Weapon y", &config::esp::weapon::offset_y, -150, 150);
 		}
-		ImGui::Separator();
-		ImGui::Checkbox("Show Weapon", &config::esp::weapon::ShowWeapon);
-		if (config::esp::weapon::ShowWeapon)
+		case 2: /* AimBot */
 		{
+			using namespace config;
+
+			ImGui::Text("AimBot");
 			ImGui::Separator();
 
-			ImGui::Checkbox("Custom Color", &config::esp::weapon::custom_color);
-			if (config::esp::weapon::custom_color)
-				ImGui::ColorEdit4("Color", config::esp::weapon::color);
+			if (ImGui::RadioButton("SpinBot", SpinBot))
+				SpinBot = !SpinBot;
 
-			ImGui::Separator();
-			ImGui::SliderInt("x", &config::esp::weapon::offset_x, -150, 150);
-			ImGui::SliderInt("y", &config::esp::weapon::offset_y, -150, 150);
+			if (SpinBot)
+			{
+				ImGui::SameLine();
+				ImGui::SliderInt("Speed", &SpinBotSpeed, 0, 220);
+			}
 
+			if (ImGui::RadioButton("TriggerBot", TriggerBot))
+				TriggerBot = !TriggerBot;
+
+			if (TriggerBot)
+			{
+				ImGui::SameLine();
+				ImGui::SliderInt("cooldown", &TriggerBotCooldown, 20, 1000);
+			}
+
+			if (ImGui::RadioButton("Health Treshold", HealthTreshold))
+				HealthTreshold = !HealthTreshold;
+
+			if (HealthTreshold)
+			{
+				ImGui::SameLine();
+				ImGui::SliderInt("Val", &config::HealthTresholdVal, 1, 100);
+			}
+
+			ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
+
+			ImGui::Text("Legit");
 			ImGui::Separator();
+
+			if (ImGui::RadioButton("Smooth Mode", SmoothAimBot))
+				SmoothAimBot = !SmoothAimBot;
+
+			if (SmoothAimBot)
+			{
+				ImGui::SameLine();
+				ImGui::SliderInt("val", &config::SmoothStep, 1, 180);
+			}
+
+			if (ImGui::RadioButton("through walls", AimLegitMode))
+				AimLegitMode = !AimLegitMode;
+
+			if (ImGui::RadioButton("Aiming assistance", AimingAssistance))
+				AimingAssistance = !AimingAssistance;
+
+			if (AimingAssistance)
+			{
+				ImGui::SameLine();
+				ImGui::SliderInt("Treshold", &config::LegitAimBotDiff, 1, 900);
+			}
+
+
 		}
-		ImGui::Separator();
-		ImGui::InputInt("Box Width", &config::esp::BoxWidth, 1, 10, 0);
-		ImGui::InputInt("Line Width", &config::esp::LineWidth, 1, 10, 0);
+		case 3: /* SkinChanger */
+		{
+
+		}
 	}
 
 	ImGui::End();
+
 	ImGui::EndFrame();
 	ImGui::Render();
-	
+
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
