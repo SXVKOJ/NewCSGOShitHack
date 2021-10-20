@@ -21,7 +21,6 @@
 #include <cmath>
 #include <string>
 #include <vector>
-
 #include "HackFunc.h"
 #include "Game.h"
 

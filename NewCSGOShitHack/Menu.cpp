@@ -33,6 +33,8 @@ int config::esp::LineWidth = 1;
 
 int config::SkinChanger::CurrentSkinID = 0;
 int config::SkinChanger::CurrentWeaponID = 0;
+int config::SkinChanger::StatTrackVal = 1337;
+bool config::SkinChanger::StatTrack = true;
 
 bool config::Aim::Compensation = false;
 int config::Aim::CompensationVal = 0;
@@ -49,8 +51,8 @@ int config::TriggerBotCooldown = 17;
 int config::MainThreadDelay = 1;
 
 int config::HotKeys::AimBot = 18;   // VK_ALT
-int config::HotKeys::End = 0x23;   // VK_END
-int config::HotKeys::Menu = 0x24; // VK_HOME
+int config::HotKeys::End = VK_END;   // VK_END
+int config::HotKeys::Menu = VK_HOME; // VK_INSERT
 bool config::MenuActive = false;
 
 float config::esp::LT_NEONESP[3] = { 0, 1, 1 };
@@ -122,11 +124,7 @@ void HACK::MenuThread()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	if (!ImGui::Begin("Settings"))
-	{
-		ImGui::End();
-		return;
-	}
+	ImGui::Begin("Settings");
 	ImGui::SetWindowSize(ImVec2(700, 650));
     
 	{ /*                 Tabs                  */
@@ -354,6 +352,15 @@ void HACK::MenuThread()
 
 			if (_SkinChanger)
 			{
+				ImGui::Text("Current Weapon Name: ");
+				ImGui::SameLine();
+				ImGui::Text(Game.GetWeaponName(config::SkinChanger::CurrentWeaponID).c_str());
+
+				if (ImGui::RadioButton("StatTrack", config::SkinChanger::StatTrackVal))
+				{
+					ImGui::SameLine();
+					ImGui::InputInt("st val", &config::SkinChanger::StatTrackVal, 1, 20);
+				}
 				ImGui::InputInt("Weapon ID", &config::SkinChanger::CurrentWeaponID, 1, 30);
 				ImGui::SameLine();
 				if (ImGui::Button("Current", ImVec2(100, 25)))
@@ -365,7 +372,21 @@ void HACK::MenuThread()
 				if (ImGui::Button("_Save_", ImVec2(100, 25)))
 				{
 					UserCFG[config::SkinChanger::CurrentWeaponID] = config::SkinChanger::CurrentSkinID;
+					Hack.FullForceUpdate();
 				}
+
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), "Current Config");
+				ImGui::BeginChild("Scrolling");
+				for (int i = 0; i < 526; i++)
+				{
+					if (UserCFG[i] != 0)
+					{
+						ImGui::Text(Game.GetWeaponName(i).c_str());
+						ImGui::SameLine();
+						ImGui::Text(std::to_string(UserCFG[i]).c_str());
+					}
+				}
+				ImGui::EndChild();
 			}
 		}
 	}

@@ -28,9 +28,9 @@ WNDPROC oWndProc;
 
 static HWND window = NULL;
 
-typedef void(__thiscall* FrameStageNotify)(void*, ClientFrameStage_t);
+typedef void(_stdcall* FrameStageNotify)(ClientFrameStage_t Stage);
 typedef void* (__cdecl* tCreateInterface)(const char* name, int* returnCode);
-FrameStageNotify fnFrameStageNotify = NULL;
+FrameStageNotify oFrameStageNotify = NULL;
 
 void* GetInterface(const char* dllname, const char* interfacename)
 {
@@ -41,7 +41,6 @@ void* GetInterface(const char* dllname, const char* interfacename)
 
 	return xinterface;
 }
-
 
 void InitImGui(LPDIRECT3DDEVICE9 pDevice)
 {
@@ -79,7 +78,6 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	{
 		InitImGui(pDevice);
 		Hack.SetCustomImGuiStyle();
-		Hack.LoadImageToDll(NameArry, pDevice);
 		Hack.InitLines(pDevice);
 
 		config::ImGui_Init = true;
@@ -100,12 +98,12 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 	return oEndScene(pDevice);
 }
 
-void __fastcall FrameStageNotifyThink(void* ecx, void* edx, ClientFrameStage_t Stage)
+void __stdcall hkFrameStageNotify(ClientFrameStage_t Stage)
 {	
-	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+	if (Stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START) {
 		Hack.SkinChangerThread();
-
-	fnFrameStageNotify(ecx, Stage);
+	}
+	oFrameStageNotify(Stage);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -140,14 +138,11 @@ HWND GetProcessWindow()
 
 DWORD WINAPI InitVMTHook(HMODULE hModule)
 {
-	VMTHook* Client_Table = nullptr;
+	void* _Client = GetInterface("client.dll", "VClient018");
 
-	fnFrameStageNotify = (FrameStageNotify)GetInterface("client.dll", "VClient018");
-	Client_Table = new VMTHook(fnFrameStageNotify);
+	DWORD* _clientVTable = (*reinterpret_cast<DWORD**>(_Client));
 
-	Client_Table->SwapPointer(36, reinterpret_cast<void*>(FrameStageNotifyThink));
-
-	Client_Table->ApplyNewTable();
+	oFrameStageNotify = (FrameStageNotify)_TrampHook32((char*)_clientVTable[37], (char*)hkFrameStageNotify, 9);
 
 	return TRUE;
 }
@@ -185,6 +180,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     {
 		Hack.MainThread();
 
+		
 		if (config::MainThreadDelay > 1 && config::FPSMode)
 			Sleep(config::MainThreadDelay);
     }

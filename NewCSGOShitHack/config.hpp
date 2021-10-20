@@ -60,6 +60,9 @@ namespace config
 	{
 		extern int CurrentSkinID;
 		extern int CurrentWeaponID;
+
+		extern bool StatTrack;
+		extern int StatTrackVal;
 	}
 	
 	namespace HotKeys

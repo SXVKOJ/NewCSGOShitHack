@@ -138,6 +138,9 @@
     <ClCompile Include="SkinChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
+    <ClCompile Include="myhook.cpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">

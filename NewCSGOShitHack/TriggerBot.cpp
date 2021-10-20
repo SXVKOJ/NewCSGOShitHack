@@ -3,6 +3,7 @@
 void HACK::TriggerBotThread()
 {
 	DWORD LocalPlayer = Game.GetLocalPlayer();
+	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
 
 	int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
 
@@ -15,6 +16,12 @@ void HACK::TriggerBotThread()
 
 		if (LocalPlayerTeam != EntityTeam)
 		{
+			if (config::Aim::Compensation)
+			{
+				Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
+				*(float*)(ClientState + offsets::dwClientState_ViewAngles) = ViewAngles.x + USER_COMP_CFG[Game.GetCurrentWeapon()];
+			}
+
 			Game.PlayerShoot();
 		}
 	}

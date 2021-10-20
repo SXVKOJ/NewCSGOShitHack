@@ -170,9 +170,6 @@ void HACK::AimBotThread()
 		else
 			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
 
-		if (config::Aim::Compensation)
-			*(float*)(ClientState + offsets::dwClientState_ViewAngles + 0x4) = ViewAngles.y + USER_COMP_CFG[Game.GetCurrentWeapon()];
-
 		if (config::TriggerBotInAimBot)
 		{
 			TriggerBotThread();
