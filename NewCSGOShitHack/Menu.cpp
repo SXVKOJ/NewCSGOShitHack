@@ -34,7 +34,10 @@ int config::esp::LineWidth = 1;
 int config::SkinChanger::CurrentSkinID = 0;
 int config::SkinChanger::CurrentWeaponID = 0;
 int config::SkinChanger::StatTrackVal = 1337;
-bool config::SkinChanger::StatTrack = true;
+int config::SkinChanger::KnifeType = 0;
+bool config::SkinChanger::StatTrack = false;
+bool config::SkinChanger::CustomName = false;
+char* config::SkinChanger::szCustomName = nullptr;
 
 bool config::Aim::Compensation = false;
 int config::Aim::CompensationVal = 0;
@@ -352,15 +355,29 @@ void HACK::MenuThread()
 
 			if (_SkinChanger)
 			{
+				ImGui::SliderInt("Knife Type", &config::SkinChanger::KnifeType, 0, 10);
+				ImGui::SameLine();
+				ImGui::Text(KnifeTypeToName().c_str());
+				ImGui::Separator();
+
 				ImGui::Text("Current Weapon Name: ");
 				ImGui::SameLine();
 				ImGui::Text(Game.GetWeaponName(config::SkinChanger::CurrentWeaponID).c_str());
 
-				if (ImGui::RadioButton("StatTrack", config::SkinChanger::StatTrackVal))
+				if (ImGui::RadioButton("_StatTrack_", config::SkinChanger::StatTrack))
+					config::SkinChanger::StatTrack = !config::SkinChanger::StatTrack;
+
+				if (config::SkinChanger::StatTrack)
 				{
 					ImGui::SameLine();
 					ImGui::InputInt("st val", &config::SkinChanger::StatTrackVal, 1, 20);
-				}
+				}			
+				if (ImGui::RadioButton("Custom Weapon Name", config::SkinChanger::CustomName))
+					config::SkinChanger::CustomName = !config::SkinChanger::CustomName;
+
+				if (config::SkinChanger::CustomName)
+					ImGui::InputText("wName", config::SkinChanger::szCustomName, sizeof(config::SkinChanger::szCustomName));
+			
 				ImGui::InputInt("Weapon ID", &config::SkinChanger::CurrentWeaponID, 1, 30);
 				ImGui::SameLine();
 				if (ImGui::Button("Current", ImVec2(100, 25)))

@@ -3,6 +3,9 @@
 namespace offsets
 {
     // 16/10/2021 15:21:48
+    const DWORD m_nModelIndex = 0x258;
+    const DWORD m_iWorldModelIndex = 0x3254;
+
     const DWORD anim_overlays = 0x2990;
     const DWORD clientstate_choked_commands = 0x4d30;
     const DWORD clientstate_delta_ticks = 0x174;

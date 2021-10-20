@@ -11,6 +11,8 @@ Vec3 CalcSmoothAngle(Vec3 src, Vec3 dst);
 
 Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig);
 
+std::string KnifeTypeToName();
+
 extern LPD3DXFONT m_font;
 extern LPD3DXFONT weapon_font;
 extern IDirect3DTexture9* tImage;
@@ -35,7 +37,7 @@ namespace DXLines
 
 static struct HACK
 {
-	bool IsKnifeWeapon();
+	bool IsKnifeWeapon(short wepID);
 
 	void MainThread();
 

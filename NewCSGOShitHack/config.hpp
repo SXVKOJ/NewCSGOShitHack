@@ -61,8 +61,12 @@ namespace config
 		extern int CurrentSkinID;
 		extern int CurrentWeaponID;
 
+		extern bool CustomName;
+		extern char* szCustomName;
 		extern bool StatTrack;
 		extern int StatTrackVal;
+
+		extern int KnifeType;
 	}
 	
 	namespace HotKeys
