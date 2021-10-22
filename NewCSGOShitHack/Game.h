@@ -3,9 +3,17 @@
 
 static struct GAME
 {
-	std::string GetWeaponName(int Weapon);
-
 	float ViewMatrix[16];
+
+	bool CheckIfScoped();
+
+	float GetDistance(DWORD Entity);
+
+	float CalcTriggerBotDelay(float Distance);
+
+	bool IsSniperWeapon(short CurrentWeapon);
+
+	std::string GetWeaponName(int Weapon);
 
 	DWORD GetClient();
 

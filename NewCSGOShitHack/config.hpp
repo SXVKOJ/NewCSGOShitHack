@@ -67,6 +67,7 @@ namespace config
 		extern int StatTrackVal;
 
 		extern int KnifeType;
+		extern float wear;
 	}
 	
 	namespace HotKeys

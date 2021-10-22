@@ -180,7 +180,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
     {
 		Hack.MainThread();
 
-		
 		if (config::MainThreadDelay > 1 && config::FPSMode)
 			Sleep(config::MainThreadDelay);
     }

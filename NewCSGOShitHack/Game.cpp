@@ -20,9 +20,39 @@ void GAME::PlayerShoot()
 {
 	DWORD client = GetClient();
 
+	Sleep(CalcTriggerBotDelay(GetDistance(GetLocalPlayer())));
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsActive;
-	Sleep(config::TriggerBotCooldown);
+	Sleep(20);
 	*(int*)(client + offsets::dwForceAttack) = constVars.FlagsOFF;
+}
+
+float GAME::CalcTriggerBotDelay(float Distance)
+{
+	float delay;
+
+	switch (Game.GetCurrentWeapon())
+	{
+		case 262204:
+			delay = 3;
+		case 7:
+			delay = 3.3;
+		case 40:
+			delay = 0.15;
+		case 9:
+			delay = 0.15;
+		default:
+			delay = 0;
+	}
+
+	return delay * Distance;
+}
+
+float GAME::GetDistance(DWORD Entity)
+{
+	Vec3 myLocation = *(Vec3*)(Game.GetLocalPlayer() + offsets::m_vecOrigin);
+	Vec3 enemyLocation = *(Vec3*)(Entity + offsets::m_vecOrigin);
+
+	return sqrt(pow(myLocation.x - enemyLocation.x, 2) + pow(myLocation.y - enemyLocation.y, 2) + pow(myLocation.z - enemyLocation.z, 2)) * 0.0254;
 }
 
 void GAME::PlayerJump()
@@ -229,4 +259,16 @@ std::string GAME::GetWeaponName(int Weapon)
 		
 	else
 		return "KNIFE";
+}
+
+bool GAME::CheckIfScoped()
+{
+	return *(bool*)(Game.GetLocalPlayer() + offsets::m_bIsScoped);
+}
+
+bool GAME::IsSniperWeapon(short CurrentWeapon)
+{
+	return (CurrentWeapon == WEAPON_AWP ||
+			CurrentWeapon == WEAPON_SSG ||
+			CurrentWeapon == WEAPON_SCAR20);
 }

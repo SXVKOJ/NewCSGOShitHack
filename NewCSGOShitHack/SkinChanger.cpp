@@ -79,6 +79,33 @@ int GetKnifeWorldModelIndex(int Type)
     return GetKnifeViewModelIndex(Type) + 1;
 }
 
+int GetKnifeIDbyType(int Type)
+{
+    switch (Type)
+    {
+    case 1:
+        return 500;
+    case 2:
+        return 505;
+    case 3:
+        return 506;
+    case 4:
+        return 507;
+    case 5:
+        return 508;
+    case 6:
+        return 509;
+    case 7:
+        return 510;
+    case 8:
+        return 511;
+    case 9:
+        return 515;
+    case 10:
+        return 516;
+    }
+}
+
 void HACK::FullForceUpdate()
 {
     DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
@@ -93,9 +120,9 @@ void HACK::SkinChangerThread()
     DWORD LocalPlayer = Game.GetLocalPlayer();
     DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
 
-    float wear = 0.000001f;
+    float wear = config::SkinChanger::wear;
 
-    for (int i = 1; i < 120; i++)
+    for (int i = 1; i < 65; i++)
     {
         if (UserCFG[i] == 0)
             continue;  
@@ -130,26 +157,21 @@ void HACK::SkinChangerThread()
                 int AccountID = *(int*)(WeaponBase + offsets::m_OriginalOwnerXuidLow);
                 short CurrentWeaponID = *(short*)(WeaponBase + offsets::m_iItemDefinitionIndex);
 
-                if (!IsKnifeWeapon(CurrentWeaponID))
+                if (config::SkinChanger::KnifeType != 0)
                 {
-                    *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = PaintKit;
-                    *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
-                    *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
-                    *(int*)(WeaponBase + offsets::m_nFallbackStatTrak) = config::SkinChanger::StatTrackVal;
-                    *(int*)(WeaponBase + offsets::m_iAccountID) = AccountID;
-                    *(int*)(WeaponBase + offsets::m_iEntityQuality) = 6;
-                    *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
+                    *(int*)(WeaponBase + offsets::m_nViewModelIndex) = GetKnifeViewModelIndex(config::SkinChanger::KnifeType);
+                    *(int*)(WeaponBase + offsets::m_iWorldModelIndex) = GetKnifeWorldModelIndex(config::SkinChanger::KnifeType);
+                    *(int*)(WeaponBase + offsets::m_nModelIndex) = GetKnifeViewModelIndex(config::SkinChanger::KnifeType) - 1;
+                    *(int*)(WeaponBase + offsets::m_iItemDefinitionIndex) = GetKnifeIDbyType(config::SkinChanger::KnifeType);
                 }
-                else
-                {
-                    if (config::SkinChanger::KnifeType != 0)
-                    {
-                        *(int*)(WeaponBase + offsets::m_iEntityQuality) = 3;
-                        *(int*)(WeaponBase + offsets::m_nViewModelIndex) = GetKnifeViewModelIndex(config::SkinChanger::KnifeType);
-                        *(int*)(WeaponBase + offsets::m_iWorldModelIndex) = GetKnifeWorldModelIndex(config::SkinChanger::KnifeType);
-                        *(int*)(WeaponBase + offsets::m_nModelIndex) = GetKnifeWorldModelIndex(config::SkinChanger::KnifeType);
-                    }                   
-                }
+
+                *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = PaintKit;
+                *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
+                *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;
+                *(int*)(WeaponBase + offsets::m_nFallbackStatTrak) = config::SkinChanger::StatTrackVal;
+                *(int*)(WeaponBase + offsets::m_iAccountID) = AccountID;
+                *(int*)(WeaponBase + offsets::m_iEntityQuality) = 3;
+                *(int*)(WeaponBase + offsets::m_iItemIDHigh) = -1;
 
                 if (LastWeaponID != CurrentWeaponID)
                 {

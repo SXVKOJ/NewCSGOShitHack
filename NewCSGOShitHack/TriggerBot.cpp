@@ -13,6 +13,7 @@ void HACK::TriggerBotThread()
 
 		int EntityTeam = *(int*)(Entity + offsets::m_iTeamNum);
 		int LocalPlayerTeam = *(int*)(LocalPlayer + offsets::m_iTeamNum);
+		short CurrentWeapon = Game.GetCurrentWeapon();
 
 		if (LocalPlayerTeam != EntityTeam)
 		{
@@ -22,7 +23,15 @@ void HACK::TriggerBotThread()
 				*(float*)(ClientState + offsets::dwClientState_ViewAngles) = ViewAngles.x + USER_COMP_CFG[Game.GetCurrentWeapon()];
 			}
 
-			Game.PlayerShoot();
+			if (Game.IsSniperWeapon(CurrentWeapon))
+			{
+				if (Game.CheckIfScoped())
+				{
+					Game.PlayerShoot();
+				}
+			}
+			else 
+				Game.PlayerShoot();
 		}
 	}
 }

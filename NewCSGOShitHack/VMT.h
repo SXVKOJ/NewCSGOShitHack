@@ -17,4 +17,3 @@ enum ClientFrameStage_t {
 };
 
 void* GetInterface(const char* dllname, const char* interfacename);
-//void __stdcall FrameStageNotifyThink(ClientFrameStage_t Stage);
