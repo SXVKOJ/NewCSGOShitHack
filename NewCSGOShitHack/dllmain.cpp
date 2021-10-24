@@ -168,9 +168,7 @@ DWORD WINAPI KieroInit(HMODULE hModule)
 }
 
 DWORD WINAPI MainThread(HMODULE hModule)
-{
-    MEM.UpdateOffsets();
-
+{	
 	FILE* pFile = nullptr;
 	
 	if (config::console)

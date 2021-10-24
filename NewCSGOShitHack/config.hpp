@@ -43,6 +43,7 @@ namespace config
 		extern bool Compensation;
 		extern int CompensationVal;
 		extern int CurrentWeaponID;
+		extern int SniperWeaponTriggerBotCooldown;
 	}
 
 	extern bool MenuActive;
@@ -90,6 +91,7 @@ namespace config
 		extern bool HP;
 		extern bool ESPBones;
 		extern bool Lines;
+		extern bool ShowNames;
 
 		namespace health
 		{

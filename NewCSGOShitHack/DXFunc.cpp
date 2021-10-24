@@ -23,14 +23,10 @@ void HACK::DrawRect(int x, int y, int w, int h, D3DCOLOR color, LPDIRECT3DDEVICE
 
 void HACK::DrawBones(ID3DXLine* _Line, DWORD Entity, std::vector<int> Bones, float thickness)
 {
-    int VecSize = Bones.size();
-
-    for (int i = 0; i < (VecSize - 1); i++) 
-    {
-        Vec3 BonePosition1 = Game.GetPlayerBonePos(Entity, Bones[i]);
-        Vec3 BonePosition2 = Game.GetPlayerBonePos(Entity, Bones[i + 1]);
-        Vec3 BonePos1ToScreen;
-        Vec3 BonePos2ToScreen;
+    for (int i = 0; i < Bones.size() - 1; i++)
+    {      
+        Vec3 BonePos1ToScreen;      Vec3 BonePosition1 = Game.GetPlayerBonePos(Entity, Bones[i]);
+        Vec3 BonePos2ToScreen;      Vec3 BonePosition2 = Game.GetPlayerBonePos(Entity, Bones[i + 1]);
 
         Game.WorldToScreen(BonePosition1, BonePos1ToScreen);
         Game.WorldToScreen(BonePosition2, BonePos2ToScreen);

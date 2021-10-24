@@ -28,6 +28,7 @@ void HACK::TriggerBotThread()
 				if (Game.CheckIfScoped())
 				{
 					Game.PlayerShoot();
+					Sleep(config::Aim::SniperWeaponTriggerBotCooldown);
 				}
 			}
 			else 

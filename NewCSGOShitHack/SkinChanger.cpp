@@ -157,14 +157,6 @@ void HACK::SkinChangerThread()
                 int AccountID = *(int*)(WeaponBase + offsets::m_OriginalOwnerXuidLow);
                 short CurrentWeaponID = *(short*)(WeaponBase + offsets::m_iItemDefinitionIndex);
 
-                if (config::SkinChanger::KnifeType != 0)
-                {
-                    *(int*)(WeaponBase + offsets::m_nViewModelIndex) = GetKnifeViewModelIndex(config::SkinChanger::KnifeType);
-                    *(int*)(WeaponBase + offsets::m_iWorldModelIndex) = GetKnifeWorldModelIndex(config::SkinChanger::KnifeType);
-                    *(int*)(WeaponBase + offsets::m_nModelIndex) = GetKnifeViewModelIndex(config::SkinChanger::KnifeType) - 1;
-                    *(int*)(WeaponBase + offsets::m_iItemDefinitionIndex) = GetKnifeIDbyType(config::SkinChanger::KnifeType);
-                }
-
                 *(int*)(WeaponBase + offsets::m_nFallbackPaintKit) = PaintKit;
                 *(int*)(WeaponBase + offsets::m_nFallbackSeed) = 0;
                 *(float*)(WeaponBase + offsets::m_flFallbackWear) = wear;

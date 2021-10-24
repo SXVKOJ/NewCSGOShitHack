@@ -43,6 +43,7 @@ float config::SkinChanger::wear = 0.000001f;
 bool config::Aim::Compensation = false;
 int config::Aim::CompensationVal = 0;
 int config::Aim::CurrentWeaponID = 0;
+int config::Aim::SniperWeaponTriggerBotCooldown = 40;
 
 float config::View::offset_x = 0;
 float config::View::offset_y = 0;
@@ -65,11 +66,12 @@ float config::esp::DX_ESP[3] = { 1, 0, 1 };
 float config::esp::health::color[3] = { 1, 0, 1 };
 float config::esp::weapon::color[3] = { 0, 1, 1 };
 
-int config::esp::health::offset_x = 0;
+int config::esp::health::offset_x = -25;
 int config::esp::health::offset_y = 0;
-int config::esp::weapon::offset_x = 20;
+int config::esp::weapon::offset_x = 16;
 int config::esp::weapon::offset_y = 0;
 int config::esp::health::BarsPos = 0; // 0 - top, 1 - left, 2 - bottom, 3 - right
+bool config::esp::ShowNames = false;
 
 bool config::esp::health::HealthBar = false;
 bool config::esp::health::ArmorBar = false;
@@ -289,6 +291,8 @@ void HACK::MenuThread()
 				ImGui::SameLine();
 				ImGui::SliderInt("Val", &config::HealthTresholdVal, 1, 100);
 			}
+
+			ImGui::SliderInt("Sniper weapon triggerbot cooldown", &config::Aim::SniperWeaponTriggerBotCooldown, 10, 250);
 
 			ImGui::InputInt("Target Bone", &config::TargetBonePos, 1, 79, 0);
 			// Compensation
