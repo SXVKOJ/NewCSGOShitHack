@@ -1,5 +1,48 @@
 #include "includes.h"
 
+/*
+class RecvProp
+{
+public:
+    char* m_pVarName;
+    void* m_RecvType;
+    int                     m_Flags;
+    int                     m_StringBufferSize;
+    int                     m_bInsideArray;
+    const void* m_pExtraData;
+    RecvProp* m_pArrayProp;
+    void* m_ArrayLengthProxy;
+    void* m_ProxyFn;
+    void* m_DataTableProxyFn;
+    RecvTable* m_pDataTable;
+    int                     m_Offset;
+    int                     m_ElementStride;
+    int                     m_nElements;
+    const char* m_pParentArrayPropName;
+};
+
+class RecvTable
+{
+public:
+    RecvProp *m_pProps;
+    int            m_nProps;
+    void* m_pDecoder;
+    char* m_pNetTableName;
+    bool        m_bInitialized;
+    bool        m_bInMainList;
+};
+
+class ClientClass
+{
+public:
+    void* m_pCreateFn;
+    void* m_pCreateEventFn;
+    char* m_pNetworkName;
+    RecvTable* m_pRecvTable;
+    ClientClass* m_pNext;
+    int                m_ClassID;
+};
+
 DWORD GetAllClassesOffset()
 {
     DWORD Offset = Mem.FindPattern((char*)"cliend.dll", (char*)"A1 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC A1 ? ? ? ? B9", (char*)"xxxxxxxxxxxxxxxxxxxxxx");
@@ -117,4 +160,4 @@ void MEM::InitOffsets()
     using namespace offsets;
 
     ClientClass *clientClass = (ClientClass*)(Game.GetClient() + GetAllClassesOffset());
-}
+}*/
