@@ -78,9 +78,6 @@
     <ClCompile Include="kiero\kiero.cpp">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
-    <ClCompile Include="kiero\minhook\src\buffer.c">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
     <ClCompile Include="kiero\minhook\src\hook.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
@@ -129,9 +126,6 @@
     <ClCompile Include="SpinBot.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="AimAssistance.cpp">
-      <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
     <ClCompile Include="ESPBones.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
@@ -141,6 +135,12 @@
     <ClCompile Include="myhook.cpp">
       <Filter>Исходные файлы\Main</Filter>
     </ClCompile>
+    <ClCompile Include="AimAssistance.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\buffer.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="offsets.hpp">
@@ -148,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="mem.h">
       <Filter>Исходные файлы\mem</Filter>
-    </ClInclude>
-    <ClInclude Include="HackFunc.h">
-      <Filter>Исходные файлы\Hack</Filter>
     </ClInclude>
     <ClInclude Include="config.hpp">
       <Filter>Исходные файлы\config</Filter>
@@ -202,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="VMT.h">
       <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="HackFunc.h">
+      <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

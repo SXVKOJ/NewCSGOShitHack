@@ -261,6 +261,11 @@ std::string GAME::GetWeaponName(int Weapon)
 		return "KNIFE";
 }
 
+void GAME::UpdateViewAngles()
+{
+	memcpy(&Game.ViewMatrix, (PBYTE*)(Game.GetClient() + offsets::dwViewMatrix), sizeof(Game.ViewMatrix));
+}
+
 bool GAME::CheckIfScoped()
 {
 	return *(bool*)(Game.GetLocalPlayer() + offsets::m_bIsScoped);

@@ -3,6 +3,7 @@ import requests
 import json
 
 tab = "    "
+mode = "update" # update/reset
 
 headers = {
     'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
@@ -44,10 +45,16 @@ def main():
         print(f"failed to load offsets, error code: {res.status_code}")
 
     for val in res["signatures"]:
-        result_file += tab + "const DWORD " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
+        if mode == "update":
+            result_file += tab + "const DWORD " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
+        elif mode == "reset":
+            result_file += tab + "const DWORD " + val + ";\n"
 
     for val in res["netvars"]:
-        result_file += tab + "const DWORD " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
+        if mode == "update":
+            result_file += tab + "const DWORD " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
+        elif mode == "reset":
+            result_file += tab + "const DWORD " + val + ";\n"
 
     result_file += "}"
 

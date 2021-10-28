@@ -13,6 +13,8 @@ static struct GAME
 
 	bool IsSniperWeapon(short CurrentWeapon);
 
+	void UpdateViewAngles();
+
 	std::string GetWeaponName(int Weapon);
 
 	DWORD GetClient();

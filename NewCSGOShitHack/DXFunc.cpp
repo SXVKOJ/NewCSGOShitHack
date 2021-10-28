@@ -27,14 +27,12 @@ void HACK::DrawBones(ID3DXLine* _Line, DWORD Entity, std::vector<int> Bones, flo
     {      
         Vec3 BonePos1ToScreen;      Vec3 BonePosition1 = Game.GetPlayerBonePos(Entity, Bones[i]);
         Vec3 BonePos2ToScreen;      Vec3 BonePosition2 = Game.GetPlayerBonePos(Entity, Bones[i + 1]);
-
+        
+        memcpy(&Game.ViewMatrix, (PBYTE*)(Game.GetClient() + offsets::dwViewMatrix), sizeof(Game.ViewMatrix));
         Game.WorldToScreen(BonePosition1, BonePos1ToScreen);
         Game.WorldToScreen(BonePosition2, BonePos2ToScreen);
 
-        if (BonePosition1.z >= 0.01f && BonePosition2.z >= 0.01)
-        {
-            DrawLine(_Line, BonePosition1.x, BonePosition1.y, BonePosition2.x, BonePosition2.y, config::esp::LineWidth, true, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1));
-        }
+        DrawLine(_Line, BonePos1ToScreen.x, BonePos1ToScreen.y, BonePos2ToScreen.x, BonePos2ToScreen.y, config::esp::LineWidth, true, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1));
     }
 }
 

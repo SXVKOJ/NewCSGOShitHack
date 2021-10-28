@@ -4,7 +4,7 @@ void HACK::SetFov(int nFov)
 {
 	DWORD LocalPlayer = Game.GetLocalPlayer();
 
-	*(int*)(LocalPlayer + offsets::m_iDefaultFOV) = nFov;
+	*(int*)(LocalPlayer + offsets::m_iFOV) = nFov;
 }
 
 void HACK::PlayerSetTPS(bool arg)
