@@ -15,7 +15,7 @@ static struct GAME
 
 	void UpdateViewAngles();
 
-	std::string GetWeaponName(int Weapon);
+	std::string GetWeaponName(int WeaponID);
 
 	DWORD GetClient();
 
