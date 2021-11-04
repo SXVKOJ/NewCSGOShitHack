@@ -2,37 +2,27 @@
 
 void HACK::TriggerBotThread()
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
-
-	int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
+	int CrosshairID = *(int*)(LOCALPLAYER + offsets::m_iCrosshairId);
 
 	if (CrosshairID != 0 && CrosshairID < 64)
 	{ 
-		DWORD Entity = *(DWORD*)(Game.GetClient() + offsets::dwEntityList + (CrosshairID - 1) * constVars.PlayerStructSize);
+		uintptr_t Entity = *(uintptr_t*)(CLIENT + offsets::dwEntityList + (CrosshairID - 1) * cVars::PlayerStructSize);
 
 		int EntityTeam = *(int*)(Entity + offsets::m_iTeamNum);
-		int LocalPlayerTeam = *(int*)(LocalPlayer + offsets::m_iTeamNum);
-		short CurrentWeapon = Game.GetCurrentWeapon();
+		short CurrentWeapon = lPlayer.GetCurrentWeapon();
 
-		if (LocalPlayerTeam != EntityTeam)
+		if (lPlayer.TeamNum() != EntityTeam)
 		{
-			if (config::Aim::Compensation)
+			if (Engine.IsSniperWeapon(CurrentWeapon))
 			{
-				Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
-				*(float*)(ClientState + offsets::dwClientState_ViewAngles) = ViewAngles.x + USER_COMP_CFG[Game.GetCurrentWeapon()];
-			}
-
-			if (Game.IsSniperWeapon(CurrentWeapon))
-			{
-				if (Game.CheckIfScoped())
+				if (lPlayer.CheckIfScoped())
 				{
-					Game.PlayerShoot();
-					Sleep(config::Aim::SniperWeaponTriggerBotCooldown);
+					lPlayer.Shoot();
+					Sleep(config::aimbot::SniperWeaponTriggerBotCooldown);
 				}
 			}
-			else 
-				Game.PlayerShoot();
+			else
+				lPlayer.Shoot();
 		}
 	}
 }

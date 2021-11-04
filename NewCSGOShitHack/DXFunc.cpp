@@ -1,42 +1,6 @@
 #include "includes.h"
 
-void HACK::InitLines(LPDIRECT3DDEVICE9& pDevice)
-{
-    D3DXCreateLine(pDevice, &DXLines::Line);
-    D3DXCreateLine(pDevice, &DXLines::p_Line);
-
-    D3DXCreateLine(pDevice, &DXLines::BodyLine);
-    D3DXCreateLine(pDevice, &DXLines::rLegLine);
-    D3DXCreateLine(pDevice, &DXLines::lLegLine);
-    D3DXCreateLine(pDevice, &DXLines::rArmLine);
-    D3DXCreateLine(pDevice, &DXLines::lArmLine);
-
-    D3DXCreateLine(pDevice, &DXLines::HealthBarLine);
-    D3DXCreateLine(pDevice, &DXLines::ArmorBarLine);
-}
-
-void HACK::DrawRect(int x, int y, int w, int h, D3DCOLOR color, LPDIRECT3DDEVICE9& pDevice)
-{
-    D3DRECT rect = { x, y, x + w, y + h };
-    pDevice->Clear(1, &rect, D3DCLEAR_TARGET, color, 0, 0);
-}
-
-void HACK::DrawBones(ID3DXLine* _Line, DWORD Entity, std::vector<int> Bones, float thickness)
-{
-    for (int i = 0; i < Bones.size() - 1; i++)
-    {      
-        Vec3 BonePos1ToScreen;      Vec3 BonePosition1 = Game.GetPlayerBonePos(Entity, Bones[i]);
-        Vec3 BonePos2ToScreen;      Vec3 BonePosition2 = Game.GetPlayerBonePos(Entity, Bones[i + 1]);
-        
-        memcpy(&Game.ViewMatrix, (PBYTE*)(Game.GetClient() + offsets::dwViewMatrix), sizeof(Game.ViewMatrix));
-        Game.WorldToScreen(BonePosition1, BonePos1ToScreen);
-        Game.WorldToScreen(BonePosition2, BonePos2ToScreen);
-
-        DrawLine(_Line, BonePos1ToScreen.x, BonePos1ToScreen.y, BonePos2ToScreen.x, BonePos2ToScreen.y, config::esp::LineWidth, true, D3DCOLOR_COLORVALUE(config::esp::DX_ESP[0], config::esp::DX_ESP[1], config::esp::DX_ESP[2], 1));
-    }
-}
-
-void HACK::DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color)
+VOID myDevice::DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color)
 {
     D3DXVECTOR2 points[5];
     points[0] = D3DXVECTOR2(x, y);
@@ -45,18 +9,18 @@ void HACK::DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color)
     points[3] = D3DXVECTOR2(x, y + h);
     points[4] = D3DXVECTOR2(x, y);
 
-    DXLines::p_Line->SetWidth(px);
-    DXLines::p_Line->Draw(points, 5, color);
-    DXLines::p_Line->End();
+    mDevice.espBoxLine->SetWidth(px);
+    mDevice.espBoxLine->Draw(points, 5, color);
+    mDevice.espBoxLine->End();
 }
 
-void HACK::DrawRect(LPDIRECT3DDEVICE9& pDevice, int baseX, int baseY, int baseW, int baseH, D3DCOLOR Cor)
+VOID myDevice::DrawRect(int baseX, int baseY, int baseW, int baseH, D3DCOLOR Cor)
 {
     D3DRECT BarRect = { baseX, baseY, baseX + baseW, baseY + baseH };
     pDevice->Clear(1, &BarRect, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, Cor, 0, 0);
 }
 
-void HACK::DrawLine(ID3DXLine* _Line, float x1, float y1, float x2, float y2, float width, bool antialias, D3DCOLOR color)
+VOID myDevice::DrawLine(ID3DXLine* _Line, float x1, float y1, float x2, float y2, float width, bool antialias, D3DCOLOR color)
 {
     D3DXVECTOR2 linePos[] = { D3DXVECTOR2(x1, y1), D3DXVECTOR2(x2, y2) };
 
@@ -67,7 +31,7 @@ void HACK::DrawLine(ID3DXLine* _Line, float x1, float y1, float x2, float y2, fl
     _Line->End();
 }
 
-void HACK::DrawMessage(LPD3DXFONT& font, unsigned int x, unsigned int y, D3DCOLOR color, LPCSTR Message)
+VOID myDevice::DrawMessage(LPD3DXFONT& font, unsigned int x, unsigned int y, D3DCOLOR color, LPCSTR Message)
 {
     RECT rct;
     rct.left = x;

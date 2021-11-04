@@ -1,22 +1,26 @@
+#include "includes.h"
 
-static struct CONSTVARS
+namespace cVars
 {
-	const int FlagsOnGround = 257;
+	namespace Flags
+	{
+		extern int OnGround;
 
-	const int FlagsActive = 5;
-	const int FlagsOFF = 4;
+		extern int Active;
+		extern int InActive;
 
-	const int Active = 1;
-	const int InActive = 0;
+		extern int ON;
+		extern int OFF;
+	}
 
-	const int PlayerStructSize = 0x10;
-	const int HeadBone = 8;
+	namespace WallHack
+	{
+		extern int posTop;
+		extern int posLeft;
+		extern int posBottom;
+		extern int posRight;
+	}
 
-	const float GreenColor[3] = { 0, 1, 0 };
-
-	// 0 - top; 1 - left; 2 - bottom; 3 - right
-	const int PosTop = 0;
-	const int PosLeft = 1;
-	const int PosBottom = 2;
-	const int PosRight = 3;
-} constVars;
+	extern int PlayerStructSize;
+	extern int HeadBone;
+}

@@ -4,7 +4,7 @@ static struct MEM
 {
 	char* SigScan(char* pattern, char* mask, char* begin, unsigned int size);
 
-	DWORD FindPattern(char* base, char* pattern, char* mask);
+	uintptr_t FindPattern(char* base, char* pattern, char* mask);
 
 	MODULEINFO GetModuleInfo(char* szModule);
 

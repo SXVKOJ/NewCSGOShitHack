@@ -2,42 +2,42 @@
 
 void HACK::MainThread()
 {
-	if (config::Bhop && GetAsyncKeyState(VK_SPACE))
+	if (config::hack::Bhop && GetAsyncKeyState(VK_SPACE))
 		Hack.BhopThread();
 
-	if (config::NeonWallHack)
+	if (config::hack::NeonWallHack)
 		Hack.NeonESPThread();
 
-	if (config::TriggerBot && !config::TriggerBotInAimBot)
+	if (config::hack::TriggerBot && !config::hack::TriggerBotInAimBot)
 		Hack.TriggerBotThread();
 
-	if (config::RecoilControlSystem)
+	if (config::hack::RecoilControlSystem)
 		Hack.RecoilControlSystemThread();
 
-	if (config::SpinBot)
-		Hack.SpinBotThread(config::SpinBotSpeed);
+	if (config::hack::SpinBot)
+		Hack.SpinBotThread(config::aimbot::SpinBotSpeed);
 
-	if (config::RadarHack)
+	if (config::hack::RadarHack)
 		Hack.RadarHackThread();
 
-	if (config::NoFlash)
+	if (config::hack::NoFlash)
 		Hack.NoFlashThread();
 
-	if (config::AimingAssistance)
+	if (config::hack::AimingAssistance)
 		Hack.AimingAssistanceThread();
 
-	if (config::ThirdPersonView && !config::TPSActive)
+	if (config::hack::ThirdPersonView && !config::hack::TPSActive)
 	{
-		Hack.PlayerSetTPS(true);
+		Hack.PlayerSetTPS(TRUE);
 
-		config::TPSActive = true;
+		config::hack::TPSActive = TRUE;
 	}
 
-	if (!config::ThirdPersonView && config::TPSActive)
+	if (!config::hack::ThirdPersonView && config::hack::TPSActive)
 	{
-		Hack.PlayerSetTPS(false);
+		Hack.PlayerSetTPS(FALSE);
 
-		config::TPSActive = false;
+		config::hack::TPSActive = FALSE;
 	}
 
 	if (config::View::custom)
@@ -45,7 +45,7 @@ void HACK::MainThread()
 		Hack.SetCustomViewOffset(Vec3{ config::View::offset_x, config::View::offset_y, config::View::offset_z });
 	}
 
-	if (config::AimBot)
+	if (config::hack::AimBot)
 	{
 		if (GetAsyncKeyState(config::HotKeys::AimBot))
 		{
@@ -53,8 +53,5 @@ void HACK::MainThread()
 		}
 	}
 
-	Hack.SetFov(config::FOV);
-
-	if (config::AimBot && config::AimingAssistance)
-		config::AimBot = !config::AimBot;
+	Hack.SetFov(config::hack::FOV);
 }

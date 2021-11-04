@@ -2,21 +2,16 @@
 
 void HACK::SetFov(int nFov)
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-
-	*(int*)(LocalPlayer + offsets::m_iFOV) = nFov;
+	*(int*)(LOCALPLAYER + offsets::m_iFOV) = nFov;
+	*(int*)(LOCALPLAYER + offsets::m_iDefaultFOV) = nFov;
 }
 
 void HACK::PlayerSetTPS(bool arg)
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-
-	*(bool*)(LocalPlayer + offsets::m_iObserverMode) = arg;
+	*(bool*)(LOCALPLAYER + offsets::m_iObserverMode) = arg;
 }
 
 void HACK::SetCustomViewOffset(Vec3 nView)
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-
-	*(Vec3*)(LocalPlayer + offsets::m_vecViewOffset) = nView;
+	*(Vec3*)(LOCALPLAYER + offsets::m_vecViewOffset) = nView;
 }

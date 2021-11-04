@@ -1,52 +1,48 @@
 #pragma once
 
-namespace config
+namespace hackstate
 {
-	extern int FOV;
-	extern int SmoothStep;
-	extern int SpinBotSpeed;
-	extern int TargetBonePos;
-
-	extern bool console;
 	extern bool ImGui_Init;
 	extern bool ImGui_Attached;
 	extern bool AimBotActive;
+	extern bool MenuActive;
+}
 
-	extern bool Bhop;
-	extern bool HealthTreshold;
-	extern bool TriggerBot;
-	extern bool NeonWallHack;
-	extern bool AimBot;
-	extern bool RecoilControlSystem;
-	extern bool RadarHack;
-	extern bool NoFlash;
-	extern bool WallHackESP;
-	extern bool SpinBot;
-	extern bool AimingAssistance;
-	extern bool SmoothAimBot;
-	extern bool ThirdPersonView;
-	extern bool TPSActive;
-	extern bool AimLegitMode;
-	extern bool TriggerBotInAimBot;
-
-	extern int HealthTresholdVal;
-	extern int BhopDelay;
-	extern int TriggerBotCooldown;
-	extern int MainThreadDelay;
-	extern int SilentAimSmooth;
-	extern int LegitAimBotDiff;
-
-	extern bool FPSMode;
-
-	namespace Aim
+namespace config
+{
+	namespace hack
 	{
-		extern bool Compensation;
-		extern int CompensationVal;
-		extern int CurrentWeaponID;
-		extern int SniperWeaponTriggerBotCooldown;
+		extern int FOV;
+		extern bool Bhop;
+		extern bool TriggerBot;
+		extern bool NeonWallHack;
+		extern bool AimBot;
+		extern bool RecoilControlSystem;
+		extern bool RadarHack;
+		extern bool NoFlash;
+		extern bool WallHackESP;
+		extern bool SpinBot;
+		extern bool AimingAssistance;
+		extern bool SmoothAimBot;
+		extern bool ThirdPersonView;
+		extern bool TPSActive;
+		extern bool TriggerBotInAimBot;
+		extern bool SkinChanger;
 	}
 
-	extern bool MenuActive;
+	namespace aimbot
+	{
+		extern int TriggerBotCooldown;
+		extern int SmoothVal;
+		extern int SpinBotSpeed;
+		extern int TargetBonePos;
+		extern int LegitDiff;
+		extern bool Compensation;
+		extern int CompensationVal;
+		extern bool LegitMode;
+		
+		extern int SniperWeaponTriggerBotCooldown;
+	}
 
 	namespace View
 	{
@@ -80,36 +76,40 @@ namespace config
 
 	namespace esp
 	{
-		extern int BoxWidth;
-		extern int LineWidth;
+		namespace box
+		{
+			extern int Width;
+		}
+		namespace line
+		{
+			extern int Width;
+		}
+		namespace colors
+		{
+			extern float LT_GLOW[3];
+			extern float ET_GLOW[3];
 
-		extern float LT_NEONESP[3];
-		extern float ET_NEONESP[3];
+			extern float ET_ESP[3];
+			extern float HealthColor[3];
+		}
 
-		extern float DX_ESP[3];
-
-		extern bool HP;
-		extern bool ESPBones;
+		extern bool HealthBar;
+		extern bool ArmorBar;
+		extern bool Boxes;
 		extern bool Lines;
 		extern bool ShowNames;
+		extern bool ShowWeapon;
 
-		namespace health
+		namespace bar
 		{
 			extern int offset_x;
 			extern int offset_y;
-
-			extern bool custom_color;
-			extern float color[3];
-
-			extern bool HealthBar;
-			extern bool ArmorBar;
 
 			extern int BarsPos;
 		}
 
 		namespace weapon
 		{
-			extern bool ShowWeapon;
 			extern int offset_x;
 			extern int offset_y;
 

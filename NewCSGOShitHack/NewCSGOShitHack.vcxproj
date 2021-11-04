@@ -158,22 +158,20 @@
   <ItemGroup>
     <ClCompile Include="AimBot.cpp" />
     <ClCompile Include="BHOP.cpp" />
-    <ClCompile Include="Console.cpp" />
     <ClCompile Include="dear_imgui\imgui.cpp" />
     <ClCompile Include="dear_imgui\imgui_demo.cpp" />
     <ClCompile Include="dear_imgui\imgui_draw.cpp" />
     <ClCompile Include="dear_imgui\imgui_impl_dx9.cpp" />
     <ClCompile Include="dear_imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
+    <ClCompile Include="DeviceFunc.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DXESP.cpp" />
     <ClCompile Include="DXFunc.cpp" />
-    <ClCompile Include="ESPBones.cpp" />
     <ClCompile Include="FovChanger.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="EngineFunctions.cpp" />
     <ClCompile Include="HackFunc.cpp" />
     <ClCompile Include="myhook.cpp" />
-    <ClCompile Include="ImGuiTheme.cpp" />
     <ClCompile Include="kiero\kiero.cpp" />
     <ClCompile Include="kiero\minhook\src\buffer.c" />
     <ClCompile Include="kiero\minhook\src\hde\hde32.c" />
@@ -181,7 +179,7 @@
     <ClCompile Include="kiero\minhook\src\hook.c" />
     <ClCompile Include="kiero\minhook\src\trampoline.c" />
     <ClCompile Include="mem.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="DearImGui.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
     <ClCompile Include="NoFlash.cpp" />
     <ClCompile Include="RadarHack.cpp" />
@@ -190,13 +188,15 @@
     <ClCompile Include="SkinChanger.cpp" />
     <ClCompile Include="SpinBot.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
+    <ClCompile Include="VarsDefinition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Client.hpp" />
     <ClInclude Include="config.hpp" />
     <ClInclude Include="constVars.hpp" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="DearImGui.h" />
+    <ClInclude Include="fEngine.h" />
     <ClInclude Include="HackFunc.h" />
-    <ClInclude Include="image.hpp" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="kiero\kiero.h" />
     <ClInclude Include="kiero\minhook\include\MinHook.h" />
@@ -208,7 +208,8 @@
     <ClInclude Include="kiero\minhook\src\hde\table64.h" />
     <ClInclude Include="kiero\minhook\src\trampoline.h" />
     <ClInclude Include="mem.h" />
-    <ClInclude Include="offsets.hpp" />
+    <ClInclude Include="offsets.h" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VMT.h" />
     <ClInclude Include="weapons.h" />

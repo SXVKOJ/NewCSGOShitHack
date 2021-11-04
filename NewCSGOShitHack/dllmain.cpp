@@ -5,28 +5,8 @@
 #endif
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-ID3DXLine* DXLines::p_Line = nullptr;
-ID3DXLine* DXLines::Line = nullptr;
-
-ID3DXLine* DXLines::BodyLine = nullptr;
-ID3DXLine* DXLines::rLegLine = nullptr;
-ID3DXLine* DXLines::lLegLine = nullptr;
-ID3DXLine* DXLines::rArmLine = nullptr;
-ID3DXLine* DXLines::lArmLine = nullptr;
-
-ID3DXLine* DXLines::HealthBarLine = nullptr;
-ID3DXLine* DXLines::ArmorBarLine = nullptr;
-
-IDirect3DTexture9* tImage = nullptr;
-
-LPD3DXFONT m_font = NULL;
-LPD3DXFONT weapon_font = NULL;
-
 EndScene oEndScene = NULL;
-WNDPROC oWndProc;
-
-static HWND window = NULL;
+WNDPROC oWndProc   = NULL;
 
 typedef void(_stdcall* FrameStageNotify)(ClientFrameStage_t Stage);
 typedef void* (__cdecl* tCreateInterface)(const char* name, int* returnCode);
@@ -42,58 +22,30 @@ void* GetInterface(const char* dllname, const char* interfacename)
 	return xinterface;
 }
 
-void InitImGui(LPDIRECT3DDEVICE9 pDevice)
-{
-	ImGui::CreateContext();
-
-	D3DDEVICE_CREATION_PARAMETERS CP;
-	pDevice->GetCreationParameters(&CP);
-	window = CP.hFocusWindow;
-
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.Fonts->AddFontDefault();
-	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
-	
-	D3DVIEWPORT9 viewport;
-	viewport.Width = io.DisplaySize.x;
-	viewport.Height = io.DisplaySize.y;
-	viewport.MinZ = 0.0f;
-	viewport.MaxZ = 1.0f;
-	viewport.X = 0.0f;
-	viewport.Y = 0.0f;
-	pDevice->SetViewport(&viewport);
-
-	D3DXCreateFont(pDevice, 18, 7, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &m_font);
-	D3DXCreateFont(pDevice, 17, 7, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &weapon_font);
-
-	ImGui_ImplWin32_Init(window);
-	ImGui_ImplDX9_Init(pDevice);
-
-	return;
-}
-
 HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
-	if (!config::ImGui_Init)
+	if (!hackstate::ImGui_Init)
 	{
-		InitImGui(pDevice);
-		Hack.SetCustomImGuiStyle();
-		Hack.InitLines(pDevice);
+		dImGui.pDevice  = pDevice;
+		mDevice.pDevice = pDevice;
 
-		config::ImGui_Init = true;
+		dImGui.Init();
+		dImGui.SetCustomStyle();
+
+		mDevice.InitFonts();
+		mDevice.InitLines();
+
+		hackstate::ImGui_Init = TRUE;
 	}
 
 	if (GetAsyncKeyState(config::HotKeys::Menu) & 1)
-		config::MenuActive = !config::MenuActive;
+		hackstate::MenuActive = !hackstate::MenuActive;
 
-	if (config::MenuActive)
-		Hack.MenuThread();
+	if (hackstate::MenuActive)
+		dImGui.Draw();
 
-	if (config::WallHackESP)
+	if (config::hack::WallHackESP)
 		Hack.DXESPThread();
-
-	if (config::esp::ESPBones)
-		Hack.ESPDrawBonesThread();
 
 	return oEndScene(pDevice);
 }
@@ -117,25 +69,6 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
-BOOL CALLBACK EnumWindowsCallback(HWND handle, LPARAM lParam)
-{
-	DWORD wndProcId;
-	GetWindowThreadProcessId(handle, &wndProcId);
-
-	if (GetCurrentProcessId() != wndProcId)
-		return TRUE;
-
-	window = handle;
-	return FALSE;
-}
-
-HWND GetProcessWindow()
-{
-	window = NULL;
-	EnumWindows(EnumWindowsCallback, NULL);
-	return window;
-}
-
 DWORD WINAPI InitVMTHook(HMODULE hModule)
 {
 	void* _Client = GetInterface("client.dll", "VClient018");
@@ -156,41 +89,30 @@ DWORD WINAPI KieroInit(HMODULE hModule)
 			kiero::bind(42, (void**)&oEndScene, hkEndScene);
 
 			do {
-				window = GetProcessWindow();
-			} while (window == NULL);
+				mDevice.Window = mDevice.GetProcessWindow();
+			} while (mDevice.Window == NULL);
 
-			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWL_WNDPROC, (LONG_PTR)WndProc);
-			config::ImGui_Attached = true;
+			oWndProc = (WNDPROC)SetWindowLongPtr(mDevice.Window, GWL_WNDPROC, (LONG_PTR)WndProc);
+			hackstate::ImGui_Attached = TRUE;
 		}
-	} while (!config::ImGui_Attached);
+	} while (!hackstate::ImGui_Attached);
 
 	return TRUE;
 }
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {	
-	FILE* pFile = nullptr;
-	
-	if (config::console)
-		pFile = Console.Init();
-
-    while (!GetAsyncKeyState(config::HotKeys::End))
-    {
+	while (!GetAsyncKeyState(config::HotKeys::End))
+	{
 		Hack.MainThread();
-
-		if (config::MainThreadDelay > 1 && config::FPSMode)
-			Sleep(config::MainThreadDelay);
-    }
-
+	}
+		
 	kiero::shutdown();
-	
-	if (config::console && pFile != nullptr)
-		Console.Release(pFile);
 
     FreeLibraryAndExitThread(hModule, 0);
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, uintptr_t ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{

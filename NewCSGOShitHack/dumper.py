@@ -46,15 +46,15 @@ def main():
 
     for val in res["signatures"]:
         if mode == "update":
-            result_file += tab + "const DWORD " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
+            result_file += tab + "const uintptr_t " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
         elif mode == "reset":
-            result_file += tab + "const DWORD " + val + ";\n"
+            result_file += tab + "const uintptr_t " + val + ";\n"
 
     for val in res["netvars"]:
         if mode == "update":
-            result_file += tab + "const DWORD " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
+            result_file += tab + "const uintptr_t " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
         elif mode == "reset":
-            result_file += tab + "const DWORD " + val + ";\n"
+            result_file += tab + "const uintptr_t " + val + ";\n"
 
     result_file += "}"
 

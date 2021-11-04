@@ -1,8 +1,6 @@
 #include "includes.h"
 # define M_PI           3.14159265358979323846
 
-float USER_COMP_CFG[100];
-
 Vec3 Subtract(Vec3 src, Vec3 dst)
 {
 	Vec3 diff;
@@ -51,8 +49,8 @@ Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig)
 	delta.x = orig.x - dest.x;
 	delta.y = orig.y - dest.y;
 
-	dest.x = orig.x - delta.x / (5.f * config::SmoothStep);
-	dest.y = orig.y - delta.y / (5.f * config::SmoothStep);
+	dest.x = orig.x - delta.x / (5.f * config::aimbot::SmoothVal);
+	dest.y = orig.y - delta.y / (5.f * config::aimbot::SmoothVal);
 
 	return dest;
 }
@@ -90,27 +88,25 @@ float Distance(Vec3 src, Vec3 dst)
 	return Magnitude(diff);
 }
 
-DWORD GetBestTarget()
+uintptr_t GetBestTarget()
 {
-	DWORD Target = NULL;
+	uintptr_t Target = NULL;
 
 	float OldDiff = FLT_MAX;
 	float NewDiff = 0;
 
-	DWORD LocalPlayer = *(DWORD*)(Game.GetClient() + offsets::dwLocalPlayer);
-	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
+	uintptr_t LocalPlayer = *(uintptr_t*)(CLIENT + offsets::dwLocalPlayer);
 
 	for (int i = 1; i < 64; i++)
 	{
-		DWORD Entity = *(DWORD*)(Game.GetClient() + offsets::dwEntityList + i * constVars.PlayerStructSize);
+		uintptr_t Entity = *(uintptr_t*)(CLIENT + offsets::dwEntityList + i * cVars::PlayerStructSize);
 
 		if (!Entity)
 			continue;
 
 		int EntityTeam = *(int*)(Entity + offsets::m_iTeamNum);
-		int LocalPlayerTeam = *(int*)(LocalPlayer + offsets::m_iTeamNum);
 
-		if (EntityTeam == LocalPlayerTeam)
+		if (EntityTeam == lPlayer.TeamNum())
 			continue;
 
 		int EntityHealth = *(int*)(Entity + offsets::m_iHealth);
@@ -121,15 +117,11 @@ DWORD GetBestTarget()
 		int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
 		int SpottedByMask = *(int*)(Entity + offsets::m_bSpottedByMask);
 
-		if (!(SpottedByMask & (1 << CrosshairID)) && config::AimLegitMode)
+		if (!(SpottedByMask & (1 << CrosshairID)) && config::aimbot::LegitMode)
 			continue;
 
-		// if health is less than a certain threshold, then the aimbot will automatically select this player
-		if (config::HealthTreshold && EntityHealth <= config::HealthTresholdVal && !Target)
-			return Entity;
-
-		Vec3 EntHeadPos = Game.GetPlayerBonePos(Entity, constVars.HeadBone);
-		Vec3 LocalPos = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
+		Vec3 EntHeadPos = Engine.GetPlayerBonePos(Entity, cVars::HeadBone);
+		Vec3 LocalPos = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntHeadPos);
 
@@ -146,33 +138,20 @@ DWORD GetBestTarget()
 
 void HACK::AimBotThread()
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-	DWORD ClientState = *(DWORD*)(Game.GetEngine() + offsets::dwClientState);
-	DWORD Entity = GetBestTarget();
+	uintptr_t Entity = GetBestTarget();
 
 	if (Entity != NULL)
 	{	
-		Vec3 LocalPos = *(Vec3*)(LocalPlayer + offsets::m_vecOrigin);
-		Vec3 EntPos = Game.GetPlayerBonePos(Entity, config::TargetBonePos);
-		LocalPos.z += *(float*)(LocalPlayer + offsets::m_vecViewOffset + 0x8);
+		Vec3 LocalPos = *(Vec3*)(LOCALPLAYER + offsets::m_vecOrigin);
+		Vec3 EntPos = Engine.GetPlayerBonePos(Entity, config::aimbot::TargetBonePos);
+		LocalPos.z += *(float*)(LOCALPLAYER + offsets::m_vecViewOffset + 0x8);
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
 		
-		if (config::SmoothAimBot)
-			AngleTo = CalcSmoothAngle(LocalPos, EntPos);
-		
-		Vec3 ViewAngles = *(Vec3*)(ClientState + offsets::dwClientState_ViewAngles);
+		Vec3 ViewAngles = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		if (!config::SmoothAimBot)
-			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = newAngles;
-		else
-			*(Vec3*)(ClientState + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
-
-		if (config::TriggerBotInAimBot)
-		{
-			TriggerBotThread();
-		}
+		*(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
 	}
 }

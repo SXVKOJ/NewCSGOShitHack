@@ -43,9 +43,9 @@ public:
     int                m_ClassID;
 };
 
-DWORD GetAllClassesOffset()
+uintptr_t GetAllClassesOffset()
 {
-    DWORD Offset = Mem.FindPattern((char*)"cliend.dll", (char*)"A1 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC A1 ? ? ? ? B9", (char*)"xxxxxxxxxxxxxxxxxxxxxx");
+    uintptr_t Offset = Mem.FindPattern((char*)"cliend.dll", (char*)"A1 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC A1 ? ? ? ? B9", (char*)"xxxxxxxxxxxxxxxxxxxxxx");
 }
 
 MODULEINFO MEM::GetModuleInfo(char * szModule)
@@ -87,14 +87,14 @@ char* MEM::SigScan(char* pattern, char* mask, char* begin, unsigned int size)
     return nullptr;
 }
 
-DWORD MEM::FindPattern(char* base, char* pattern, char* mask)
+uintptr_t MEM::FindPattern(char* base, char* pattern, char* mask)
 {
     size_t patternLength = strlen(mask);
 
     MODULEINFO mInfo = GetModuleInfo(base);
 
-    DWORD base = (DWORD)mInfo.lpBaseOfDll;
-    DWORD size = (DWORD)mInfo.SizeOfImage;
+    uintptr_t base = (uintptr_t)mInfo.lpBaseOfDll;
+    uintptr_t size = (uintptr_t)mInfo.SizeOfImage;
 
     for (uintptr_t i = 0; i < size - patternLength; i++)
     {
@@ -110,13 +110,13 @@ DWORD MEM::FindPattern(char* base, char* pattern, char* mask)
 
         if (found)
         {
-            return (DWORD)base + i;
+            return (uintptr_t)base + i;
         }
     }
     return 0;
 }
 
-DWORD GetOffset(RecvTable* table, const char* tableName, const char* netvarName)
+uintptr_t GetOffset(RecvTable* table, const char* tableName, const char* netvarName)
 {
     for (int i = 0; i < table->m_nProps; i++)
     {
@@ -129,7 +129,7 @@ DWORD GetOffset(RecvTable* table, const char* tableName, const char* netvarName)
 
         if (prop.m_pDataTable)
         {
-            DWORD offset = GetOffset(prop.m_pDataTable, tableName, netvarName);
+            uintptr_t offset = GetOffset(prop.m_pDataTable, tableName, netvarName);
 
             if (offset)
             {
@@ -140,7 +140,7 @@ DWORD GetOffset(RecvTable* table, const char* tableName, const char* netvarName)
     return 0;
 }
 
-DWORD GetNetVarOffset(const char* tableName, const char* netvarName, ClientClass* clientClass)
+uintptr_t GetNetVarOffset(const char* tableName, const char* netvarName, ClientClass* clientClass)
 {
     ClientClass* currNode = clientClass;
 

@@ -48,10 +48,7 @@
     <ClCompile Include="HackFunc.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Console.cpp">
+    <ClCompile Include="EngineFunctions.cpp">
       <Filter>Исходные файлы\Main</Filter>
     </ClCompile>
     <ClCompile Include="BHOP.cpp">
@@ -90,13 +87,10 @@
     <ClCompile Include="kiero\minhook\src\hde\hde64.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
-    <ClCompile Include="ImGuiTheme.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
     <ClCompile Include="FovChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
+    <ClCompile Include="DearImGui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="DXESP.cpp">
@@ -126,9 +120,6 @@
     <ClCompile Include="SpinBot.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="ESPBones.cpp">
-      <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
     <ClCompile Include="SkinChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
@@ -141,11 +132,14 @@
     <ClCompile Include="kiero\minhook\src\buffer.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
+    <ClCompile Include="VarsDefinition.cpp">
+      <Filter>Исходные файлы\config</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceFunc.cpp">
+      <Filter>Исходные файлы\DXShit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="offsets.hpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="mem.h">
       <Filter>Исходные файлы\mem</Filter>
     </ClInclude>
@@ -158,7 +152,7 @@
     <ClInclude Include="constVars.hpp">
       <Filter>Исходные файлы\config</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="fEngine.h">
       <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
     <ClInclude Include="includes.h">
@@ -191,9 +185,6 @@
     <ClInclude Include="kiero\kiero.h">
       <Filter>Исходные файлы\hook</Filter>
     </ClInclude>
-    <ClInclude Include="image.hpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClInclude>
     <ClInclude Include="weapons.h">
       <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
@@ -202,6 +193,18 @@
     </ClInclude>
     <ClInclude Include="HackFunc.h">
       <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="offsets.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.hpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DearImGui.h">
+      <Filter>imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

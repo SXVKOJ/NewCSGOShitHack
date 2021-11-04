@@ -2,14 +2,10 @@
 
 void HACK::NeonESPThread()
 {
-	DWORD LocalPlayer = Game.GetLocalPlayer();
-
-	int LocalPlayerTeam = *(int*)(LocalPlayer + offsets::m_iTeamNum);
-
 	for (int i = 1; i < 64; i++)
 	{
-		DWORD Entity = *(DWORD*)(Game.GetClient() + offsets::dwEntityList + i * constVars.PlayerStructSize);
-		DWORD GlowManager = *(DWORD*)(Game.GetClient() + offsets::dwGlowObjectManager);
+		uintptr_t Entity = *(uintptr_t*)(CLIENT + offsets::dwEntityList + i * cVars::PlayerStructSize);
+		uintptr_t GlowManager = *(uintptr_t*)(CLIENT + offsets::dwGlowObjectManager);
 
 		if (!Entity)
 			continue;
@@ -21,22 +17,22 @@ void HACK::NeonESPThread()
 		if (EntHealth <= 0)
 			continue;
 
-		if (EntTeam == LocalPlayerTeam)
+		if (EntTeam == lPlayer.TeamNum())
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::LT_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::LT_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::LT_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::colors::LT_GLOW[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::colors::LT_GLOW[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::colors::LT_GLOW[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 		else
 		{
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::ET_NEONESP[0];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::ET_NEONESP[1];
-			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::ET_NEONESP[2];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x8) = config::esp::colors::ET_GLOW[0];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0xC) = config::esp::colors::ET_GLOW[1];
+			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x10) = config::esp::colors::ET_GLOW[2];
 			*(float*)(GlowManager + (GlowIndex * 0x38) + 0x14) = 1.7;
 		}
 
-		*(bool*)(GlowManager + (GlowIndex * 0x38) + 0x28) = true;
-		*(bool*)(GlowManager + (GlowIndex * 0x38) + 0x29) = false;
+		*(bool*)(GlowManager + (GlowIndex * 0x38) + 0x28) = TRUE;
+		*(bool*)(GlowManager + (GlowIndex * 0x38) + 0x29) = FALSE;
 	}
 }

@@ -1,9 +1,10 @@
-static std::vector<std::string> WeaponNames = {
+static const std::vector<std::string> WeaponNames = {
+            "NONE", // NULL INDEX
     "DEAGLE",
     "BERETTAS",
     "FIVESEVEN",
     "GLOCK",
-            "NONE",
+            "NONE", // indent
             "NONE",
     "AK-47",
     "AUG",
@@ -40,9 +41,8 @@ static std::vector<std::string> WeaponNames = {
     "SG553",
     "SSG",
             "NONE",
-    
     "KNIFE CT",
-            "NONE",
+            "NONE", // 43 - 59
             "NONE",
             "NONE",
             "NONE",
@@ -62,7 +62,6 @@ static std::vector<std::string> WeaponNames = {
     "KNIFE T",
     "M4A1",
     "USP",
-            "NONE",
     "CZ75",
     "REVOLVER",
 };
@@ -126,22 +125,3 @@ enum AllWeaponsIDs: int
     WEAPON_KNIFE_TALON = 523,
     WEAPON_KNIFE_SKELETON = 525,
 };
-
-typedef struct player_info_s {
-private:
-    DWORD __pad0[2];
-public:
-    int m_nXuidLow;
-    int m_nXuidHigh;
-    char m_szPlayerName[128];
-    int m_nUserID;
-    char m_szSteamID[33];
-    UINT m_nSteam3ID;
-    char m_szFriendsName[128];
-    bool m_bIsFakePlayer;
-    bool m_bIsHLTV;
-    DWORD m_dwCustomFiles[4];
-    BYTE m_FilesDownloaded;
-private:
-    int __pad1;
-} player_info_t;
