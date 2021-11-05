@@ -72,21 +72,6 @@
     <ClCompile Include="NoFlash.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
-    <ClCompile Include="kiero\kiero.cpp">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="kiero\minhook\src\hook.c">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="kiero\minhook\src\trampoline.c">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="kiero\minhook\src\hde\hde32.c">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="kiero\minhook\src\hde\hde64.c">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClCompile>
     <ClCompile Include="FovChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
@@ -97,6 +82,24 @@
       <Filter>Исходные файлы\Hack</Filter>
     </ClCompile>
     <ClCompile Include="DXFunc.cpp">
+      <Filter>Исходные файлы\DXShit</Filter>
+    </ClCompile>
+    <ClCompile Include="SpinBot.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinChanger.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="myhook.cpp">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="AimAssistance.cpp">
+      <Filter>Исходные файлы\Hack</Filter>
+    </ClCompile>
+    <ClCompile Include="VarsDefinition.cpp">
+      <Filter>Исходные файлы\config</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceFunc.cpp">
       <Filter>Исходные файлы\DXShit</Filter>
     </ClCompile>
     <ClCompile Include="dear_imgui\imgui.cpp">
@@ -117,26 +120,23 @@
     <ClCompile Include="dear_imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="SpinBot.cpp">
-      <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinChanger.cpp">
-      <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
-    <ClCompile Include="myhook.cpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="AimAssistance.cpp">
-      <Filter>Исходные файлы\Hack</Filter>
+    <ClCompile Include="kiero\kiero.cpp">
+      <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
     <ClCompile Include="kiero\minhook\src\buffer.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
-    <ClCompile Include="VarsDefinition.cpp">
-      <Filter>Исходные файлы\config</Filter>
+    <ClCompile Include="kiero\minhook\src\hook.c">
+      <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceFunc.cpp">
-      <Filter>Исходные файлы\DXShit</Filter>
+    <ClCompile Include="kiero\minhook\src\trampoline.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\hde\hde32.c">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero\minhook\src\hde\hde64.c">
+      <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,33 +158,6 @@
     <ClInclude Include="includes.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="kiero\minhook\src\hde\hde32.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\hde\hde64.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\hde\pstdint.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\hde\table32.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\hde\table64.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\buffer.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\src\trampoline.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\minhook\include\MinHook.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="kiero\kiero.h">
-      <Filter>Исходные файлы\hook</Filter>
-    </ClInclude>
     <ClInclude Include="weapons.h">
       <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
@@ -205,6 +178,27 @@
     </ClInclude>
     <ClInclude Include="DearImGui.h">
       <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\buffer.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\trampoline.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\hde\hde32.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\hde\hde64.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\hde\pstdint.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\hde\table32.h">
+      <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="kiero\minhook\src\hde\table64.h">
+      <Filter>Исходные файлы\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

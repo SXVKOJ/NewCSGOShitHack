@@ -7,9 +7,12 @@
 static class LocalPlayer
 {
 public:
-	VOID Shoot()
+	VOID Shoot(uintptr_t &Entity)
 	{
 		uintptr_t client = CLIENT;
+
+		FLOAT DISTANCE = Engine.GetDistance(Entity);
+		Sleep(Engine.CalcTriggerBotDelay(DISTANCE));
 
 		*(int*)(client + offsets::dwForceAttack) = cVars::Flags::Active;
 		Sleep(20);
@@ -30,9 +33,13 @@ public:
 		int weapon = *(int*)(LOCALPLAYER + offsets::m_hActiveWeapon);
 		int weaponEnt = *(int*)(CLIENT + offsets::dwEntityList + ((weapon & 0xFFF) - 1) * 0x10);
 
-		short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
+		if (weaponEnt)
+		{
+			short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
 
-		return weaponID;
+			return weaponID;
+		}
+		return NULL;
 	}
 
 	Vec3 Velocity()
@@ -52,22 +59,22 @@ public:
 	
 	int Health()
 	{
-		return *(__int32*)(LOCALPLAYER + offsets::m_iHealth);
+		return *(int*)(LOCALPLAYER + offsets::m_iHealth);
 	}
 
 	int TeamNum()
 	{
-		return *(__int32*)(LOCALPLAYER + offsets::m_iTeamNum);
+		return *(int*)(LOCALPLAYER + offsets::m_iTeamNum);
 	}
 
 	int Armor()
 	{
-		return *(__int32*)(LOCALPLAYER + offsets::m_ArmorValue);
+		return *(int*)(LOCALPLAYER + offsets::m_ArmorValue);
 	}
 
-	BYTE Flags()
+	int Flags()
 	{
-		return *(BYTE*)(LOCALPLAYER + offsets::m_fFlags);
+		return *(int*)(LOCALPLAYER + offsets::m_fFlags);
 	}
 
 	BOOL isDead()

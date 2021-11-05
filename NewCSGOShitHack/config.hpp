@@ -99,6 +99,7 @@ namespace config
 		extern bool Lines;
 		extern bool ShowNames;
 		extern bool ShowWeapon;
+		extern bool HealthNum;
 
 		namespace bar
 		{

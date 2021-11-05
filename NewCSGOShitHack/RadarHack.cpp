@@ -10,9 +10,8 @@ void HACK::RadarHackThread()
 			continue;
 
 		int EntityTeam = *(int*)(Entity + offsets::m_iTeamNum);
-		int LocalPlayerTeam = *(int*)(LOCALPLAYER + offsets::m_iTeamNum);
 
-		if (EntityTeam == LocalPlayerTeam)
+		if (EntityTeam == lPlayer.TeamNum())
 			continue;
 
 		int EntityHealth = *(int*)(Entity + offsets::m_iHealth);

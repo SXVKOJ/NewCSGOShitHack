@@ -2,7 +2,7 @@
 
 void HACK::MainThread()
 {
-	if (config::hack::Bhop && GetAsyncKeyState(VK_SPACE))
+	if (GetAsyncKeyState(VK_SPACE) && config::hack::Bhop)
 		Hack.BhopThread();
 
 	if (config::hack::NeonWallHack)

@@ -99,7 +99,7 @@ void DearImGui::Draw()
 			CurrTab = 3;
 	}
 	
-	if (true)
+	if (TRUE)
 	{
 		if (CurrTab == 0) 
 		{ /*     Main   */
@@ -275,12 +275,7 @@ void DearImGui::Draw()
 				{
 					ImGui::SameLine();
 					ImGui::InputInt("st val", &config::SkinChanger::StatTrackVal, 1, 20);
-				}			
-				if (ImGui::RadioButton("Custom Weapon Name", config::SkinChanger::CustomName))
-					config::SkinChanger::CustomName = !config::SkinChanger::CustomName;
-
-				if (config::SkinChanger::CustomName)
-					ImGui::InputText("wName", config::SkinChanger::szCustomName, sizeof(config::SkinChanger::szCustomName));
+				}
 			
 				ImGui::SliderFloat("skin wear", &config::SkinChanger::wear, 0.f, 1.f);
 				ImGui::InputInt("Weapon ID", &config::SkinChanger::CurrentWeaponID, 1, 30);

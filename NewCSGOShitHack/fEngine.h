@@ -2,6 +2,23 @@
 #include <Windows.h>
 #include "Vector.h"
 
+namespace dx
+{
+	namespace fonts
+	{
+		extern LPD3DXFONT health_font;
+		extern LPD3DXFONT weapon_font;
+
+	}
+	namespace lines
+	{
+		extern ID3DXLine* espLine;
+		extern ID3DXLine* espBoxLine;
+		extern ID3DXLine* HealthBarLine;
+		extern ID3DXLine* ArmorBarLine;
+	}
+}
+
 static struct myDevice
 {
 public:
@@ -14,21 +31,6 @@ public:
 	VOID DrawBox(float x, float y, float w, float h, float px, D3DCOLOR color);
 	VOID DrawLine(ID3DXLine* _Line, float x1, float y1, float x2, float y2, float width, bool antialias, D3DCOLOR color);
 	VOID DrawMessage(LPD3DXFONT& font, unsigned int x, unsigned int y, D3DCOLOR color, LPCSTR Message);
-
-	LPD3DXFONT health_font;
-	LPD3DXFONT weapon_font;
-
-	ID3DXLine* espLine;
-	ID3DXLine* espBoxLine;
-
-	ID3DXLine* BodyLine;
-	ID3DXLine* rLegLine;
-	ID3DXLine* lLegLine;
-	ID3DXLine* rArmLine;
-	ID3DXLine* lArmLine;
-
-	ID3DXLine* HealthBarLine;
-	ID3DXLine* ArmorBarLine;
 
 	HWND Window;
 	HWND GetProcessWindow();

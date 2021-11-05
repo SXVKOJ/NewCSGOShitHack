@@ -11,18 +11,18 @@ void HACK::TriggerBotThread()
 		int EntityTeam = *(int*)(Entity + offsets::m_iTeamNum);
 		short CurrentWeapon = lPlayer.GetCurrentWeapon();
 
-		if (lPlayer.TeamNum() != EntityTeam)
+		if (EntityTeam != lPlayer.TeamNum())
 		{
 			if (Engine.IsSniperWeapon(CurrentWeapon))
 			{
 				if (lPlayer.CheckIfScoped())
 				{
-					lPlayer.Shoot();
+					lPlayer.Shoot(Entity);
 					Sleep(config::aimbot::SniperWeaponTriggerBotCooldown);
 				}
 			}
 			else
-				lPlayer.Shoot();
+				lPlayer.Shoot(Entity);
 		}
 	}
 }

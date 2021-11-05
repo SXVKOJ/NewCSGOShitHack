@@ -171,13 +171,13 @@
     <ClCompile Include="FovChanger.cpp" />
     <ClCompile Include="EngineFunctions.cpp" />
     <ClCompile Include="HackFunc.cpp" />
-    <ClCompile Include="myhook.cpp" />
     <ClCompile Include="kiero\kiero.cpp" />
     <ClCompile Include="kiero\minhook\src\buffer.c" />
     <ClCompile Include="kiero\minhook\src\hde\hde32.c" />
     <ClCompile Include="kiero\minhook\src\hde\hde64.c" />
     <ClCompile Include="kiero\minhook\src\hook.c" />
     <ClCompile Include="kiero\minhook\src\trampoline.c" />
+    <ClCompile Include="myhook.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="DearImGui.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
@@ -198,8 +198,6 @@
     <ClInclude Include="fEngine.h" />
     <ClInclude Include="HackFunc.h" />
     <ClInclude Include="includes.h" />
-    <ClInclude Include="kiero\kiero.h" />
-    <ClInclude Include="kiero\minhook\include\MinHook.h" />
     <ClInclude Include="kiero\minhook\src\buffer.h" />
     <ClInclude Include="kiero\minhook\src\hde\hde32.h" />
     <ClInclude Include="kiero\minhook\src\hde\hde64.h" />

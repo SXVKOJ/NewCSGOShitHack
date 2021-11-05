@@ -2,16 +2,14 @@
 
 // cVars
 int cVars::Flags::OnGround = 257;
-int cVars::Flags::Active	  = 5;
+int cVars::Flags::Active   = 5;
 int cVars::Flags::InActive = 4;
 int cVars::Flags::ON       = 1;
 int cVars::Flags::OFF      = 0;
-
 int cVars::WallHack::posTop    = 0;
 int cVars::WallHack::posLeft   = 1;
 int cVars::WallHack::posBottom = 2;
 int cVars::WallHack::posRight  = 3;
-
 int cVars::PlayerStructSize = 0x10;
 int cVars::HeadBone = 8;
 // menu
@@ -59,34 +57,29 @@ float	config::SkinChanger::wear = 0.000001;
 int config::HotKeys::AimBot = 18;
 int config::HotKeys::End = VK_END;
 int config::HotKeys::Menu = VK_HOME;
-
-int config::esp::box::Width = 3;
-int config::esp::line::Width = 1;
-
-float config::esp::colors::LT_GLOW[3] = { 0, 1, 1 };
-float config::esp::colors::ET_GLOW[3] = { 1, 0, 1 };
-float config::esp::colors::ET_ESP[3] = { 0, 1, 1 };
-float config::esp::colors::HealthColor[3] = { 1, 0, 1 };
-
-bool config::esp::HealthBar = TRUE;
-bool config::esp::ArmorBar = TRUE;
-bool config::esp::Boxes = TRUE;
-bool config::esp::Lines = TRUE;
-bool config::esp::ShowNames = FALSE;
-bool config::esp::ShowWeapon = TRUE;
-
-int config::esp::bar::offset_x = -25;
-int config::esp::bar::offset_y = 0;
-int config::esp::bar::BarsPos = 1;        // 0 - top, 1 - left, 2 - bottom, 3 - right
-
+// ESP
+int		config::esp::box::Width = 3;
+int		config::esp::line::Width = 1;
+float	config::esp::colors::LT_GLOW[3] = { 0, 1, 1 };
+float	config::esp::colors::ET_GLOW[3] = { 1, 0, 1 };
+float	config::esp::colors::ET_ESP[3] = { 0, 1, 1 };
+float	config::esp::colors::HealthColor[3] = { 1, 0, 1 };
+bool	config::esp::HealthBar = FALSE;
+bool	config::esp::HealthNum = FALSE;
+bool	config::esp::ArmorBar = FALSE;
+bool	config::esp::Boxes = TRUE;
+bool	config::esp::Lines = TRUE;
+bool	config::esp::ShowNames = FALSE;
+bool	config::esp::ShowWeapon = FALSE;
+int		config::esp::bar::offset_x = -25;
+int		config::esp::bar::offset_y = 0;
+int		config::esp::bar::BarsPos = 1;        // 0 - top, 1 - left, 2 - bottom, 3 - right
 int		config::esp::weapon::offset_x = 16;
 int		config::esp::weapon::offset_y = 0;
 bool	config::esp::weapon::custom_color = FALSE;
 float	config::esp::weapon::color[3] = { 1, 0, 1 };
-
 // hackstate
-
 bool hackstate::ImGui_Init = FALSE;
 bool hackstate::ImGui_Attached = FALSE;
 bool hackstate::AimBotActive = FALSE;
-bool hackstate::MenuActive = TRUE;
+bool hackstate::MenuActive = FALSE;

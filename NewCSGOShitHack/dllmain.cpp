@@ -26,7 +26,7 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
 	if (!hackstate::ImGui_Init)
 	{
-		dImGui.pDevice  = pDevice;
+		dImGui.pDevice = pDevice;
 		mDevice.pDevice = pDevice;
 
 		dImGui.Init();
@@ -60,7 +60,6 @@ void __stdcall hkFrameStageNotify(ClientFrameStage_t Stage)
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-
 	ImGuiIO& io = ImGui::GetIO();
 
 	if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
@@ -103,27 +102,24 @@ DWORD WINAPI KieroInit(HMODULE hModule)
 DWORD WINAPI MainThread(HMODULE hModule)
 {	
 	while (!GetAsyncKeyState(config::HotKeys::End))
-	{
 		Hack.MainThread();
-	}
 		
 	kiero::shutdown();
 
     FreeLibraryAndExitThread(hModule, 0);
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, uintptr_t ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
-		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)InitVMTHook, hModule, NULL, NULL));
-		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)KieroInit, hModule, NULL, NULL));
-		CloseHandle(CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL));
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)InitVMTHook, hModule, NULL, NULL);
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)KieroInit, hModule, NULL, NULL);
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL);
 	case DLL_PROCESS_DETACH:
 		kiero::shutdown();
-		break;
 	}
 
     return TRUE;

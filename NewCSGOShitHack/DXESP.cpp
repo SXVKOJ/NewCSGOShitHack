@@ -12,10 +12,10 @@ void HACK::DXESPThread()
     {
         uintptr_t Entity = *(uintptr_t*)(CLIENT + offsets::dwEntityList + i * cVars::PlayerStructSize);
 
-        if (!Entity)
+        if (Entity != NULL)
             continue;
 
-        int EntDormant = *(int*)(Entity + offsets::m_bDormant);
+        bool EntDormant = *(bool*)(Entity + offsets::m_bDormant);
 
         if (EntDormant)
             continue;
@@ -43,18 +43,36 @@ void HACK::DXESPThread()
         float boxHeight = abs(Head2Screen.y - Entity2Screen.y);
         float boxWidth = boxHeight / 2;
 
-        mDevice.DrawBox(Entity2Screen.x - boxWidth / 2, Head2Screen.y, boxWidth, boxHeight, config::esp::box::Width, D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
-                                                                                                                                         config::esp::colors::ET_ESP[1],
-                                                                                                                                         config::esp::colors::ET_ESP[2], 1));
+        if (config::esp::Boxes)
+        {
+            mDevice.DrawBox(Entity2Screen.x - boxWidth / 2,
+                Head2Screen.y,
+                boxWidth,
+                boxHeight,
+                config::esp::box::Width,
+                D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
+                                    config::esp::colors::ET_ESP[1],
+                                    config::esp::colors::ET_ESP[2], 1));
+        }
+        
         if (config::esp::Lines)
-            mDevice.DrawLine(mDevice.espLine, mWindowX, mWindowY, Entity2Screen.x, Entity2Screen.y, config::esp::line::Width, true, D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
-                                                                                                                                                        config::esp::colors::ET_ESP[1],                                                                                                                                                 config::esp::colors::ET_ESP[2], 1));
-
-        if (config::esp::HealthBar)
+        {
+            mDevice.DrawLine(dx::lines::espLine,
+                mWindowX,
+                mWindowY,
+                Entity2Screen.x,
+                Entity2Screen.y,
+                config::esp::line::Width,
+                true, D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
+                                          config::esp::colors::ET_ESP[1],
+                                          config::esp::colors::ET_ESP[2], 1));
+        }
+            
+        if (config::esp::HealthNum)
         {
             using namespace config::esp::bar;
 
-            mDevice.DrawMessage(mDevice.health_font,
+            mDevice.DrawMessage(dx::fonts::health_font,
                 Entity2Screen.x + offset_x - (boxWidth / 2),
                 Entity2Screen.y - boxHeight - 35 - offset_y,
                 D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
@@ -67,7 +85,7 @@ void HACK::DXESPThread()
         {
             using namespace config::esp::weapon;
 
-            mDevice.DrawMessage(mDevice.weapon_font,
+            mDevice.DrawMessage(dx::fonts::weapon_font,
                 Entity2Screen.x + offset_x,
                 Entity2Screen.y - boxHeight - 35 - offset_y,
                 D3DCOLOR_COLORVALUE(config::esp::colors::ET_ESP[0],
@@ -98,7 +116,7 @@ void HACK::DXESPThread()
             {
                 if (config::esp::bar::BarsPos == cVars::WallHack::posLeft)
                 {
-                    mDevice.DrawLine(mDevice.HealthBarLine,
+                    mDevice.DrawLine(dx::lines::HealthBarLine,
                         HealthBarX - HealthBarOffsetX - 8,
                         HealthBarY,
                         HealthBarX - HealthBarOffsetX - 8,
@@ -107,7 +125,7 @@ void HACK::DXESPThread()
                 }    
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posTop)
                 {
-                    mDevice.DrawLine(mDevice.HealthBarLine,
+                    mDevice.DrawLine(dx::lines::HealthBarLine,
                         HealthBarX,
                         HealthBarY - boxHeight - HealthBarOffsetY,
                         HealthBarX - (((HealthBarX - (HealthBarX + boxWidth)) / 100) * EntHealth),
@@ -116,7 +134,7 @@ void HACK::DXESPThread()
                 }
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posRight)
                 {
-                    mDevice.DrawLine(mDevice.HealthBarLine,
+                    mDevice.DrawLine(dx::lines::HealthBarLine,
                         HealthBarX + boxWidth + 8,
                         HealthBarY,
                         HealthBarX + boxWidth + 8,
@@ -125,7 +143,7 @@ void HACK::DXESPThread()
                 }
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posBottom)
                 {
-                    mDevice.DrawLine(mDevice.HealthBarLine,
+                    mDevice.DrawLine(dx::lines::HealthBarLine,
                         HealthBarX,
                         HealthBarY,
                         HealthBarX - (((HealthBarX - (HealthBarX + boxWidth)) / 100) * EntHealth),
@@ -138,7 +156,7 @@ void HACK::DXESPThread()
             {
                 if (config::esp::bar::BarsPos == cVars::WallHack::posLeft)
                 {
-                    mDevice.DrawLine(mDevice.ArmorBarLine,
+                    mDevice.DrawLine(dx::lines::ArmorBarLine,
                         HealthBarX - 8,
                         HealthBarY,
                         HealthBarX - 8,
@@ -147,7 +165,7 @@ void HACK::DXESPThread()
                 }
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posTop)
                 {
-                    mDevice.DrawLine(mDevice.ArmorBarLine,
+                    mDevice.DrawLine(dx::lines::ArmorBarLine,
                         HealthBarX,
                         HealthBarY - boxHeight,
                         HealthBarX - (((HealthBarX - (HealthBarX + boxWidth)) / 100) * EntityArmor),
@@ -156,7 +174,7 @@ void HACK::DXESPThread()
                 }
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posRight)
                 {
-                    mDevice.DrawLine(mDevice.ArmorBarLine,
+                    mDevice.DrawLine(dx::lines::ArmorBarLine,
                         HealthBarX + boxWidth,
                         HealthBarY,
                         HealthBarX + boxWidth,
@@ -165,7 +183,7 @@ void HACK::DXESPThread()
                 }
                 else if (config::esp::bar::BarsPos == cVars::WallHack::posBottom)
                 {
-                    mDevice.DrawLine(mDevice.ArmorBarLine,
+                    mDevice.DrawLine(dx::lines::ArmorBarLine,
                         HealthBarX,
                         HealthBarY + 8,
                         HealthBarX - (((HealthBarX - (HealthBarX + boxWidth)) / 100) * EntityArmor),

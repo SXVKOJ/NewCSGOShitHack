@@ -86,9 +86,14 @@ short mEngine::GetEntityWeapon(uintptr_t &Entity)
 {
 	int weapon = *(int*)(Entity + offsets::m_hActiveWeapon);
 	int weaponEnt = *(int*)(CLIENT + offsets::dwEntityList + ((weapon & 0xFFF) - 1) * 0x10);
-	short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
 
-	return weaponID;
+	if (weaponEnt)
+	{
+		short weaponID = *(short*)(weaponEnt + offsets::m_iItemDefinitionIndex);
+
+		return weaponID;
+	}
+	return NULL;
 }
 
 std::string mEngine::GetWeaponName(short WeaponID)

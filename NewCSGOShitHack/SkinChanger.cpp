@@ -1,11 +1,8 @@
 #include "includes.h"
 
-int UserCFG[526];
-
 void HACK::FullForceUpdate()
 {
-    uintptr_t ClientState = *(uintptr_t*)(ENGINE + offsets::dwClientState);
-    *(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
+    *(int*)(CLIENTSTATE + offsets::clientstate_delta_ticks) = -1;
 }
 
 static int LastWeaponID = 0;
@@ -17,11 +14,11 @@ void HACK::SkinChangerThread()
 
     for (int i = 1; i < 65; i++)
     {
-        if (UserCFG[i] == 0)
+        if (Engine.SkinChangerCFG[i] == 0)
             continue;  
 
         int Weapon = i;
-        int PaintKit = UserCFG[i];
+        int PaintKit = Engine.SkinChangerCFG[i];
 
         if (lPlayer.GetCurrentWeapon() == Weapon)
         {

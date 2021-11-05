@@ -2,7 +2,6 @@
 
 void HACK::SetFov(int nFov)
 {
-	*(int*)(LOCALPLAYER + offsets::m_iFOV) = nFov;
 	*(int*)(LOCALPLAYER + offsets::m_iDefaultFOV) = nFov;
 }
 
