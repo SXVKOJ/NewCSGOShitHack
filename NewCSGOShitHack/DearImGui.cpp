@@ -2,6 +2,11 @@
 
 static int CurrTab = 0;
 
+VOID DearImGui::SetD3DDevice(LPDIRECT3DDEVICE9 pDevice)
+{
+	this->pDevice = pDevice;
+}
+
 VOID DearImGui::Init()
 {
 	ImGui::CreateContext();
@@ -103,27 +108,27 @@ void DearImGui::Draw()
 	{
 		if (CurrTab == 0) 
 		{ /*     Main   */
-			using namespace config::hack;
+			using namespace config;
 
 			ImGui::Separator();
 
 			ImGui::Text("Main Functions");
 			ImGui::Separator();
 
-			if (ImGui::RadioButton("Bhop", Bhop))
-				Bhop = !Bhop;
-			if (ImGui::RadioButton("AimBot", AimBot))
-				AimBot = !AimBot;
-			if (ImGui::RadioButton("Glow ESP", NeonWallHack))
-				NeonWallHack = !NeonWallHack;
-			if (ImGui::RadioButton("Default ESP", WallHackESP))
-				WallHackESP = !WallHackESP;
-			if (ImGui::RadioButton("Recoil Control System", RecoilControlSystem))
-				RecoilControlSystem = !RecoilControlSystem;
-			if (ImGui::RadioButton("Radar Hack", RadarHack))
-				RadarHack = !RadarHack;
-			if (ImGui::RadioButton("Trigger Bot", TriggerBot))
-				TriggerBot = !TriggerBot;
+			if (ImGui::RadioButton("Bhop", hack::Bhop))
+				hack::Bhop = !hack::Bhop;
+			if (ImGui::RadioButton("AimBot", hack::AimBot))
+				hack::AimBot = !hack::AimBot;
+			if (ImGui::RadioButton("Glow ESP", hack::NeonWallHack))
+				hack::NeonWallHack = !hack::NeonWallHack;
+			if (ImGui::RadioButton("Default ESP", hack::WallHackESP))
+				hack::WallHackESP = !hack::WallHackESP;
+			if (ImGui::RadioButton("Recoil Control System", hack::RecoilControlSystem))
+				hack::RecoilControlSystem = !hack::RecoilControlSystem;
+			if (ImGui::RadioButton("Radar Hack", hack::RadarHack))
+				hack::RadarHack = !hack::RadarHack;
+			if (ImGui::RadioButton("Trigger Bot", hack::TriggerBot))
+				hack::TriggerBot = !hack::TriggerBot;
 		}
 		else if (CurrTab == 1) 
 		{ /*      Visuals    */

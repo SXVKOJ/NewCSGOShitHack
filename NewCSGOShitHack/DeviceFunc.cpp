@@ -7,6 +7,11 @@ ID3DXLine* dx::lines::ArmorBarLine  = nullptr;
 LPD3DXFONT dx::fonts::health_font	= nullptr;
 LPD3DXFONT dx::fonts::weapon_font	= nullptr;
 
+VOID myDevice::SetD3DDevice(LPDIRECT3DDEVICE9 pDevice)
+{
+	this->pDevice = pDevice;
+}
+
 VOID myDevice::InitFonts()
 {
 	D3DXCreateFont(pDevice, 18, 7, FW_NORMAL, 1, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial Black", &dx::fonts::health_font);

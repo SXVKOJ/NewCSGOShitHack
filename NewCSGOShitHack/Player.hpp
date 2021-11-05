@@ -11,9 +11,6 @@ public:
 	{
 		uintptr_t client = CLIENT;
 
-		FLOAT DISTANCE = Engine.GetDistance(Entity);
-		Sleep(Engine.CalcTriggerBotDelay(DISTANCE));
-
 		*(int*)(client + offsets::dwForceAttack) = cVars::Flags::Active;
 		Sleep(20);
 		*(int*)(client + offsets::dwForceAttack) = cVars::Flags::InActive;

@@ -21,15 +21,16 @@
 
 #include "DearImGui.h"
 #include "offsets.h"
-#include "Client.hpp"
+#include "Client.h"
 #include "Vector.h"
 #include "Player.hpp"
 #include "constvars.hpp"
 #include "config.hpp"
 #include "weapons.h"
-#include "fEngine.h"
+#include "Engine.h"
+#include "myDevice.h"
 #include "VMT.h"
-#include "HackFunc.h"
+#include "Hack.h"
 
 #define WINDOW_NAME "Dear ImGui DirectX9 Example"
 typedef long(__stdcall* EndScene)(LPDIRECT3DDEVICE9);

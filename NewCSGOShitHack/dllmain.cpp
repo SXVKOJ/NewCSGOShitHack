@@ -26,8 +26,8 @@ HRESULT __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
 	if (!hackstate::ImGui_Init)
 	{
-		dImGui.pDevice = pDevice;
-		mDevice.pDevice = pDevice;
+		dImGui.SetD3DDevice(pDevice);
+		mDevice.SetD3DDevice(pDevice);
 
 		dImGui.Init();
 		dImGui.SetCustomStyle();

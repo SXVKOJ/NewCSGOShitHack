@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\mem">
-      <UniqueIdentifier>{ee442400-226e-4021-b5a2-86c8758e1088}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\Hack">
       <UniqueIdentifier>{d1debbb6-8350-4e27-86c0-e7ceb098ef81}</UniqueIdentifier>
     </Filter>
@@ -37,19 +34,22 @@
     <Filter Include="Исходные файлы\DXShit">
       <UniqueIdentifier>{fc24c281-7bb6-4f61-96a4-52b489eb3d4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imgui\dImGui">
+      <UniqueIdentifier>{a20a3c64-a1d5-44ae-a58f-39f12b594be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Player">
+      <UniqueIdentifier>{2a07984c-bf59-4ee7-82a8-6efc7c9fb88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Engine">
+      <UniqueIdentifier>{43e0af1d-3595-4128-8081-c3b26367ba6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="mem.cpp">
-      <Filter>Исходные файлы\mem</Filter>
-    </ClCompile>
     <ClCompile Include="HackFunc.cpp">
       <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineFunctions.cpp">
-      <Filter>Исходные файлы\Main</Filter>
     </ClCompile>
     <ClCompile Include="BHOP.cpp">
       <Filter>Исходные файлы\Hack</Filter>
@@ -74,9 +74,6 @@
     </ClCompile>
     <ClCompile Include="FovChanger.cpp">
       <Filter>Исходные файлы\Hack</Filter>
-    </ClCompile>
-    <ClCompile Include="DearImGui.cpp">
-      <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="DXESP.cpp">
       <Filter>Исходные файлы\Hack</Filter>
@@ -138,11 +135,14 @@
     <ClCompile Include="kiero\minhook\src\hde\hde64.c">
       <Filter>Исходные файлы\hook</Filter>
     </ClCompile>
+    <ClCompile Include="DearImGui.cpp">
+      <Filter>imgui\dImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Исходные файлы\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mem.h">
-      <Filter>Исходные файлы\mem</Filter>
-    </ClInclude>
     <ClInclude Include="config.hpp">
       <Filter>Исходные файлы\config</Filter>
     </ClInclude>
@@ -151,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="constVars.hpp">
       <Filter>Исходные файлы\config</Filter>
-    </ClInclude>
-    <ClInclude Include="fEngine.h">
-      <Filter>Исходные файлы\Main</Filter>
     </ClInclude>
     <ClInclude Include="includes.h">
       <Filter>Файлы заголовков</Filter>
@@ -164,20 +161,8 @@
     <ClInclude Include="VMT.h">
       <Filter>Исходные файлы\hook</Filter>
     </ClInclude>
-    <ClInclude Include="HackFunc.h">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClInclude>
     <ClInclude Include="offsets.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.hpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>Исходные файлы\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="DearImGui.h">
-      <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="kiero\minhook\src\buffer.h">
       <Filter>Исходные файлы\hook</Filter>
@@ -199,6 +184,24 @@
     </ClInclude>
     <ClInclude Include="kiero\minhook\src\hde\table64.h">
       <Filter>Исходные файлы\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="DearImGui.h">
+      <Filter>imgui\dImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Исходные файлы\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack.h">
+      <Filter>Исходные файлы\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="myDevice.h">
+      <Filter>Исходные файлы\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

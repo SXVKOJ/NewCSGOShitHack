@@ -1,28 +1,28 @@
 #include "includes.h"
 #include "Vector.h"
 
-float mEngine::CalcTriggerBotDelay(float Distance)
+FLOAT TriggerBot::CalcTriggerBotDelay(float Distance)
 {
 	float delay;
 
 	switch (lPlayer.GetCurrentWeapon())
 	{
-		case 26:
-			delay = 3;
-		case 7:
-			delay = 3.3;
-		case 40:
-			delay = 0.15;
-		case 9:
-			delay = 0.15;
-		default:
-			delay = 0;
+	case 26:
+		delay = 3;
+	case 7:
+		delay = 3.3;
+	case 40:
+		delay = 0.15;
+	case 9:
+		delay = 0.15;
+	default:
+		delay = 0;
 	}
 
 	return delay * Distance;
 }
 
-float mEngine::GetDistance(uintptr_t &Entity)
+FLOAT TriggerBot::GetDistanceToEntity(uintptr_t& Entity)
 {
 	Vec3 myLocation = *(Vec3*)(LOCALPLAYER + offsets::m_vecOrigin);
 	Vec3 enemyLocation = *(Vec3*)(Entity + offsets::m_vecOrigin);
