@@ -14,8 +14,7 @@ void HACK::SpinBotThread(int speed)
 	float x = *(float*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
 	float y = *(float*)(CLIENTSTATE + offsets::dwClientState_ViewAngles + 0x4);
 
-	*(float*)(CLIENTSTATE + offsets::dwClientState_ViewAngles) = 89;
-	*(float*)(CLIENTSTATE + offsets::dwClientState_ViewAngles + 0x4) = y - speed;
+	lPlayer.SetViewAngles(Vec3{ 89, (y - speed), 0 });
 
 	if (y == -179.f)
 		*(float*)(CLIENTSTATE + offsets::dwClientState_ViewAngles + 0x4) = 180;

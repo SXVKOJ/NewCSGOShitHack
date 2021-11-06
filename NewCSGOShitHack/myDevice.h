@@ -6,7 +6,7 @@ static class myDevice
 private:
 	LPDIRECT3DDEVICE9 pDevice;
 public:
-	VOID SetD3DDevice(LPDIRECT3DDEVICE9 pDevice);
+	VOID SetpD3DDevice(LPDIRECT3DDEVICE9 pDevice);
 	VOID InitFonts();
 	VOID InitLines();
 

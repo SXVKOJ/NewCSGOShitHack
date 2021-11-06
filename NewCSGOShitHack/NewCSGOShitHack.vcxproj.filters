@@ -141,6 +141,9 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Исходные файлы\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Playec.cpp">
+      <Filter>Исходные файлы\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.hpp">
@@ -188,7 +191,7 @@
     <ClInclude Include="DearImGui.h">
       <Filter>imgui\dImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Player.hpp">
+    <ClInclude Include="Player.h">
       <Filter>Исходные файлы\Player</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">

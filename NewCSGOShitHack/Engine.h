@@ -4,7 +4,7 @@
 static class mEngine
 {
 public:
-	int SkinChangerCFG[526];
+	int SkinChangerCFG[70];
 	float ViewMatrix[16];
 
 	Vec3 GetPlayerBonePos(uintptr_t& Entity, int index);

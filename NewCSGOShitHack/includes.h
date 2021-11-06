@@ -23,7 +23,7 @@
 #include "offsets.h"
 #include "Client.h"
 #include "Vector.h"
-#include "Player.hpp"
+#include "Player.h"
 #include "constvars.hpp"
 #include "config.hpp"
 #include "weapons.h"

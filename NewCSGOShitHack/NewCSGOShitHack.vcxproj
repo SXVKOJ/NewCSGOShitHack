@@ -181,6 +181,7 @@
     <ClCompile Include="DearImGui.cpp" />
     <ClCompile Include="NeonGlow.cpp" />
     <ClCompile Include="NoFlash.cpp" />
+    <ClCompile Include="Playec.cpp" />
     <ClCompile Include="RadarHack.cpp" />
     <ClCompile Include="RecoilControlSystem.cpp" />
     <ClCompile Include="AimAssistance.cpp" />
@@ -206,7 +207,7 @@
     <ClInclude Include="kiero\minhook\src\trampoline.h" />
     <ClInclude Include="myDevice.h" />
     <ClInclude Include="offsets.h" />
-    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VMT.h" />
     <ClInclude Include="weapons.h" />

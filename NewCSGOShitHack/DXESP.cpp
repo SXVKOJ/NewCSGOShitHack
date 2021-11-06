@@ -15,9 +15,9 @@ void HACK::DXESPThread()
         if (Entity != NULL)
             continue;
 
-        bool EntDormant = *(bool*)(Entity + offsets::m_bDormant);
+        int EntDormant = *(int*)(Entity + offsets::m_bDormant);
 
-        if (EntDormant)
+        if ((bool)EntDormant)
             continue;
 
         int EntHealth = *(int*)(Entity + offsets::m_iHealth);

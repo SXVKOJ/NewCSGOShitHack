@@ -40,7 +40,7 @@ uintptr_t GetNearestPlayer()
 			continue;
 
 		Vec3 EntHeadPos = Engine.GetPlayerBonePos(Entity, cVars::HeadBone);
-		Vec3 LocalPos = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
+		Vec3 ViewAngles = lPlayer.ViewAngles();
 
 		memcpy(&Engine.ViewMatrix, (PBYTE*)(CLIENT + offsets::dwViewMatrix), sizeof(Engine.ViewMatrix));
 
@@ -72,10 +72,10 @@ void HACK::AimingAssistanceThread()
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntityPos);
 
-		Vec3 ViewAngles = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
+		Vec3 ViewAngles = lPlayer.ViewAngles();
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
+		lPlayer.SetViewAngles(GetSmoothAngle(ViewAngles, newAngles));
 	}
 }

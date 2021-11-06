@@ -57,20 +57,13 @@ Vec3 GetSmoothAngle(Vec3 dest, Vec3 orig)
 
 Vec3 normalizeAngles(float x, float y)
 {
-	if (x > 89)
-	{
+	if (x > 89) {
 		x -= 360;
-	}
-	else if (x < -89)
-	{
+	} else if (x < -89) {
 		x += 360;
-	}
-	else if (y > 180)
-	{
+	} else if (y > 180) {
 		y -= 360;
-	}
-	else if (y < -180)
-	{
+	} else if (y < -180) {
 		y += 360;
 	}
 
@@ -95,8 +88,6 @@ uintptr_t GetBestTarget()
 	float OldDiff = FLT_MAX;
 	float NewDiff = 0;
 
-	uintptr_t LocalPlayer = *(uintptr_t*)(CLIENT + offsets::dwLocalPlayer);
-
 	for (int i = 1; i < 64; i++)
 	{
 		uintptr_t Entity = *(uintptr_t*)(CLIENT + offsets::dwEntityList + i * cVars::PlayerStructSize);
@@ -114,16 +105,16 @@ uintptr_t GetBestTarget()
 		if (EntityHealth <= 0)
 			continue;
 
-		int CrosshairID = *(int*)(LocalPlayer + offsets::m_iCrosshairId);
+		int CrosshairID = *(int*)(LOCALPLAYER + offsets::m_iCrosshairId);
 		int SpottedByMask = *(int*)(Entity + offsets::m_bSpottedByMask);
 
 		if (!(SpottedByMask & (1 << CrosshairID)) && config::aimbot::LegitMode)
 			continue;
 
 		Vec3 EntHeadPos = Engine.GetPlayerBonePos(Entity, cVars::HeadBone);
-		Vec3 LocalPos = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
+		Vec3 ViewAngles = lPlayer.ViewAngles();
 
-		Vec3 AngleTo = calcAngle(LocalPos, EntHeadPos);
+		Vec3 AngleTo = calcAngle(ViewAngles, EntHeadPos);
 
 		NewDiff = AngleTo.x;
 		if (NewDiff < OldDiff)
@@ -142,16 +133,16 @@ void HACK::AimBotThread()
 
 	if (Entity != NULL)
 	{	
-		Vec3 LocalPos = *(Vec3*)(LOCALPLAYER + offsets::m_vecOrigin);
+		Vec3 LocalPos = lPlayer.Position();
 		Vec3 EntPos = Engine.GetPlayerBonePos(Entity, config::aimbot::TargetBonePos);
 		LocalPos.z += *(float*)(LOCALPLAYER + offsets::m_vecViewOffset + 0x8);
 
 		Vec3 AngleTo = calcAngle(LocalPos, EntPos);
 		
-		Vec3 ViewAngles = *(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles);
+		Vec3 ViewAngles = lPlayer.ViewAngles();
 
 		Vec3 newAngles = normalizeAngles(AngleTo.x, AngleTo.y);
 
-		*(Vec3*)(CLIENTSTATE + offsets::dwClientState_ViewAngles) = GetSmoothAngle(ViewAngles, newAngles);
+		lPlayer.SetViewAngles(GetSmoothAngle(ViewAngles, newAngles));
 	}
 }

@@ -2,7 +2,7 @@
 
 static int CurrTab = 0;
 
-VOID DearImGui::SetD3DDevice(LPDIRECT3DDEVICE9 pDevice)
+VOID DearImGui::SetpD3DDevice(LPDIRECT3DDEVICE9 pDevice)
 {
 	this->pDevice = pDevice;
 }

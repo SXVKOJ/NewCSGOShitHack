@@ -2,7 +2,8 @@
 
 void HACK::FullForceUpdate()
 {
-    *(int*)(CLIENTSTATE + offsets::clientstate_delta_ticks) = -1;
+    uintptr_t ClientState = CLIENTSTATE;
+    *(int*)(ClientState + offsets::clientstate_delta_ticks) = -1;
 }
 
 static int LastWeaponID = 0;
@@ -12,7 +13,7 @@ void HACK::SkinChangerThread()
 {
     float wear = config::SkinChanger::wear;
 
-    for (int i = 1; i < 65; i++)
+    for (int i = 1; i < 69; i++)
     {
         if (Engine.SkinChangerCFG[i] == 0)
             continue;  
@@ -20,7 +21,7 @@ void HACK::SkinChangerThread()
         int Weapon = i;
         int PaintKit = Engine.SkinChangerCFG[i];
 
-        if (lPlayer.GetCurrentWeapon() == Weapon)
+        if (Weapon == lPlayer.GetCurrentWeapon())
         {
             int WeaponBase = NULL;
 
