@@ -33,7 +33,7 @@ def main():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
     global result_file
-    result_file = f"#pragma once\n\nnamespace offsets\n{'{'}\n    // {dt_string}\n"
+    result_file = f"#pragma once\n#include <iostream>\n\nnamespace offsets\n{'{'}\n    // {dt_string}\n"
 
     res = requests.get("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json", headers=headers)
 
@@ -46,21 +46,21 @@ def main():
 
     for val in res["signatures"]:
         if mode == "update":
-            result_file += tab + "const uintptr_t " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
+            result_file += tab + "constexpr ::std::ptrdiff_t " + val + " = " + str(hex(res["signatures"][val])) + ";\n"
         elif mode == "reset":
-            result_file += tab + "const uintptr_t " + val + ";\n"
+            result_file += tab + "constexpr ::std::ptrdiff_t " + val + ";\n"
 
     for val in res["netvars"]:
         if mode == "update":
-            result_file += tab + "const uintptr_t " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
+            result_file += tab + "constexpr ::std::ptrdiff_t " + val + " = " + str(hex(res["netvars"][val])) + ";\n"
         elif mode == "reset":
-            result_file += tab + "const uintptr_t " + val + ";\n"
+            result_file += tab + "constexpr ::std::ptrdiff_t " + val + ";\n"
 
     result_file += "}"
 
     print(result_file)
 
-    write_file("./offsets.hpp", result_file)
+    write_file("./offsets.h", result_file)
     
     
 if __name__ == '__main__':
